@@ -30,8 +30,18 @@ Protocol (reverse-engineered + validated byte-for-byte against a real flash):
 
 --stop-before gates the stages so a dry-run can't run past where we intend to stop.
 """
-import time, json, struct, threading, queue, asyncio, sys, argparse
+import time, json, struct, threading, queue, asyncio, sys, argparse, re, os, random
 import urllib.request, urllib.parse
+
+# Debug fault injection (env-driven): force a single failure on component
+# G2_FAULT_COMPONENT, block G2_FAULT_BLOCK, mode G2_FAULT_MODE ('frag'|'ack').
+FAULT_COMPONENT = int(os.environ.get('G2_FAULT_COMPONENT','-1'))
+FAULT_BLOCK     = int(os.environ.get('G2_FAULT_BLOCK','-1'))
+FAULT_MODE      = os.environ.get('G2_FAULT_MODE','')
+# G2_LOSS_RATE: probability of silently dropping each data-channel write (debug),
+# to simulate a lossy write-without-response link across a whole transfer.
+LOSS_RATE       = float(os.environ.get('G2_LOSS_RATE','0'))
+_fault_fired    = [False]
 
 # channel = (service uuid, write char, notify char). Mapping by handle order:
 DATA = ("00002760-08c2-11e1-9073-0e8ac72e1001",   # firmware data svc (handles 0x082x)
@@ -48,6 +58,32 @@ REQUIRED_SEGMENT = "ota/s200_firmware_ota.bin"
 # how far to go: 'discover' | 'heartbeat' | 'file_check' | 'flash' | 'done'
 STAGES = ["discover", "heartbeat", "file_check", "flash", "done"]
 def allowed(stage, stop_before): return STAGES.index(stage) < STAGES.index(stop_before)
+
+# ---- transfer tuning ----
+# The c0/c1 OTA path has NO block index and NO dedup (firmware FUN_004dc14c): a
+# `c0 op 0x02` marker resets the receive offset, c1 fragments accumulate by arrival,
+# and the flash-writer advances ONE block per accepted block. Re-sending a block
+# that was already written therefore double-advances the flash offset and corrupts
+# everything after it -> the per-component END check (status 7 = CHECK_FAIL) fails.
+# So: only resend in place on an explicit NAK (firmware rejected it, did not advance);
+# on a bare ack-timeout (ambiguous: ack may just be lost on the bridge hop) abandon
+# the attempt and re-flash the WHOLE component, which restarts cleanly from FILE_CHECK.
+BLOCK_ACK_TIMEOUT = 4      # s to wait for a 4 KB block ack. A healthy block acks in
+                           # well under 1s; if a marker/last-frag was dropped the block
+                           # never completes and NO ack ever comes, so a long wait just
+                           # sits in dead air until the BLE link's supervision timeout
+                           # drops the connection. Fail fast and re-flash the component.
+BLOCK_NAK_RETRIES = 3      # in-place resends on an explicit NAK (safe: firmware did not advance)
+COMPONENT_RETRIES = 3      # whole-component re-flash attempts on END check-fail / ack-timeout
+
+# eOTATransmitRsp (ota_transmit.proto) — ack status byte meanings.
+OTA_RSP = {0:"SUCCESS",1:"HEADER_ERR",2:"PATH_ERR",3:"CRC_ERR",4:"TIMEOUT",5:"NO_RESOURCES",
+           6:"FLASH_WRITE_ERR",7:"CHECK_FAIL",8:"UPDATING",9:"SYS_RESTART",10:"FAIL"}
+def rsp_name(s): return OTA_RSP.get(s, f"0x{s:02x}")
+# Normal END (RESULT_CHECK) acks: SUCCESS, plus UPDATING (8) which is what every
+# component actually returns on a good flash, plus SYS_RESTART (9). 7=CHECK_FAIL is
+# the real "bytes in flash don't match the component CRC" failure.
+END_OK = {0, 8, 9}
 
 # ---------------- framing (validated byte-for-byte vs capture) ----------------
 def crc16(d):
@@ -67,17 +103,24 @@ def crc32c_msb(buf,_t=[]):
     return crc
 CHUNK=232
 _seq=[0]
-def _reset_seq(): _seq[0]=0
+_seq_lock=threading.Lock()    # heartbeat thread + data path both call _nextseq()
+def _reset_seq():
+    with _seq_lock: _seq[0]=0
 def _nextseq():
-    _seq[0]=(_seq[0]+1)&0xff; return _seq[0]
-def frames(sid,pb,flag=0x00):
-    body=pb+crc16(pb); tot=max(1,-(-len(body)//CHUNK)); seq=_nextseq(); out=[];off=0
+    with _seq_lock:
+        _seq[0]=(_seq[0]+1)&0xff
+        return _seq[0]
+def frames(sid,pb,flag=0x00,seq=None):
+    # seq=None -> allocate a fresh transport seq; pass an explicit seq to share one
+    # across a marker+block pair (matches the official app).
+    if seq is None: seq=_nextseq()
+    body=pb+crc16(pb); tot=max(1,-(-len(body)//CHUNK)); out=[];off=0
     for i in range(tot):
         ch=body[off:off+CHUNK];off+=len(ch)
         out.append(bytes([0xaa,0x21,seq,len(ch),tot,i+1,sid,flag])+ch)
     return out
-def ctrl_frames(op,data=b''): return frames(0xc0,bytes([op])+data)
-def data_frames(block):        return frames(0xc1,block)
+def ctrl_frames(op,data=b'',seq=None): return frames(0xc0,bytes([op])+data,seq=seq)
+def data_frames(block,seq=None):        return frames(0xc1,block,seq=seq)
 
 # ---------------- firmware parsing / validation ----------------
 def parse_firmware_segments(img):
@@ -110,6 +153,21 @@ def validate_firmware(img):
     if REQUIRED_SEGMENT not in names:
         raise ValueError(
             f"required segment {REQUIRED_SEGMENT!r} not found; segments are: {names}")
+    # Each component stores a CRC32C of its payload in the TOC and the sub-header
+    # echo (sub[12:16]); the glasses verify it on END (status 7 = CHECK_FAIL). The
+    # flasher streams the sub-header verbatim, so a stale stored CRC (image patched
+    # without recomputing checksums) guarantees a status-7 failure after a full,
+    # slow transfer. Catch it here instead.
+    for i, s in enumerate(segs):
+        payload = img[s['off']+128:s['off']+128+s['ps']]
+        calc = crc32c_msb(payload)
+        sub_crc = struct.unpack_from('<I', s['sub'], 12)[0]
+        if calc != s['crc'] or calc != sub_crc:
+            raise ValueError(
+                f"segment {i} ({s['fn']}) stored CRC32C is stale: payload computes "
+                f"{calc:08x} but TOC={s['crc']:08x} sub={sub_crc:08x}. The image was "
+                "modified without recomputing checksums — re-run the patch tool's "
+                "checksum fixup (and the mainApp internal preamble CRC32) before flashing.")
     return segs
 
 # ---------------- DroidBridge client ----------------
@@ -183,17 +241,56 @@ class DroidBridgeTransport:
     def set_notify(self, svc, ch, enable=True):
         self.br.notify(self.address, svc, ch, enable)
     def write(self, svc, ch, hexdata, wtype=1):
+        if LOSS_RATE>0 and ch==DATA[1] and random.random()<LOSS_RATE:
+            return  # debug: simulate a dropped write-without-response fragment
         self.br.write(self.address, svc, ch, hexdata, wtype)
     def close(self):
         try: self.br._req('/disconnect',{"address":self.address})
         except Exception: pass
 
+# G2 arms advertise as "Even G#_<serial>_<L|R>_<last-3-MAC-bytes>", e.g.
+# "Even G2_32_L_693CCB" for MAC EC:D7:82:69:3C:CB. Groups: (serial, side, mactail).
+G2_NAME_RE = re.compile(r'(?:even\s+)?G\d+_(\d+)_([LR])_([0-9a-fA-F]{6})', re.I)
+SCAN_TIMEOUT = 12   # s to scan before giving up on finding an arm
+
+def _norm_addr(s): return re.sub(r'[^0-9a-f]', '', (s or '').lower())
+
+def match_scanned_device(devs, address, side):
+    """Pick a scanned arm for the requested address/side. `devs` is bleak's
+    discover(return_adv=True) dict {addr: (BLEDevice, AdvertisementData)}.
+
+    macOS/CoreBluetooth never exposes BLE MACs (scanned addresses are random
+    per-host UUIDs), so a MAC in the connection string can't match by address.
+    But the advertised name carries the last 3 MAC bytes, so we match the MAC tail
+    there. On Linux/BlueZ (and for UUID connection strings) the exact-address path
+    matches directly. Returns a BLEDevice or None."""
+    want=_norm_addr(address); want_tail=want[-6:]
+    side_letter={'left':'L','right':'R'}.get(side or '')
+    def name_of(d,adv): return adv.local_name or d.name or ""
+    # 1) exact address match (Linux MAC, or macOS UUID connection strings)
+    for a,(d,adv) in devs.items():
+        if _norm_addr(a)==want: return d
+    # 2) MAC tail embedded in the advertised name (the macOS case for a MAC string)
+    for a,(d,adv) in devs.items():
+        m=G2_NAME_RE.search(name_of(d,adv))
+        if m and m.group(3).lower()==want_tail and (not side_letter or m.group(2).upper()==side_letter):
+            return d
+    # 3) last resort: exactly one advertised arm on the requested side
+    if side_letter:
+        cands=[d for a,(d,adv) in devs.items()
+               if (lambda m: m and m.group(2).upper()==side_letter)(G2_NAME_RE.search(name_of(d,adv)))]
+        if len(cands)==1: return cands[0]
+    return None
+
 class LocalBleTransport:
     """Direct connection over this machine's Bluetooth radio via bleak. bleak is
     async, so we run an event loop on a background thread and bridge each call
-    across with run_coroutine_threadsafe."""
-    def __init__(self, address, address_type=None):
-        self.address=address; self.address_type=address_type
+    across with run_coroutine_threadsafe. We scan first and connect to the
+    discovered BLEDevice rather than connecting by raw address string — that is
+    the only reliable path on macOS/CoreBluetooth (and is how the TS examples
+    work)."""
+    def __init__(self, address, address_type=None, side=None):
+        self.address=address; self.address_type=address_type; self.side=side
         self.notes=queue.Queue()
         self.client=None
         self._loop=asyncio.new_event_loop()
@@ -203,16 +300,21 @@ class LocalBleTransport:
         asyncio.set_event_loop(self._loop); self._loop.run_forever()
     def _call(self, coro): return asyncio.run_coroutine_threadsafe(coro, self._loop).result()
     def status(self):
-        return f"local BLE {self.address}" + (f" ({self.address_type})" if self.address_type else "")
+        return f"local BLE {self.side or '?'} {self.address}" + (f" ({self.address_type})" if self.address_type else "")
     def connect(self):
-        from bleak import BleakClient
-        kwargs={}
-        # address_type ("public"/"random") is honored by the WinRT backend; macOS
-        # CoreBluetooth and Linux BlueZ derive it from the address/scan instead.
-        if self.address_type and sys.platform.startswith("win"):
-            kwargs["address_type"]=self.address_type
+        from bleak import BleakClient, BleakScanner
         async def _c():
-            self.client=BleakClient(self.address, **kwargs)
+            devs=await BleakScanner.discover(timeout=SCAN_TIMEOUT, return_adv=True)
+            dev=match_scanned_device(devs, self.address, self.side)
+            if dev is None:
+                seen=[f"{(adv.local_name or d.name)!r}@{a}" for a,(d,adv) in devs.items()
+                      if G2_NAME_RE.search(adv.local_name or d.name or "")]
+                raise RuntimeError(
+                    f"could not find G2 {self.side or ''} ({self.address}) in a {SCAN_TIMEOUT}s scan. "
+                    f"G2 arms advertising now: {seen or 'none'}. "
+                    "The arm must be powered on and NOT connected to the phone (close the Even app / "
+                    "turn off the phone's Bluetooth) so it advertises for a direct connection.")
+            self.client=BleakClient(dev)
             await self.client.connect()
         self._call(_c())
     def discover(self):
@@ -232,6 +334,8 @@ class LocalBleTransport:
         self._call(_n())
     def write(self, svc, ch, hexdata, wtype=1):
         data=bytes.fromhex(hexdata)
+        if LOSS_RATE>0 and ch==DATA[1] and random.random()<LOSS_RATE:
+            return  # debug: simulate a dropped write-without-response fragment
         # Android writeType 1 == WRITE_TYPE_NO_RESPONSE; anything else => with response.
         response=(wtype!=1)
         async def _w(): await self.client.write_gatt_char(ch, data, response=response)
@@ -267,6 +371,88 @@ def send_data_msg(tp, frames_list, want_op):
     for f in frames_list: tp.write(svc,wch,f.hex(),1)
     return wait_ack(tp, want_op, nch)
 
+def send_block(tp, blk, fault=None):
+    """Send one 4 KB block as marker+data sharing a single envelope seq (matches the
+    official app). Drains stale acks first so we match THIS block's ack. Returns the
+    ack status; raises TimeoutError if no ack arrives within BLOCK_ACK_TIMEOUT.
+
+    `fault` (debug only) injects a controlled failure to exercise recovery:
+      'frag' — drop one data fragment so the firmware sees a bad block CRC -> NAK.
+      'ack'  — send the block fully (firmware writes it) but swallow its ack and
+               raise TimeoutError, simulating a lost ack on a written block."""
+    seq=_nextseq()
+    while not tp.notes.empty(): tp.notes.get()
+    for f in ctrl_frames(0x02, seq=seq): tp.write(DATA[0],DATA[1],f.hex(),1)   # marker: reset rx offset
+    dfr=data_frames(blk, seq=seq)
+    if fault=='frag':
+        drop=len(dfr)//2
+        print(f"     [FAULT] dropping data frag {drop}/{len(dfr)} to force a block NAK")
+        dfr=[f for k,f in enumerate(dfr) if k!=drop]
+    for f in dfr: tp.write(DATA[0],DATA[1],f.hex(),1)                          # 4 KB payload
+    if fault=='ack':
+        print("     [FAULT] block sent; swallowing its ack to simulate ack-loss -> timeout")
+        try: wait_ack(tp, 0x02, DATA[2], timeout=BLOCK_ACK_TIMEOUT)
+        except TimeoutError: pass
+        raise TimeoutError("injected ack-loss")
+    return wait_ack(tp, 0x02, DATA[2], timeout=BLOCK_ACK_TIMEOUT)
+
+def flash_component(tp, seg, img, stop_before, comp_index=-1):
+    """One pass over a component: FILE_CHECK, all 4 KB blocks, END. Returns the END
+    ack status, or None if stop_before halts us before the data phase. Raises on a
+    block-level failure (a NAK that survives in-place resends, or an ack-timeout) so
+    the caller can re-flash the whole component from a clean state."""
+    sub=seg['sub']; ps=seg['ps']; fn=seg['fn']
+    payload=img[seg['off']+128:seg['off']+128+ps]
+    st=send_data_msg(tp, ctrl_frames(0x01, sub), 0x01)            # FILE_CHECK / OTA_TRANSMIT_INFORMATION
+    if st: raise RuntimeError(f"FILE_CHECK rejected status={st} ({rsp_name(st)})")
+    if not allowed("flash", stop_before):
+        return None
+    nb=-(-len(payload)//4096)
+    resends=0
+    for b in range(nb):
+        blk=payload[b*4096:(b+1)*4096]
+        for tries in range(BLOCK_NAK_RETRIES):
+            fault=None
+            if comp_index==FAULT_COMPONENT and b==FAULT_BLOCK and not _fault_fired[0]:
+                _fault_fired[0]=True; fault=FAULT_MODE or None
+            try:
+                st=send_block(tp, blk, fault=fault)
+            except TimeoutError:
+                print(f"     block {b}/{nb} ACK TIMEOUT after {BLOCK_ACK_TIMEOUT}s")
+                raise                                            # -> whole-component re-flash (clean reset)
+            if st==0: break
+            resends+=1
+            print(f"     block {b}/{nb} NAK={st} ({rsp_name(st)}) resend {tries+1}/{BLOCK_NAK_RETRIES}")
+        else:
+            raise RuntimeError(f"block {b} NAK'd {BLOCK_NAK_RETRIES}x")
+        if b%100==0 or b==nb-1: print(f"     {fn}: block {b+1}/{nb}")
+    print(f"     {fn}: data phase done, {resends} block resend(s); sending END")
+    return send_data_msg(tp, ctrl_frames(0x03), 0x03)            # END / OTA_TRANSMIT_RESULT_CHECK
+
+def flash_component_with_retry(tp, i, seg, img, stop_before):
+    """Flash a component, re-flashing the whole thing if END verification fails or a
+    block ack times out. Returns 0 on success, None if stopped early, raises if it
+    can't get a clean END within COMPONENT_RETRIES attempts."""
+    fn=seg['fn']; ps=seg['ps']
+    payload=img[seg['off']+128:seg['off']+128+ps]
+    print(f"[{i}] {fn} ({ps}B crc32c=0x{crc32c_msb(payload):08x})")
+    for attempt in range(COMPONENT_RETRIES):
+        if attempt: print(f"   re-flash attempt {attempt+1}/{COMPONENT_RETRIES}")
+        try:
+            end_st=flash_component(tp, seg, img, stop_before, comp_index=i)
+        except (TimeoutError, RuntimeError) as e:
+            print(f"   block phase failed: {e}")
+            end_st=-1
+        if end_st is None: return None
+        if end_st in END_OK:
+            print(f"   END verify OK ({fn}) status={end_st} ({rsp_name(end_st)})")
+            return 0
+        if end_st>=0:
+            print(f"   END verify FAILED status={end_st} ({rsp_name(end_st)})")
+        while not tp.notes.empty(): tp.notes.get()    # settle before the next attempt
+        time.sleep(1.5)
+    raise RuntimeError(f"component {fn} failed after {COMPONENT_RETRIES} attempts")
+
 # ---------------- flash one lens ----------------
 def flash_lens(tp, img, segs, stop_before):
     _reset_seq()
@@ -300,33 +486,18 @@ def flash_lens(tp, img, segs, stop_before):
     N=len(segs)
     print(f"flashing {len(img)}B, {N} components")
     while not tp.notes.empty(): tp.notes.get()          # drain stale notifications
-    print("begin ack", send_data_msg(tp, ctrl_frames(0x00), 0x00))
+    bst=send_data_msg(tp, ctrl_frames(0x00), 0x00)
+    print(f"begin ack {bst} ({rsp_name(bst)})")
+    if bst not in END_OK: print(f"   WARNING: unexpected begin status {bst} ({rsp_name(bst)}); continuing")
     t_start=time.time()
-    for i,seg in enumerate(segs):
-        sub=seg['sub']; ps=seg['ps']; payload=img[seg['off']+128:seg['off']+128+ps]; fn=seg['fn']
-        print(f"[{i}] FILE_CHECK {fn} ({ps}B crc32c=0x{crc32c_msb(payload):08x})")
-        st=send_data_msg(tp, ctrl_frames(0x01, sub), 0x01)
-        if st: hb_stop.set(); raise RuntimeError(f"FILE_CHECK NAK {st}")
-        if not allowed("flash", stop_before):
-            hb_stop.set(); print(f"[stop-before={stop_before}] FILE_CHECK acked; stopping before data blocks."); return
-        nb=-(-len(payload)//4096)
-        for b in range(nb):
-            blk=payload[b*4096:(b+1)*4096]
-            for tries in range(5):
-                for f in ctrl_frames(0x02): tp.write(DATA[0],DATA[1],f.hex(),1)   # marker
-                for f in data_frames(blk):  tp.write(DATA[0],DATA[1],f.hex(),1)   # 4 KB block
-                try:
-                    st=wait_ack(tp,0x02,DATA[2],timeout=8)
-                    if st==0: break
-                    print(f"   block {b} NAK={st} retry {tries}")
-                except TimeoutError:
-                    print(f"   block {b} ack-timeout retry {tries}")
-            else:
-                hb_stop.set(); raise RuntimeError(f"block {b} failed after retries")
-            if b%50==0 or b==nb-1: print(f"   {fn}: block {b+1}/{nb}")
-        print("   END ack", send_data_msg(tp, ctrl_frames(0x03), 0x03))
-    hb_stop.set()
-    print(f"=== all {N} components sent in {time.time()-t_start:.0f}s; glasses should verify + reboot ===")
+    try:
+        for i,seg in enumerate(segs):
+            if flash_component_with_retry(tp, i, seg, img, stop_before) is None:
+                print(f"[stop-before={stop_before}] FILE_CHECK acked; stopping before data blocks.")
+                return
+    finally:
+        hb_stop.set()
+    print(f"=== all {N} components verified in {time.time()-t_start:.0f}s; glasses should reboot into the new firmware ===")
 
 # ---------------- connection string ----------------
 def parse_connection_string(raw):
@@ -372,6 +543,7 @@ def confirm_warranty(skip):
 
 # ---------------- main ----------------
 def main(argv=None):
+    global DEBUG, COMPONENT_RETRIES, BLOCK_NAK_RETRIES
     p=argparse.ArgumentParser(description="Flash firmware onto Even Realities G2 glasses.")
     p.add_argument('-c','--connection', required=True,
                    help="connection string: g2://droidbridge?phone=..&port=..&token=..&left=..&right=.. "
@@ -383,10 +555,16 @@ def main(argv=None):
                    help="stop before this stage (dry-run gating; default: done = full flash)")
     p.add_argument('--my-warranty-is-void', action='store_true',
                    help="skip the interactive warranty confirmation (for automation)")
+    p.add_argument('--component-retries', type=int, default=COMPONENT_RETRIES,
+                   help=f"whole-component re-flash attempts on END fail/timeout (default {COMPONENT_RETRIES})")
+    p.add_argument('--block-nak-retries', type=int, default=BLOCK_NAK_RETRIES,
+                   help=f"in-place block resends on an explicit NAK (default {BLOCK_NAK_RETRIES})")
     p.add_argument('--debug', action='store_true', help="print received frames")
     args=p.parse_args(argv)
 
-    global DEBUG; DEBUG=args.debug
+    DEBUG=args.debug
+    COMPONENT_RETRIES=args.component_retries
+    BLOCK_NAK_RETRIES=args.block_nak_retries
 
     try:
         conn=parse_connection_string(args.connection)
@@ -416,7 +594,7 @@ def main(argv=None):
         addr=conn[side]
         print(f"\n=== flashing {side} lens ({addr}) ===")
         if conn['method']=='local':
-            tp=LocalBleTransport(addr, conn.get('address_type'))
+            tp=LocalBleTransport(addr, conn.get('address_type'), side=side)
         else:
             tp=DroidBridgeTransport(bridge, addr)
         try:
