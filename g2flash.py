@@ -30,7 +30,7 @@ Protocol (reverse-engineered + validated byte-for-byte against a real flash):
 
 --stop-before gates the stages so a dry-run can't run past where we intend to stop.
 """
-import time, json, struct, threading, queue, asyncio, sys, argparse, re, os, random
+import time, json, struct, threading, queue, asyncio, sys, argparse, re, os, random, zlib, tempfile
 import urllib.request, urllib.parse
 
 # Debug fault injection (env-driven): force a single failure on component
@@ -169,6 +169,50 @@ def validate_firmware(img):
                 "modified without recomputing checksums — re-run the patch tool's "
                 "checksum fixup (and the mainApp internal preamble CRC32) before flashing.")
     return segs
+
+def recompute_checksums(path):
+    """Rewrite an EVENOTA image's stored checksums in place to match its current
+    payloads — use after a length-preserving binary patch. Fixes each component's
+    CRC32C (TOC entry @0x40+i*16+12 AND sub-header echo @off+0x0C) and the mainApp
+    internal preamble CRC32 (zlib over payload[8:] @ payload+4). Writes atomically.
+    Returns the number of fields changed."""
+    with open(path,'rb') as fh: data=bytearray(fh.read())
+    segs=parse_firmware_segments(bytes(data))   # validates structure / offsets
+    changed=0
+    for i,s in enumerate(segs):
+        off=s['off']; ps=s['ps']; fn=s['fn']
+        # The mainApp internal preamble CRC32 lives INSIDE the payload, so fix it
+        # before computing the component CRC32C (which covers the whole payload).
+        if fn.endswith('s200_firmware_ota.bin'):
+            pre=zlib.crc32(bytes(data[off+128+8:off+128+ps]))&0xffffffff
+            old=struct.unpack_from('<I',data,off+128+4)[0]
+            if old!=pre:
+                struct.pack_into('<I',data,off+128+4,pre); changed+=1
+                print(f"  [{i}] {fn}: preamble crc32 {old:08x} -> {pre:08x}")
+        payload=bytes(data[off+128:off+128+ps])
+        crc=crc32c_msb(payload)
+        old_toc=struct.unpack_from('<I',data,0x40+i*16+12)[0]
+        old_sub=struct.unpack_from('<I',data,off+12)[0]
+        if old_toc!=crc: struct.pack_into('<I',data,0x40+i*16+12,crc); changed+=1
+        if old_sub!=crc: struct.pack_into('<I',data,off+12,crc); changed+=1
+        if old_toc!=crc or old_sub!=crc:
+            print(f"  [{i}] {fn}: component crc32c -> {crc:08x} (was TOC={old_toc:08x} sub={old_sub:08x})")
+        else:
+            print(f"  [{i}] {fn}: component crc32c {crc:08x} (ok)")
+    if not changed:
+        print(f"{path}: already consistent, no changes"); return 0
+    st=os.stat(path); d=os.path.dirname(os.path.abspath(path))
+    fd,tmp=tempfile.mkstemp(dir=d, prefix='.g2ck_')
+    try:
+        with os.fdopen(fd,'wb') as fh: fh.write(data)
+        os.chmod(tmp, st.st_mode)
+        os.replace(tmp, path)
+    except BaseException:
+        try: os.unlink(tmp)
+        except OSError: pass
+        raise
+    print(f"updated {path}: {changed} checksum field(s) rewritten")
+    return changed
 
 # ---------------- DroidBridge client ----------------
 class Bridge:
@@ -545,10 +589,14 @@ def confirm_warranty(skip):
 def main(argv=None):
     global DEBUG, COMPONENT_RETRIES, BLOCK_NAK_RETRIES
     p=argparse.ArgumentParser(description="Flash firmware onto Even Realities G2 glasses.")
-    p.add_argument('-c','--connection', required=True,
+    p.add_argument('-c','--connection',
                    help="connection string: g2://droidbridge?phone=..&port=..&token=..&left=..&right=.. "
                         "or g2://local?left=..&right=..&addressType=public|random")
-    p.add_argument('-f','--firmware', required=True, help="path to the firmware image to flash")
+    p.add_argument('-f','--firmware', help="path to the firmware image to flash")
+    p.add_argument('--recompute-checksums', metavar='IMAGE',
+                   help="rewrite IMAGE's stored checksums in place to match its payloads "
+                        "(component CRC32C + mainApp preamble CRC32), then exit. Use after a "
+                        "length-preserving binary patch; does not connect or flash.")
     p.add_argument('--lens', choices=['left','right','both'], default='both',
                    help="which lens to flash (default: both)")
     p.add_argument('--stop-before', choices=STAGES, default='done',
@@ -565,6 +613,16 @@ def main(argv=None):
     DEBUG=args.debug
     COMPONENT_RETRIES=args.component_retries
     BLOCK_NAK_RETRIES=args.block_nak_retries
+
+    if args.recompute_checksums:
+        try:
+            recompute_checksums(args.recompute_checksums)
+        except (OSError, ValueError) as e:
+            print(f"recompute-checksums failed: {e}"); sys.exit(1)
+        return
+
+    if not args.connection or not args.firmware:
+        p.error("-c/--connection and -f/--firmware are required (unless --recompute-checksums)")
 
     try:
         conn=parse_connection_string(args.connection)
