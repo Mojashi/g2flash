@@ -5,7 +5,7 @@ Build a CFW image for g2_2.2.4.34 with:
       g2flash/patch_img_container_576.py), and
   (2) 1bpp->4bpp image decompression on ImageRawDataUpdate.CompressMode.
 
-(2) injects frag_write() (g2flash/cfw/decompress.c, built by build.py) over the
+(2) injects frag_write() (g2flash/patches/decompress.c, built by build.py) over the
 unused production-test handler set_aging_test_info (ghidra 0x491340, ~2KB, zero
 xrefs) and retargets the three per-fragment memcpy calls (FUN_00439be4) in the
 ImageRawDataUpdate handler FUN_004ff8fc to it.
@@ -27,7 +27,7 @@ DELTA = 0x39E680  # file_off = ghidra_addr - DELTA  (OTA mainApp component)
 def g2f(addr):
     return addr - DELTA
 
-# zlib image glue (g2flash/cfw/zlib_glue.c -> build.py pass2, 386 B) placed at
+# zlib image glue (g2flash/patches/zlib_glue.c -> build.py pass2, 386 B) placed at
 # ghidra 0x491400 (= bufbase set_aging_test_info tail, after frag_write). Exports
 # zwrap_alloc@0x491400, zwrap_free@0x49140e, load_image_z@0x49141a. load_image_z
 # decompresses into the recon buffer's unused tail (no scratch malloc) to avoid OOM.
@@ -46,7 +46,7 @@ ZLIB_GLUE = bytes.fromhex(
     "00f144014046884741f24b63c0f250033046294622469847044620460fb0bde8f08f"
 )
 
-# frag_write machine code (g2flash/cfw/decompress.c -> build.py, text+0x80, 106 B)
+# frag_write machine code (g2flash/patches/decompress.c -> build.py, text+0x80, 106 B)
 FRAG_WRITE = bytes.fromhex(
     "f0b540f26c63c0f250031b681b6a13b35fea920c08bff0bd00238646ca5c0725"
     "744600bf22fa05f606f001066f1e764222fa07f726f00f06ff0718bf0f3604f8"
