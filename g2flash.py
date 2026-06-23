@@ -15,7 +15,7 @@ command line:
       random is the macOS / CoreBluetooth peripheral-UUID style. (Local mode
       needs `pip install bleak`.)
 
-Protocol (reverse-engineered + validated byte-for-byte against a real flash):
+Protocol:
   transport: aa21 envelope  aa 21 seq len totFrags fragIdx sid flag <pb> crc16LE(last frag)
              CRC-16/CCITT-FALSE over the concatenated pb; chunkSize=232.
   DATA channel (svc e1001: write e0001 / notify e0002), sid byte = message type:
