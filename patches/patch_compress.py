@@ -2,10 +2,13 @@
 """
 Build a CFW image for g2_2.2.4.34 with:
   (1) the 576x288 image-container size lift (same 3 edits as
-      g2flash/patch_img_container_576.py), and
-  (2) 1bpp->4bpp image decompression on ImageRawDataUpdate.CompressMode.
+      patches/patch_img_container_576.py),
+  (2) 1bpp->4bpp image decompression on ImageRawDataUpdate.CompressMode, and
+  (3) a CFW capability-advertisement field (protobuf field 100, a feature-token
+      string) appended to the sid=0x09 settings READ response, so a connected
+      app can detect this firmware and which extensions it supports.
 
-(2) injects frag_write() (g2flash/patches/decompress.c, built by build.py) over the
+(2) injects frag_write() (patches/decompress.c, built by build.py) over the
 unused production-test handler set_aging_test_info (ghidra 0x491340, ~2KB, zero
 xrefs) and retargets the three per-fragment memcpy calls (FUN_00439be4) in the
 ImageRawDataUpdate handler FUN_004ff8fc to it.
@@ -27,26 +30,57 @@ DELTA = 0x39E680  # file_off = ghidra_addr - DELTA  (OTA mainApp component)
 def g2f(addr):
     return addr - DELTA
 
-# zlib image glue (g2flash/patches/zlib_glue.c -> build.py pass2, 386 B) placed at
+# zlib image glue (patches/zlib_glue.c -> build.py pass2, 790 B) placed at
 # ghidra 0x491400 (= bufbase set_aging_test_info tail, after frag_write). Exports
-# zwrap_alloc@0x491400, zwrap_free@0x49140e, load_image_z@0x49141a. load_image_z
-# decompresses into the recon buffer's unused tail (no scratch malloc) to avoid OOM.
+# zwrap_alloc@0x491400, zwrap_free@0x49140e, load_image_z@0x49141a. Mode dispatch:
+# 'B'=raw BMP, 1=zlib 4bpp BMP (recon-tail), 2=zlib 8bpp full frame ->display buffer,
+# 3=8bpp XOR delta; 4=8bpp stereo pair (per-lens half via FW_SIDE); 2/3/4 push via loader tail.
 ZLIB_GLUE = bytes.fromhex(
-    "02fb01f042f66f31c0f247010847084642f6b331c0f2470108472de9f04f8fb0"
-    "41f24b6314460d4606460029c0f2500300f09e80022cc0f09b80287800f00f00"
-    "082840f09580b6f840000323421cb6f8421003eb520222f003024a4302f1b607"
-    "01fb00fb17eb040a4ff0000040f10009bbeb0a0170eb090012d242f66f31c0f2"
-    "470138468847804670b941f24b63304629462246c0f250030fb0bde8f04f1847"
-    "abeb070005eb0008002001a9002200bf88540132382afbd141f20140c0f24900"
-    "4ef2076109900e30c0f25b010a90002048f2e452cde904870b9001f13c0701a8"
-    "c0f278020f213823cde90154b84760bb4ef20760c0f25b0000f5857201a80421"
-    "90470699074600914ef2076101a8c0f25b018847012f18d1009a41f24b633046"
-    "4146c0f250039847bbeb0a014ff0000171eb0901044620d242f66f30c0f24700"
-    "00f144014046884717e0bbeb0a004ff0000070eb090007d242f66f30c0f24700"
-    "00f144014046884741f24b63c0f250033046294622469847044620460fb0bde8f08f"
+    "02fb01f042f66f31c0f247010847084642f6b331c0f2470108472de9f04fd3b0"
+    "814619b112b10d78422d08d141f24b63c0f25003484653b0bde8f04f1847032a"
+    "f4d3681f10f1050ff0d9b9f84060b9f84240002045ab0027d8550137382ffbd1"
+    "501e41f20142c0f249024d920e324b1c04fb06f84e920022012dcde945304f92"
+    "15d1731c032707eb530323f00303634303f1b60616eb000a42f1000bbaeb0800"
+    "7bf1000017d2a8eb06000d181de04ef2076bc0f25b0b48f2e452d9f808a00bf1"
+    "3c0745a8c0f278020f213823b84700b345a8d847e8e042f66f31c0f247013046"
+    "88470546002800f0df804ef20767c0f25b0748f2e452cde9485607f13c0645a8"
+    "c0f278020f213823b047b0b145a8b8472ae0032d39d0022d69d10bf5857245a8"
+    "0421cde948a890470128d1d14a98a0eb0800b0fa80f04509abe045ac07f58572"
+    "2046042190474a99064620460491b847012e09d141f24b63049ac0f250034846"
+    "29469847044601e04ff0ff34baeb08007bf10000c0f09a8042f66f30c0f24700"
+    "00f144012846884790e0cdf80ca0cde9016400260df1140a0bf5857ba8eb0600"
+    "b0f5807f28bf4ff48070cde948a045a80021d8474899b1eb0a040cd003995346"
+    "8a19214613f8015b1778013987ea050702f8017bf6d1012826444dd000284ff0"
+    "00054ed1b4fa84f04009d7d049e04af6ed00c0f24500cde901648047861e5846"
+    "18bf464606eb0807cdf80ca0aaeb060800250df1140b00f585704ff0000a0490"
+    "4ff48070049a499045a80021cdf820b19047ddf820e1beeb0b0c10d053465c46"
+    "624600bfb34204d3bb423cbf217808f80310013a04f1010403f10103f2d1e244"
+    "beeb0b0118bf0121ba4528bf012508d238b90029d4d104e0a6eb0800b0fa80f0"
+    "4509dde901644ef2076bddf80ca0c0f25b0b45a8d8473db14846514632462346"
+    "00f008f8002401e04ff0ff34204653b0bde8f08f2de9f04182b003fb02f68846"
+    "cde9001642f6877107466846c0f247011c461546884740f2196047f8240f7889"
+    "40f6017245ea0040b86045ea044057f8204c7860c0f24b0220463946fe60c7f8"
+    "1080904740f2f751c0f244012046884702b0bde8f081"
 )
 
-# frag_write machine code (g2flash/patches/decompress.c -> build.py, text+0x80, 106 B)
+# settings capability-advertisement wrapper (patches/settings_ext.c ->
+# build.py, 256 B) placed at ghidra 0x491718 (dead set_aging_test_info tail,
+# after the zlib glue). Hooks the one `bl FUN_0047398c` (aa21 send) at the tail
+# of the settings responder FUN_004b42b4: appends protobuf field 100 (string
+# "EVENCFW/1 img576 imgz xordelta stereo") to the sid=0x09 READ response so a
+# connected app can detect this CFW and its extensions, then tail-calls send.
+SETTINGS_EXT = bytes.fromhex(
+    "092978d12de9f04102eb030c56248cf804404e248cf8064043248cf8074046248c"
+    "f8084057248cf809402f248cf80a4031244ff0a20e8cf80b406924352702f803e0"
+    "4ff0060e8cf80d408cf8107037278cf814407a248cf801e04ff0250e67268cf811"
+    "7036278cf8174078248cf802e04ff0450e6d258cf80f608cf812708cf816608cf8"
+    "194064266c2761248cf803e08cf805e04ff0200e8cf80e508cf815504ff06f0872"
+    "258cf81c6065268cf81e7074278cf82040732428338cf80ce08cf813e08cf818e0"
+    "8cf81a808cf81b508cf81d608cf81f708cf821e08cf822408cf823708cf824608c"
+    "f825508cf826608cf82780bde8f04143f68d1cc0f2470c6047"
+)
+
+# frag_write machine code (patches/decompress.c -> build.py, text+0x80, 106 B)
 FRAG_WRITE = bytes.fromhex(
     "f0b540f26c63c0f250031b681b6a13b35fea920c08bff0bd00238646ca5c0725"
     "744600bf22fa05f606f001066f1e764222fa07f726f00f06ff0718bf0f3604f8"
@@ -79,6 +113,14 @@ PATCHES = [
     # image) into a scratch BMP before loading. Raw BMPs pass straight through.
     (g2f(0x491400), "ab f7 21 fd", ZLIB_GLUE.hex(), "zlib glue (zwrap_alloc/free + load_image_z)"),
     (g2f(0x4ae9cc), "52 f0 3d fe", "e2 f7 25 fd", "bl load_image_z (decompress at BMP load)"),
+    # --- CFW capability advertisement on the sid=0x09 settings READ response ---
+    # Inject settings_send_wrapper into the dead tail (after the zlib glue), then
+    # redirect the settings responder's `bl FUN_0047398c` (aa21 send) to it so it
+    # appends protobuf field 100 ("EVENCFW/1 img576 imgz xordelta stereo") before
+    # framing. Unknown high field tag -> stock app/bridge ignore it; CFW-aware
+    # apps read it to detect the firmware and gate features.
+    (g2f(0x491718), "00 f0 c4 80", SETTINGS_EXT.hex(), "settings_send_wrapper (CFW caps field)"),
+    (g2f(0x4b43c4), "bf f7 e2 fa", "dd f7 a8 f9", "bl settings_send_wrapper (append caps field 100)"),
 ]
 
 def hx(s):
@@ -112,8 +154,8 @@ def fixup_checksums(data):
         print(f"  [{i}] {name}: component crc32c={crc:08x}{extra}")
 
 def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "g2flash/g2_2.2.4.34.bin"
-    dst = sys.argv[2] if len(sys.argv) > 2 else "g2flash/g2_2.2.4.34_cfw.bin"
+    src = sys.argv[1] if len(sys.argv) > 1 else "g2_2.2.4.34.bin"
+    dst = sys.argv[2] if len(sys.argv) > 2 else "g2_2.2.4.34_cfw.bin"
     data = bytearray(open(src, "rb").read())
     for off, orig, new, desc in PATCHES:
         o, n = hx(orig), hx(new)  # orig is a prefix sanity-check; new may be longer (code blob)
