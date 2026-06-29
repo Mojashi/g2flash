@@ -1,0 +1,5 @@
+# Runtime dependencies for g2flash.py. Both are imported lazily, so you only
+# strictly need the one for the transport you use; build_cfw.sh installs both
+# for convenience. The patch tools (patches/*.py) use only the stdlib.
+bleak              # g2://local transport (this machine's own Bluetooth radio)
+websocket-client   # g2://droidbridge transport (GATT forwarded from an Android phone)

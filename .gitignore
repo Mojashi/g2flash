@@ -1,0 +1,8 @@
+# Firmware blobs are not redistributed — build_cfw.sh downloads the stock image
+# from Even's CDN and patches it locally.
+*.bin
+
+# Python virtualenv created by build_cfw.sh, and bytecode caches.
+/venv/
+__pycache__/
+*.pyc

@@ -2,8 +2,7 @@
 
 `g2flash.py` flashes firmware onto Even Realities G2 smart glasses by
 reimplementing the official app's BLE flash protocol. It is the tool used to
-push custom firmware (the `*_cfw.bin` images in this directory) onto the
-device.
+push custom firmware (a patched `*_cfw.bin` image) onto the device.
 
 > **WARNING — this voids your warranty and can brick the glasses.**
 > Flashing custom firmware over the OTA path carries a real risk of bricking
@@ -11,14 +10,48 @@ device.
 > prompt before it will write anything (use `--my-warranty-is-void` to skip the
 > prompt for automation). Only proceed if you understand and accept the risk.
 
+## Quick start
+
+```bash
+cd g2flash
+./build_cfw.sh                       # set up venv, download stock fw, patch, verify
+./venv/bin/python g2flash.py -c g2://local -f g2_2.2.4.34_cfw.bin
+```
+
+`build_cfw.sh` does the whole build: it creates `./venv` with the flasher's
+dependencies, downloads the stock **G2 2.2.4.34** firmware from Even's CDN,
+applies the patches in `patches/`, and verifies that both the download and the
+patched result match pinned SHA-256 hashes (so a clean run proves you got
+exactly the reviewed image). Run `./build_cfw.sh --help` for options
+(`--skip-venv`, `--force-download`). Then flash as shown above — see
+[Usage](#usage) for connection strings and safety flags.
+
+## What's the custom firmware?
+
+The patches in `patches/` add image/display features on top of stock 2.2.4.34:
+
+- **576×288 image containers** (stock caps at 288×144).
+- **zlib-compressed image payloads** and **8bpp XOR-delta** frame updates, for
+  much faster image/video streaming.
+- **Per-lens stereo image pairs**.
+- A **capability-advertisement field** on the settings response, so a connected
+  app can detect this firmware and which features it supports.
+
 ## What's in this directory
 
 - `g2flash.py` — the flasher.
-- `g2_2.2.4.34.bin` — stock G2 2.2.4.34 firmware image (reference / re-flash).
-- `g2_2.2.4.34_cfw.bin` — patched custom firmware.
-- `g2_2.2.4.34_imgcontainer576.bin` — image-container 576×288 patch variant.
-- `g2_2.2.4.34_NOTASKS.bin`, `g2_2.2.4.34_ramloader.bin` — other build variants.
-- `patch_img_container_576.py` — the patch tool that produces the 576 variant.
+- `build_cfw.sh` — one-shot venv setup + download + patch + verify (see above).
+- `patches/` — the patch sources and tools:
+  - `patch_compress.py` — the all-in-one patcher (576 lift + image compression
+    + stereo + capability field) that `build_cfw.sh` runs.
+  - `patch_img_container_576.py` — standalone tool for just the 576×288 lift.
+  - `build.py`, `*.c` — the C→position-independent-Thumb pipeline and sources
+    for the injected firmware code (the machine code is embedded in
+    `patch_compress.py`; these are kept for review/rebuild).
+- `requirements.txt` — the flasher's Python dependencies.
+
+Firmware images (`g2_2.2.4.34*.bin`) are **not** checked in — they are Even's
+firmware, so you build them locally with `build_cfw.sh`.
 
 ## Requirements
 
@@ -42,27 +75,19 @@ on the standard library alone.
 
 ## Setting up the venv
 
-The checked-in `venv/` is broken — its scripts point at a path that no longer
-exists (`/Users/jbabcock/g2-mitm/venv/...`). Remove it and build a clean one:
+`build_cfw.sh` creates and populates `./venv` for you as part of a normal run.
+To set it up by hand instead:
 
 ```bash
 cd g2flash
-
-# remove the stale venv
-rm -rf venv
-
-# create and activate a fresh virtualenv
 python3 -m venv venv
-source venv/bin/activate          # bash/zsh
-python -m pip install --upgrade pip
-
-# insteal bleak for direct (local radio) flashing and websocket-client for DroidBridge flashing:
-pip install bleak websocket-client
+./venv/bin/python -m pip install --upgrade pip
+./venv/bin/python -m pip install -r requirements.txt
 ```
 
-To leave the environment later, run `deactivate`. With the venv activated you
-can invoke the tool as `python g2flash.py ...` (or
-`./venv/bin/python g2flash.py ...` without activating).
+With the venv activated (`source venv/bin/activate`) you can invoke the tool as
+`python g2flash.py ...`; otherwise use `./venv/bin/python g2flash.py ...`. Run
+`deactivate` to leave the environment.
 
 ### macOS note
 
