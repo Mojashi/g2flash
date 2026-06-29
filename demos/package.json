@@ -1,0 +1,20 @@
+{
+  "name": "g2-cfw-demos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demos for the faceclaw G2 custom firmware: a video-streaming benchmark and a CFW-detection probe, talking to the glasses over BLE.",
+  "dependencies": {
+    "g2-kit": "github:jimrandomh/g2-kit-unofficial#e8530502419bed4f5fb02c370c522208117c01d2",
+    "omggif": "^1.0.10"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/ws": "^8.18.1",
+    "typescript": "^6.0.2"
+  },
+  "scripts": {
+    "detect": "bun detect-cfw.ts",
+    "bench": "bun video-bench.ts"
+  }
+}
