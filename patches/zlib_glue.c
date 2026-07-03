@@ -54,6 +54,11 @@
  * header is needed on 8bpp payloads — the sender just deflates w*h raw bytes
  * (mode 2) or a w*h XOR delta against the previous frame (mode 3).
  *
+ * Every invocation (any mode) first kicks the EvenHub keepalive: stock firmware
+ * resets the ticks-since-heartbeat counter only on the sid-0x0c heartbeat msg, so
+ * a client streaming image updates to maximize throughput would otherwise trip the
+ * "Connection lost" teardown. See FW_KEEPALIVE_RESET at the top of load_image_z.
+ *
  * BMP handling (modes 'B' and 1) does NOT use the stock loader FUN_0050164a: that
  * decoder runs two non-inlined function calls PER PIXEL (palette pack + luminance
  * blend) plus a whole-buffer CRC, which costs more CPU than the airtime it saves.
@@ -87,6 +92,7 @@ typedef void (*buzz_note_fn)(uint32_t note, uint32_t tone, uint32_t beat); /* DR
 typedef void (*buzz_reset_fn)(void);                /* buzzer stop/reset */
 typedef void (*buzz_raw_fn)(uint32_t freq, uint32_t duty);   /* reset+power+PWM(freq,duty) */
 typedef int  (*timer_start_fn)(uint32_t handle, uint32_t ms); /* osTimer start (one-shot) */
+typedef void (*keepalive_reset_fn)(void);           /* zero the EvenHub keepalive counter */
 
 /* firmware entry points (Thumb bit set for blx via constant pointer) */
 #define FW_MALLOC  ((malloc_fn)0x00472b6fU)         /* FUN_00472b6e malloc(size) */
@@ -104,6 +110,11 @@ typedef int  (*timer_start_fn)(uint32_t handle, uint32_t ms); /* osTimer start (
 #define FW_BUZZ_RESET  ((buzz_reset_fn)0x004e9759U)  /* FUN_004e9758 buzzer stop/reset */
 #define FW_BUZZ_RAW    ((buzz_raw_fn)0x004e991dU)     /* FUN_004e991c reset+power+PWM(freq,duty) */
 #define FW_TIMER_START ((timer_start_fn)0x004484ebU)  /* FUN_004484ea osTimerStart(handle,ms) */
+#define FW_KEEPALIVE_RESET ((keepalive_reset_fn)0x00505cc3U) /* FUN_00505cc2: EvenHub keepalive
+                                                     * counter (@0x200744e8) = 0. This is the exact
+                                                     * leaf the stock sid-0x0c heartbeat handler in
+                                                     * FUN_004ae69c calls; it takes no args and reads
+                                                     * the counter pointer from its own literal pool. */
 #define BUZZ_TIMER_ADDR 0x20074440U                   /* RAM: buzzer osTimer handle (DAT_004e996c) */
 #define ZLIB_VER   ((const char *)0x007885e4U)      /* "1.1.4" */
 
@@ -141,6 +152,20 @@ static void unpack4bpp(uint8_t *disp, const uint8_t *pix, uint32_t w, uint32_t h
 static int load_bmp_fast(uint8_t *state, const uint8_t *bmp, uint32_t len);
 
 int load_image_z(void *state_, uint8_t *src, uint32_t srclen) {
+    /* An inbound image message proves the phone is still connected, so kick the
+     * EvenHub keepalive back to life exactly as the stock heartbeat handler does.
+     * Stock firmware resets the ticks-since-last-heartbeat counter (@0x200744e8)
+     * ONLY on the sid-0x0c heartbeat message; the periodic evenhub_ui_event_handler
+     * (FUN_00506460, param_1==4) increments it every tick and, once it passes 899,
+     * fires FUN_004fee62(0,0) -> "DISPLAY_AUTO_REFLASH heartbeat timeout" -> the
+     * "Connection lost" context teardown. A client streaming image updates to
+     * maximize throughput would otherwise have to interleave heartbeats to avoid
+     * that teardown; resetting here lets a steady image stream keep the context
+     * alive on its own. Placed before any dispatch so every mode (image, delta,
+     * stereo, sound, BMP) counts as liveness. Runs on the same evenhub task that
+     * owns the counter, so no locking is needed. */
+    FW_KEEPALIVE_RESET();
+
     uint8_t *state = (uint8_t *)state_;
     if (src == 0 || srclen < 1) return load_bmp_fast(state, src, srclen);
 
