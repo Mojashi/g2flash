@@ -3,11 +3,21 @@
 // + framerate. Decodes/rescales/grayscales/compresses ALL frames up front, then
 // sends them in order, pacing only on the per-fragment acks.
 //
-// Frames are sent to the CFW's 8bpp display modes:
-//   - keyframe -> mode 2 (full 8bpp frame)
-//   - others   -> mode 3 (8bpp XOR delta vs the previous frame)
-// Deltas are tiny for content like Bad Apple (mostly-static black/white), so the
-// achieved framerate is dominated by ack latency, not wire bytes.
+// Each frame is zlib-compressed and sent with a leading mode byte that selects
+// a CFW display path. G2_MODE picks the encoding (handy for comparing 4bpp-BMP
+// vs 8bpp compressibility and throughput):
+//   full  (default) 8bpp: every frame -> mode 2 (full 8bpp frame, raw pixels)
+//   delta           8bpp: first frame mode 2, rest mode 3 (XOR delta vs prev)
+//   bmp             4bpp: every frame -> mode 1 (full 4bpp indexed BMP)
+//   raw4            4bpp: every frame -> mode 6 (headerless 4bpp, fast expander)
+// 8bpp carries a full byte per pixel (the panel requantizes to ~16 levels);
+// 4bpp is half the raw size before compression. `bmp` (mode 1) runs through the
+// stock BMP loader, which decodes with two function calls per pixel; `raw4`
+// (mode 6) sends headerless 4bpp and expands it on-device with a plain nibble
+// copy, so it gets the 4bpp airtime without the stock decoder's CPU cost.
+// Deltas are tiny for content like Bad Apple (mostly-static), so in `delta` mode
+// the framerate is dominated by ack latency, not wire bytes; the other three
+// send a whole frame every time.
 //
 //   bun video-bench.ts path/to/bad_apple.gif
 //
@@ -16,10 +26,11 @@
 //
 // Env:
 //   G2_IMG_W / G2_IMG_H   target size (default 288x144)
+//   G2_IMG_THRESHOLD      >=0 = 1-bit threshold; -1 = grayscale (default -1)
 //   G2_MAX_FRAMES         cap frame count (default 0 = all)
 //   G2_FRAME_STRIDE       use every Nth decoded frame (default 1)
-//   G2_KEYFRAME_INTERVAL  full frame every N (default 0 = only the first)
-//   G2_MODE               "delta" (default) or "full" (every frame mode 2)
+//   G2_KEYFRAME_INTERVAL  (delta mode) force a full frame every N (default 0 = only the first)
+//   G2_MODE               "full" (default), "delta", "bmp", or "raw4" (see above)
 //   G2_DRY_RUN=1          decode+compress+report only, don't connect/stream
 //   G2_WINDOW             pipelined image messages in flight at once (default 2; 1 = serial)
 
@@ -28,6 +39,7 @@ import {
   buildCreateStartUpPageContainer,
   buildImageContainers,
   buildImageRawData,
+  buildEvenHubBmp,
   planImageFragments,
   type ImageContainerSpec,
 } from "g2-kit/ble";
@@ -42,7 +54,14 @@ const THRESHOLD = Math.max(-1, Math.min(255, Number(process.env.G2_IMG_THRESHOLD
 const MAX_FRAMES = Math.max(0, Number(process.env.G2_MAX_FRAMES ?? "0"));
 const STRIDE = Math.max(1, Number(process.env.G2_FRAME_STRIDE ?? "1"));
 const KEYFRAME_INTERVAL = Math.max(0, Number(process.env.G2_KEYFRAME_INTERVAL ?? "0"));
-const FULL_ONLY = (process.env.G2_MODE ?? "full") === "full";
+const MODE = (process.env.G2_MODE ?? "full").toLowerCase(); // "full" | "delta" | "bmp" | "raw4"
+if (!["full", "delta", "bmp", "raw4"].includes(MODE)) {
+  console.error(`G2_MODE must be one of full|delta|bmp|raw4 (got "${MODE}")`);
+  process.exit(1);
+}
+const BMP4 = MODE === "bmp";    // mode 1: full 4bpp BMP per frame (stock BMP path)
+const RAW4 = MODE === "raw4";   // mode 6: headerless 4bpp, our fast expander
+const DELTA = MODE === "delta"; // mode 2 keyframes + mode 3 XOR deltas
 const DRY_RUN = process.env.G2_DRY_RUN === "1";
 const WINDOW = Math.max(1, Number(process.env.G2_WINDOW ?? "2"));
 const IMAGE_SEND_ARM = "R";
@@ -109,9 +128,18 @@ for (let i = 0; i < total; i++) {
 
   if (i % STRIDE !== 0) continue;
   const gray = rescaleGray(rgba);
-  const isKey = FULL_ONLY || prev === null || (KEYFRAME_INTERVAL > 0 && used % KEYFRAME_INTERVAL === 0);
+  // In delta mode a frame is a keyframe on the first frame or every Nth; full
+  // and bmp modes send a whole frame every time.
+  const isKey = !DELTA || prev === null || (KEYFRAME_INTERVAL > 0 && used % KEYFRAME_INTERVAL === 0);
   let payload: Uint8Array;
-  if (isKey) {
+  if (BMP4) {
+    // mode 1: full 4bpp indexed BMP (gray 0..255 -> 0..15), zlib-compressed.
+    const bmp = buildEvenHubBmp(W, H, (x, y) => gray[y * W + x]! >> 4);
+    payload = pack(1, bmp);
+  } else if (RAW4) {
+    // mode 6: headerless tight 4bpp (gray>>4), our fast on-device expander.
+    payload = pack(6, pack4bpp(gray));
+  } else if (isKey) {
     payload = pack(2, gray);
   } else {
     const d = new Uint8Array(W * H);
@@ -133,7 +161,7 @@ const deltaBytes = stats.filter((s) => !s.key).reduce((a, s) => a + s.bytes, 0);
 const deltaN = stats.length - keyN;
 const totalBytes = keyBytes + deltaBytes;
 console.log(
-  `[prepared] ${payloads.length} frames in ${(prepMs / 1000).toFixed(1)}s | ` +
+  `[prepared] mode=${MODE} ${W}x${H} ${payloads.length} frames in ${(prepMs / 1000).toFixed(1)}s | ` +
     `${(totalBytes / 1024).toFixed(0)} KiB total, avg ${(totalBytes / payloads.length).toFixed(0)} B/frame ` +
     `(keyframes ${keyN}@${keyN ? (keyBytes / keyN).toFixed(0) : 0}B, deltas ${deltaN}@${deltaN ? (deltaBytes / deltaN).toFixed(0) : 0}B)`,
 );
@@ -143,6 +171,22 @@ function pack(mode: number, raw: Uint8Array): Uint8Array {
   const out = new Uint8Array(z.length + 1);
   out[0] = mode;
   out.set(z, 1);
+  return out;
+}
+
+// Tightly-packed 4bpp (mode 6): gray 0..255 -> nibble (gray>>4), 2 px/byte with
+// the left pixel in the high nibble, rows top-down, stride = ceil(W/2), no
+// padding. Matches the firmware's headerless-4bpp expander.
+function pack4bpp(gray: Uint8Array): Uint8Array {
+  const stride = (W + 1) >> 1;
+  const out = new Uint8Array(stride * H);
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x += 2) {
+      const hi = gray[y * W + x]! >> 4;
+      const lo = x + 1 < W ? gray[y * W + x + 1]! >> 4 : 0;
+      out[y * stride + (x >> 1)] = (hi << 4) | lo;
+    }
+  }
   return out;
 }
 
@@ -169,7 +213,7 @@ try {
   // container replicate to that lens before the first frame to avoid a race.
   await new Promise((r) => setTimeout(r, 300));
 
-  console.log(`[stream] sending ${payloads.length} frames, window=${WINDOW}, arm=${IMAGE_SEND_ARM}...`);
+  console.log(`[stream] sending ${payloads.length} frames, mode=${MODE}, window=${WINDOW}, arm=${IMAGE_SEND_ARM}...`);
   let sid = 1, sent = 0, sentBytes = 0, aborted = false;
   let latSum = 0, latN = 0, latWorst = 0;
 
@@ -221,7 +265,7 @@ try {
   const elapsed = (performance.now() - tStart) / 1000;
   const fps = sent / elapsed;
   console.log(
-    `\n=== RESULT (window=${WINDOW}) ===\n` +
+    `\n=== RESULT (mode=${MODE}, ${W}x${H}, window=${WINDOW}) ===\n` +
       `frames sent : ${sent}${aborted ? " (aborted early)" : ""}\n` +
       `elapsed     : ${elapsed.toFixed(1)} s\n` +
       `framerate   : ${fps.toFixed(2)} fps  (${(1000 / fps).toFixed(0)} ms/frame)\n` +

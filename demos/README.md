@@ -8,8 +8,9 @@ G2 glasses over Bluetooth and show off the [custom firmware](../) built by
   running the custom firmware, and which extensions it advertises. Works on
   stock firmware too (it just reports "no CFW").
 - **`video-bench.ts`** — streams a video (as a GIF) to the lens as fast as it
-  acks and benchmarks the achieved framerate / byte count. Uses the CFW's
-  compressed 8bpp display modes (full keyframe + XOR-delta frames).
+  acks and benchmarks the achieved framerate / byte count. Streams via the
+  CFW's compressed display modes — 8bpp full frames, 8bpp XOR deltas, or 4bpp
+  indexed BMP — selectable with `G2_MODE` to compare size and throughput.
 
 They depend on [`g2-kit`](https://github.com/jimrandomh/g2-kit-unofficial) (a
 reverse-engineered BLE library for the G2), pulled directly from GitHub — see
@@ -63,7 +64,7 @@ Useful environment variables:
 |-----|---------|---------|
 | `G2_IMG_W` / `G2_IMG_H` | `288` / `144` | target size (max `576`×`288`) |
 | `G2_IMG_THRESHOLD` | `-1` | `>=0` = 1-bit threshold; `-1` = grayscale |
-| `G2_MODE` | `full` | `full` (every frame a keyframe) or `delta` (XOR deltas) |
+| `G2_MODE` | `full` | `full` = 8bpp full frame (mode 2); `delta` = 8bpp XOR deltas (mode 3); `bmp` = 4bpp BMP via stock loader (mode 1); `raw4` = headerless 4bpp via fast expander (mode 6) |
 | `G2_KEYFRAME_INTERVAL` | `0` | in `delta` mode, force a full frame every N |
 | `G2_FRAME_STRIDE` | `1` | use every Nth source frame |
 | `G2_MAX_FRAMES` | `0` | cap frame count (`0` = all) |

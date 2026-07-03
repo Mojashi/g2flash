@@ -6,9 +6,9 @@
  * Replaces the one BMP-loader call FUN_0050164a(state, buf, len) in FUN_004ae69c.
  * Dispatch on the first byte of the reassembled image buffer:
  *
- *   'B' (0x42)  -> raw BMP, hand straight to the stock loader (unchanged path).
+ *   'B' (0x42)  -> raw BMP: decode with our own fast 4bpp decoder (load_bmp_fast).
  *   1           -> [1][zlib]   4bpp BMP: inflate into the recon buffer's tail,
- *                              then hand the BMP to the stock loader.
+ *                              then decode with load_bmp_fast.
  *   2           -> [2][zlib]   8bpp full frame: inflate straight into the display
  *                              buffer (state+0x8, w*h, 1 byte/pixel), then push.
  *   3           -> [3][zlib]   8bpp XOR delta: inflate in chunks and XOR onto the
@@ -45,15 +45,25 @@
  *                              raw-tone entry drives the low-level PWM start and
  *                              arms that same osTimer for auto-stop. None spin or
  *                              block here. Returns 0 (success).
- *   anything else / too short  -> hand to the stock loader (it rejects cleanly).
+ *   6           -> [6][zlib]   headerless 4bpp full frame: inflate the tightly
+ *                              packed 4bpp pixels (h * ceil(w/2) bytes, top-down)
+ *                              and expand them into the 8bpp display buffer, push.
+ *   anything else / too short  -> load_bmp_fast (rejects cleanly if not a BMP).
  *
  * The image dimensions come from the container state (state+0x40/0x42), so no
  * header is needed on 8bpp payloads — the sender just deflates w*h raw bytes
  * (mode 2) or a w*h XOR delta against the previous frame (mode 3).
  *
- * Modes 2/3 bypass the BMP decoder, so they replicate its tail to get the buffer
- * onto the panel: dcache-clean the display buffer, set the LVGL image descriptor
- * (state+0x24..0x34), lv_image_set_src, lv_obj_invalidate.
+ * BMP handling (modes 'B' and 1) does NOT use the stock loader FUN_0050164a: that
+ * decoder runs two non-inlined function calls PER PIXEL (palette pack + luminance
+ * blend) plus a whole-buffer CRC, which costs more CPU than the airtime it saves.
+ * load_bmp_fast instead does a direct 4bpp-nibble -> 8bpp (nibble*17) expand,
+ * ignoring the palette (the sender only ever uses the standard gray ramp). The
+ * stock loader is kept only as a fallback for non-4bpp or mismatched-size BMPs.
+ *
+ * Modes 2/3/4/6 and the BMP decoder replicate the stock loader's tail to get the
+ * buffer onto the panel: dcache-clean the display buffer, set the LVGL image
+ * descriptor (state+0x24..0x34), lv_image_set_src, lv_obj_invalidate.
  *
  * Self-contained: no external symbols, no writable globals. Firmware entry points
  * are called by absolute constant address (movw/movt + blx, no relocation). The
@@ -126,13 +136,16 @@ void zwrap_free(void *opaque, void *ptr) {
 }
 
 static void push_display(uint8_t *state, uint8_t *disp, uint32_t w, uint32_t h);
+static void unpack4bpp(uint8_t *disp, const uint8_t *pix, uint32_t w, uint32_t h,
+                       uint32_t stride, int bottom_up);
+static int load_bmp_fast(uint8_t *state, const uint8_t *bmp, uint32_t len);
 
 int load_image_z(void *state_, uint8_t *src, uint32_t srclen) {
     uint8_t *state = (uint8_t *)state_;
-    if (src == 0 || srclen < 1) return FW_LOADBMP(state, src, srclen);
+    if (src == 0 || srclen < 1) return load_bmp_fast(state, src, srclen);
 
     uint8_t mode = src[0];
-    if (mode == 0x42) return FW_LOADBMP(state, src, srclen);          /* raw BMP */
+    if (mode == 0x42) return load_bmp_fast(state, src, srclen);       /* raw BMP */
 
     if (mode == 5) {
         /* play a UI sound on the buzzer; no display change. [5][kind][args...].
@@ -166,7 +179,7 @@ int load_image_z(void *state_, uint8_t *src, uint32_t srclen) {
         return 0;
     }
 
-    if (mode < 1 || mode > 4 || srclen < 3) return FW_LOADBMP(state, src, srclen);
+    if (mode < 1 || mode > 6 || srclen < 3) return load_bmp_fast(state, src, srclen);
 
     const uint8_t *zsrc = src + 1;
     uint32_t zlen = srclen - 1;
@@ -182,27 +195,43 @@ int load_image_z(void *state_, uint8_t *src, uint32_t srclen) {
     *(uint32_t *)(strm + ZS_ZFREE) = ZWRAP_FREE_ADDR;
     *(uint32_t *)(strm + ZS_OPAQUE) = 0;
 
-    if (mode == 1) {
-        /* 4bpp BMP -> recon-buffer tail (no scratch), then the stock loader */
-        uint32_t row_stride = (((w + 1) >> 1) + 3) & ~3u;
-        uint32_t bmp_max = 118 + row_stride * h + 64;
+    if (mode == 1 || mode == 6) {
+        /* Both inflate a whole payload into the recon buffer's tail (no scratch
+         * unless it won't fit), then hand off: mode 1 is a full 4bpp BMP decoded
+         * by load_bmp_fast; mode 6 is headerless tight 4bpp expanded directly. */
+        uint32_t out_max;
+        if (mode == 1) {
+            uint32_t row_stride = (((w + 1) >> 1) + 3) & ~3u;   /* BMP 4-byte-padded */
+            out_max = 118 + row_stride * h + 64;
+        } else {
+            out_max = ((w + 1) >> 1) * h;                       /* tight 4bpp */
+        }
         uint8_t *dst;
         int allocated = 0;
-        if ((uint64_t)bmp_max + zlen + 1 <= wh) {     /* +1: input starts at src[1] */
-            dst = src + (wh - bmp_max);
+        if ((uint64_t)out_max + zlen + 1 <= wh) {     /* +1: input starts at src[1] */
+            dst = src + (wh - out_max);
         } else {
-            dst = (uint8_t *)FW_MALLOC(bmp_max);
+            dst = (uint8_t *)FW_MALLOC(out_max);
             if (dst == 0) return -1;
             allocated = 1;
         }
         *(uint8_t **)(strm + ZS_NEXT_OUT) = dst;
-        *(uint32_t *)(strm + ZS_AVAIL_OUT) = bmp_max;
+        *(uint32_t *)(strm + ZS_AVAIL_OUT) = out_max;
         int ret = -1;
         if (FW_INIT2(strm, 15, ZLIB_VER, ZS_SIZE) == 0) {
-            int r = FW_INFLATE(strm, 4);              /* Z_FINISH (whole BMP fits) */
+            int r = FW_INFLATE(strm, 4);              /* Z_FINISH (whole frame fits) */
             uint32_t out = *(uint32_t *)(strm + ZS_TOTAL_OUT);
             FW_END(strm);
-            if (r == 1) ret = FW_LOADBMP(state, dst, out);
+            if (r == 1) {
+                if (mode == 1) {
+                    ret = load_bmp_fast(state, dst, out);
+                } else if (out == out_max) {
+                    uint8_t *disp = *(uint8_t **)(state + 0x8);
+                    unpack4bpp(disp, dst, w, h, (w + 1) >> 1, 0);
+                    push_display(state, disp, w, h);
+                    ret = 0;
+                }
+            }
         } else {
             FW_END(strm);
         }
@@ -286,4 +315,57 @@ static void push_display(uint8_t *state, uint8_t *disp, uint32_t w, uint32_t h) 
     uint32_t obj = *(uint32_t *)(state + 4);
     FW_SETSRC(obj, state + 0x24);
     FW_INVAL(obj);
+}
+
+/* little-endian unaligned reads (byte-wise; -mno-unaligned-access safe) */
+static uint32_t rd16(const uint8_t *p) { return (uint32_t)p[0] | ((uint32_t)p[1] << 8); }
+static uint32_t rd32(const uint8_t *p) {
+    return (uint32_t)p[0] | ((uint32_t)p[1] << 8) | ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+}
+
+/* Expand a 4bpp (2 px/byte, high nibble = left pixel) source into the 8bpp
+ * display buffer: nibble n (0..15) -> n*17 (== (n<<4)|n) so 0->0, 15->255. `pix`
+ * is `stride` bytes per source row; `bottom_up` flips the row order (BMP). */
+static void unpack4bpp(uint8_t *disp, const uint8_t *pix, uint32_t w, uint32_t h,
+                       uint32_t stride, int bottom_up) {
+    for (uint32_t y = 0; y < h; y++) {
+        uint32_t srcY = bottom_up ? (h - 1 - y) : y;
+        const uint8_t *row = pix + srcY * stride;
+        uint8_t *out = disp + y * w;
+        for (uint32_t x = 0; x < w; x++) {
+            uint8_t b = row[x >> 1];
+            uint8_t nib = (x & 1) ? (b & 0x0f) : (uint8_t)(b >> 4);
+            out[x] = (uint8_t)(nib * 17);
+        }
+    }
+}
+
+/* Fast replacement for the stock BMP loader FUN_0050164a: decode a 4bpp indexed
+ * BMP straight into the 8bpp display buffer via unpack4bpp, ignoring the palette
+ * (always the gray ramp) and skipping the per-pixel color calls + CRC pass. Only
+ * width/height/bpp/pixel-offset are read from the header. Falls back to the stock
+ * loader for anything that isn't a 4bpp BMP matching the container dimensions. */
+static int load_bmp_fast(uint8_t *state, const uint8_t *bmp, uint32_t len) {
+    if (bmp == 0 || len < 0x36 || bmp[0] != 0x42 || bmp[1] != 0x4d)  /* "BM" */
+        return FW_LOADBMP(state, (void *)bmp, len);
+    if (rd16(bmp + 0x1c) != 4)                                       /* not 4bpp */
+        return FW_LOADBMP(state, (void *)bmp, len);
+
+    uint32_t dataoff = rd32(bmp + 0x0a);
+    int32_t bh_signed = (int32_t)rd32(bmp + 0x16);
+    uint32_t w = rd32(bmp + 0x12);
+    uint32_t h = (bh_signed < 0) ? (uint32_t)(-bh_signed) : (uint32_t)bh_signed;
+    int bottom_up = bh_signed > 0;
+
+    /* Dimensions must match the container's display buffer, else let the stock
+     * loader handle (and reject) it — avoids writing past the display buffer. */
+    if (w != *(uint16_t *)(state + 0x40) || h != *(uint16_t *)(state + 0x42) ||
+        (uint64_t)dataoff >= len)
+        return FW_LOADBMP(state, (void *)bmp, len);
+
+    uint32_t stride = (((w + 1) >> 1) + 3) & ~3u;   /* BMP rows padded to 4 bytes */
+    uint8_t *disp = *(uint8_t **)(state + 0x8);
+    unpack4bpp(disp, bmp + dataoff, w, h, stride, bottom_up);
+    push_display(state, disp, w, h);
+    return 0;
 }
