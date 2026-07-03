@@ -216,6 +216,7 @@ try {
   console.log(`[stream] sending ${payloads.length} frames, mode=${MODE}, window=${WINDOW}, arm=${IMAGE_SEND_ARM}...`);
   let sid = 1, sent = 0, sentBytes = 0, aborted = false;
   let latSum = 0, latN = 0, latWorst = 0;
+  const lats: number[] = [];
 
   // Sliding window of in-flight acks: each image-raw message fires immediately
   // (only its BLE write is awaited); we await the oldest ack before exceeding
@@ -227,6 +228,7 @@ try {
     const ack = await it.ack;
     const lat = performance.now() - it.t;
     latSum += lat; latN++; if (lat > latWorst) latWorst = lat;
+    lats.push(lat);
     return ack !== null;
   };
   const sendMsg = async (pb: Uint8Array, mg: number): Promise<boolean> => {
@@ -264,12 +266,23 @@ try {
 
   const elapsed = (performance.now() - tStart) / 1000;
   const fps = sent / elapsed;
+  // Percentiles over all observed ack latencies (nearest-rank on the sorted set).
+  const sortedLats = [...lats].sort((a, b) => a - b);
+  const pct = (p: number) =>
+    sortedLats.length ? sortedLats[Math.min(sortedLats.length - 1, Math.ceil(p * sortedLats.length) - 1)]! : 0;
+  const p90 = pct(0.9), p99 = pct(0.99);
+  // A worst >1000 ms almost certainly means the run ended on a timeout/disconnect,
+  // so the "worst" is that terminal stall, not a representative ack — surface the
+  // next-worst latency too so the tail is still readable.
+  const secondWorst = sortedLats.length >= 2 ? sortedLats[sortedLats.length - 2]! : 0;
+  const showSecond = latWorst > 1000 && sortedLats.length >= 2;
   console.log(
     `\n=== RESULT (mode=${MODE}, ${W}x${H}, window=${WINDOW}) ===\n` +
       `frames sent : ${sent}${aborted ? " (aborted early)" : ""}\n` +
       `elapsed     : ${elapsed.toFixed(1)} s\n` +
       `framerate   : ${fps.toFixed(2)} fps  (${(1000 / fps).toFixed(0)} ms/frame)\n` +
-      `ack latency : avg ${latN ? (latSum / latN).toFixed(0) : 0} ms, worst ${latWorst.toFixed(0)} ms  (round trip pipelining hides)\n` +
+      `ack latency : avg ${latN ? (latSum / latN).toFixed(0) : 0} ms, p90 ${p90.toFixed(0)} ms, p99 ${p99.toFixed(0)} ms, worst ${latWorst.toFixed(0)} ms` +
+      `${showSecond ? ` (2nd-worst ${secondWorst.toFixed(0)} ms)` : ""}  (round trip pipelining hides)\n` +
       `wire image  : ${(sentBytes / 1024).toFixed(0)} KiB  (avg ${sent ? (sentBytes / sent).toFixed(0) : 0} B/frame, ${((sentBytes * 8) / elapsed / 1000).toFixed(0)} kbit/s)\n` +
       `(image bytes only; protobuf+aa21 envelope add per-fragment overhead)`,
   );
