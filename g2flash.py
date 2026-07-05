@@ -295,7 +295,7 @@ class DroidBridgeTransport:
 # G2 arms advertise as "Even G#_<serial>_<L|R>_<last-3-MAC-bytes>", e.g.
 # "Even G2_32_L_693CCB" for MAC EC:D7:82:69:3C:CB. Groups: (serial, side, mactail).
 G2_NAME_RE = re.compile(r'(?:even\s+)?G\d+_(\d+)_([LR])_([0-9a-fA-F]{6})', re.I)
-SCAN_TIMEOUT = 12   # s to scan before giving up on finding an arm
+SCAN_TIMEOUT = 20   # s to scan before giving up on finding an arm
 
 def _norm_addr(s): return re.sub(r'[^0-9a-f]', '', (s or '').lower())
 
