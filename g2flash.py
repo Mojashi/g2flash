@@ -55,6 +55,20 @@ CTRL = ("00002760-08c2-11e1-9073-0e8ac72e5450",   # EvenHub/heartbeat svc (handl
 EXPECTED_SEGMENTS = 5
 REQUIRED_SEGMENT = "ota/s200_firmware_ota.bin"
 
+# --- main-app MRAM size ceiling (see memory: g2-firmware-size-limit) ---------
+# The bootloader programs the main app into internal MRAM with NO bounds check:
+# destination = preamble[0x14] and length = preamble[0]&0xFFFFFF are taken
+# verbatim from the image and fed to unbounded erase+program loops. An image
+# whose programmed end runs past the OTA flag / end of MRAM does NOT get
+# rejected -- it overruns and (past MRAM end) deterministically bricks the lens
+# into a bootloader-only, SWD-recovery state. So the ONLY guard is here.
+APP_LOAD_ADDR = 0x00438000    # where the bootloader programs the main app (XIP)
+MRAM_END      = 0x00800000    # end of Apollo510b 4 MB internal MRAM
+OTA_FLAG_ADDR = 0x007FE000    # OTA magic word (last 8 KB) -- app must stay below
+APP_PREAMBLE  = 0x20          # 32-byte preamble; bootloader programs payload[0x20:]
+# Conservative ceiling: leave the top ~56 KB below the flag for BLE-bond/KV NV.
+APP_MAX_END   = 0x007F0000
+
 # how far to go: 'discover' | 'heartbeat' | 'file_check' | 'flash' | 'done'
 STAGES = ["discover", "heartbeat", "file_check", "flash", "done"]
 def allowed(stage, stop_before): return STAGES.index(stage) < STAGES.index(stop_before)
@@ -168,7 +182,61 @@ def validate_firmware(img):
                 f"{calc:08x} but TOC={s['crc']:08x} sub={sub_crc:08x}. The image was "
                 "modified without recomputing checksums — re-run the patch tool's "
                 "checksum fixup (and the mainApp internal preamble CRC32) before flashing.")
+    check_mainapp_fits_mram(img, segs)
     return segs
+
+def check_mainapp_fits_mram(img, segs):
+    """Guard against an enlarged main-app image overrunning internal MRAM.
+
+    The bootloader programs the main app with NO size/destination bound (dst and
+    length come straight from the 32-byte preamble). If the programmed region
+    reaches the OTA flag (0x7FE000) it clobbers it + the BLE-bond/KV NV band; if
+    it reaches the end of MRAM (0x800000) the write faults mid-erase and the lens
+    is left in a permanent, BLE-unrecoverable bootloop (SWD-only recovery). This
+    is the only place that can catch it, so fail loudly here.
+
+    Also cross-checks the two fields the bootloader actually trusts:
+      preamble[0x14] must be the load address 0x438000, and
+      preamble[0]&0xFFFFFF (the length it programs) must equal the staged payload
+      size ps -- if you enlarge the image you MUST bump the preamble length too,
+      or the bootloader will program a different byte count than was streamed.
+    """
+    s = next((x for x in segs if x['fn'] == REQUIRED_SEGMENT), None)
+    if s is None:                       # already caught above, but be defensive
+        return
+    ps = s['ps']
+    pre = img[s['off']+128:s['off']+128+APP_PREAMBLE]
+    if len(pre) < APP_PREAMBLE:
+        raise ValueError("main-app payload is smaller than its 32-byte preamble")
+    load_addr = struct.unpack_from('<I', pre, 0x14)[0]
+    pre_len   = struct.unpack_from('<I', pre, 0)[0] & 0xFFFFFF
+    if load_addr != APP_LOAD_ADDR:
+        raise ValueError(
+            f"main-app preamble load address is 0x{load_addr:08x}, expected "
+            f"0x{APP_LOAD_ADDR:08x}. The bootloader programs to THIS address with "
+            "no check — flashing would write the app to the wrong MRAM location.")
+    if pre_len != ps:
+        raise ValueError(
+            f"main-app preamble length (0x{pre_len:x} = {pre_len} B) != staged "
+            f"payload size ps (0x{ps:x} = {ps} B). The bootloader erases/programs "
+            "preamble-length bytes but the flasher streams ps bytes; a mismatch "
+            "truncates or overruns. If you resized the image, set preamble[0] "
+            "low-24 to the new size and re-run --recompute-checksums.")
+    prog_end = APP_LOAD_ADDR + ps - APP_PREAMBLE   # bootloader writes payload[0x20:]
+    if prog_end > APP_MAX_END:
+        over = prog_end - APP_MAX_END
+        raise ValueError(
+            f"main-app is too large: programmed region ends at 0x{prog_end:08x}, "
+            f"{over} B ({over/1024:.1f} KB) past the safe ceiling 0x{APP_MAX_END:08x}. "
+            f"MRAM app window is 0x{APP_LOAD_ADDR:08x}..0x{OTA_FLAG_ADDR:08x} (OTA flag); "
+            f"end of MRAM is 0x{MRAM_END:08x}. The bootloader does NOT bounds-check "
+            "this, so flashing risks clobbering the OTA flag / NV or bricking the lens "
+            "(SWD-only recovery). Shrink the image or, if you have verified the exact "
+            "NV base, raise APP_MAX_END deliberately.")
+    headroom = APP_MAX_END - prog_end
+    if DEBUG:
+        print(f"    [main-app fits: ends 0x{prog_end:08x}, "
+              f"{headroom} B ({headroom/1024:.0f} KB) under 0x{APP_MAX_END:08x}]")
 
 def recompute_checksums(path):
     """Rewrite an EVENOTA image's stored checksums in place to match its current
@@ -641,7 +709,7 @@ def main(argv=None):
 
     confirm_warranty(args.my_warranty_is_void)
 
-    sides=['right','left'] if args.lens=='both' else [args.lens]
+    sides=['left','right'] if args.lens=='both' else [args.lens]
 
     bridge=None
     if conn['method']=='droidbridge':
