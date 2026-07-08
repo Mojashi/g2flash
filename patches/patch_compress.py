@@ -62,7 +62,17 @@ FRAG_BL_SITES = {
     0x500b60: "39 f7 40 f8",   # new-stream restart
     0x500d7c: "38 f7 32 ff",   # append fragment
 }
-LOADBMP_BL_SITE        = (0x4ae9cc, "52 f0 3d fe")  # bl FUN_0050164a -> load_image_z
+LOADBMP_BL_SITE        = (0x4ae9cc, "52 f0 3d fe")  # bl FUN_0050164a (deferred consumer) -> image_deferred
+# The two both-lens `bl FUN_0045a8ec` (lens-identity check) sites at image-
+# reconstruction-complete in FUN_004ff8fc (single- and multi-fragment). Redirected to
+# snapshot_side, which copies the fresh recon buffer into a per-state FIFO (both
+# lenses) then tail-calls the real FUN_0045a8ec so the RIGHT gate still works. This +
+# image_deferred consuming the FIFO fixes the producer/consumer race on the shared
+# recon buffer. See the snapshot/restore note in zlib_glue.c.
+SNAPSHOT_BL_SITES      = {   # both decode to `bl 0x45a8ec` (verified)
+    0x500a04: "59 f7 72 ff",   # single-fragment complete
+    0x500df8: "59 f7 78 fd",   # multi-fragment last-fragment complete
+}
 SETTINGS_BL_SITE       = (0x4b43c4, "bf f7 e2 fa")  # bl FUN_0047398c (aa21 send) -> wrapper
 GESTURE_LONGPRESS_SITE = (0x4425ae, "28 f0 49 f8")  # bl FUN_0046a644 -> evenhub_longpress
 GESTURE_RELEASE_SITE   = (0x4428de, "1d f0 cf f9")  # bl FUN_0045fc80 -> ring_release
@@ -139,13 +149,18 @@ def layout(img):
     p1 = build_blob("zlib_glue.c")
     alloc_addr = glue_base + _fn(p1, "zwrap_alloc")["offset"] + 1   # +1 = Thumb bit (blx via fn-ptr)
     free_addr  = glue_base + _fn(p1, "zwrap_free")["offset"] + 1
+    seq_tick_addr = glue_base + _fn(p1, "seq_tick")["offset"] + 1   # buzzer-sequence osTimer callback
     p2 = build_blob("zlib_glue.c", [
         f"-DZWRAP_ALLOC_ADDR=0x{alloc_addr:x}",
         f"-DZWRAP_FREE_ADDR=0x{free_addr:x}",
+        f"-DSEQ_TICK_ADDR=0x{seq_tick_addr:x}",
     ])
     glue = bytes.fromhex(p2["text"])
     assert place(glue) == glue_off, "glue placement drifted between size calc and layout"
-    loadz_addr = glue_base + _fn(p2, "load_image_z")["offset"]
+    assert glue_base + _fn(p2, "seq_tick")["offset"] + 1 == seq_tick_addr, \
+        "seq_tick offset moved between build passes (reordered?); baked SEQ_TICK_ADDR would be wrong"
+    snapshot_addr = glue_base + _fn(p2, "snapshot_side")["offset"]   # both-lens snapshot hook
+    deferred_addr = glue_base + _fn(p2, "image_deferred")["offset"]  # deferred consumer (FIFO restore)
 
     # 3) settings_send_wrapper (whole .text; entry at offset 0)
     se = build_blob("settings_ext.c")
@@ -197,9 +212,15 @@ def layout(img):
           for site, orig in FRAG_BL_SITES.items()],
         # allow per-fragment CompressMode to vary within one image session
         (g2f(0x500c10), "3b d0", "3b e0", "drop per-session CompressMode-consistency guard"),
-        # redirect the BMP-loader call -> load_image_z (multi-mode decompress dispatch)
-        (g2f(LOADBMP_BL_SITE[0]), LOADBMP_BL_SITE[1], enc_bl(LOADBMP_BL_SITE[0], loadz_addr),
-         "bl load_image_z (decompress at BMP load)"),
+        # Snapshot/restore (fixes the shared-recon-buffer producer/consumer race): at the
+        # both-lens completion, redirect `bl FUN_0045a8ec` -> snapshot_side (copies the fresh
+        # message into a per-state FIFO, then returns the lens id); the deferred consumer
+        # `bl FUN_0050164a` -> image_deferred (pops the FIFO and runs the worker on the
+        # snapshot, ignoring the possibly-overwritten live buffer).
+        *[(g2f(site), orig, enc_bl(site, snapshot_addr), f"bl snapshot_side @ {site:#x}")
+          for site, orig in SNAPSHOT_BL_SITES.items()],
+        (g2f(LOADBMP_BL_SITE[0]), LOADBMP_BL_SITE[1], enc_bl(LOADBMP_BL_SITE[0], deferred_addr),
+         "bl image_deferred (deferred consumer -> FIFO restore + worker, both lenses)"),
         # redirect the settings responder send -> settings_send_wrapper (caps field 100)
         (g2f(SETTINGS_BL_SITE[0]), SETTINGS_BL_SITE[1], enc_bl(SETTINGS_BL_SITE[0], settings_addr),
          "bl settings_send_wrapper (append caps field 100)"),
