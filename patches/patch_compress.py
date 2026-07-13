@@ -122,80 +122,53 @@ def find_mainapp(img):
     raise SystemExit("main-app component (ota/s200_firmware_ota.bin) not found")
 
 def layout(img):
-    """Compile the injected blobs and lay them out at the tail of the main-app
-    payload. Returns (append_bytes, in_place_patches, mainapp=(idx,off,old_ps)).
-    Enforces the MRAM ceiling (duplicate of g2flash.check_mainapp_fits_mram)."""
+    """Compile the single injected code blob (patches_main.c, which #includes every
+    patch source) and append it at the tail of the main-app payload. Returns
+    (append_bytes, in_place_patches, mainapp=(idx,off,old_ps)). Enforces the MRAM
+    ceiling (duplicate of g2flash.check_mainapp_fits_mram)."""
     idx, comp_off, old_ps = find_mainapp(img)
 
-    pieces = []          # (payload_off, blob_bytes) in append order
-    cursor = align_up(old_ps, BLOB_ALIGN)
-
-    def place(blob):
-        nonlocal cursor
-        off = align_up(cursor, BLOB_ALIGN)
-        pieces.append((off, blob))
-        cursor = off + len(blob)
-        return off
-
-    # 1) frag_write (extracted from decompress.c; entry at offset 0 of its bytes).
-    # This is the one place we append a SINGLE function's bytes rather than the whole
-    # blob, so it must carry no rodata -- a string literal here would be laid out
-    # after .text by build.py and dropped by this per-function slice, leaving its
-    # PC-relative refs dangling. Assert that; if decompress.c ever needs strings,
-    # switch this to append the whole `dec["text"]` blob like the others.
-    dec = build_blob("decompress.c")
-    assert dec.get("rodata_len", 0) == 0, \
-        "decompress.c now emits rodata; frag_write can't be extracted alone (see note)"
-    frag = bytes.fromhex(_fn(dec, "frag_write")["bytes"])
-    frag_off = place(frag)
-    frag_addr = mram_addr(frag_off)
-
-    # 2) zlib glue (2-pass: stable zwrap_alloc/free addrs baked into z_stream)
-    glue_off = align_up(cursor, BLOB_ALIGN)
-    glue_base = mram_addr(glue_off)
-    p1 = build_blob("zlib_glue.c")
-    alloc_addr = glue_base + _fn(p1, "zwrap_alloc")["offset"] + 1   # +1 = Thumb bit (blx via fn-ptr)
-    free_addr  = glue_base + _fn(p1, "zwrap_free")["offset"] + 1
-    seq_tick_addr = glue_base + _fn(p1, "seq_tick")["offset"] + 1   # buzzer-sequence osTimer callback
-    p2 = build_blob("zlib_glue.c", [
+    # Single combined blob: patches_main.c #includes all four patch sources, so build.py
+    # emits ONE relocatable blob (its mini-linker resolves cross-file calls) that we
+    # append once at the tail of the main-app payload. 2-pass so the stable zwrap_alloc/
+    # free + seq_tick addresses can be baked as absolute Thumb fn-ptrs (z_stream zalloc/
+    # zfree, buzzer osTimer callback); every other injected entry is a bl target. Each
+    # entry address is just base + the function's offset in the one blob.
+    blob_off = align_up(old_ps, BLOB_ALIGN)
+    base = mram_addr(blob_off)
+    p1 = build_blob("patches_main.c")
+    alloc_addr    = base + _fn(p1, "zwrap_alloc")["offset"] + 1   # +1 = Thumb bit (blx via fn-ptr)
+    free_addr     = base + _fn(p1, "zwrap_free")["offset"] + 1
+    seq_tick_addr = base + _fn(p1, "seq_tick")["offset"] + 1      # buzzer-sequence osTimer callback
+    p2 = build_blob("patches_main.c", [
         f"-DZWRAP_ALLOC_ADDR=0x{alloc_addr:x}",
         f"-DZWRAP_FREE_ADDR=0x{free_addr:x}",
         f"-DSEQ_TICK_ADDR=0x{seq_tick_addr:x}",
     ])
-    glue = bytes.fromhex(p2["text"])
-    assert place(glue) == glue_off, "glue placement drifted between size calc and layout"
-    assert glue_base + _fn(p2, "seq_tick")["offset"] + 1 == seq_tick_addr, \
+    blob = bytes.fromhex(p2["text"])
+    assert base + _fn(p2, "seq_tick")["offset"] + 1 == seq_tick_addr, \
         "seq_tick offset moved between build passes (reordered?); baked SEQ_TICK_ADDR would be wrong"
-    snapshot_addr = glue_base + _fn(p2, "snapshot_side")["offset"]   # both-lens snapshot hook
-    deferred_addr = glue_base + _fn(p2, "image_deferred")["offset"]  # deferred consumer (FIFO restore)
 
-    # 3) settings_send_wrapper (whole .text; entry at offset 0)
-    se = build_blob("settings_ext.c")
-    settings = bytes.fromhex(se["text"])
-    settings_off = place(settings)
-    settings_addr = mram_addr(settings_off)
+    # injected entry points, resolved from the single blob's function table (bl targets;
+    # even addresses -- the Thumb bit is only needed for the baked fn-ptrs above)
+    frag_addr      = base + _fn(p2, "frag_write")["offset"]
+    snapshot_addr  = base + _fn(p2, "snapshot_side")["offset"]
+    deferred_addr  = base + _fn(p2, "image_deferred")["offset"]
+    settings_addr  = base + _fn(p2, "settings_send_wrapper")["offset"]
+    longpress_addr = base + _fn(p2, "evenhub_longpress")["offset"]
+    release_addr   = base + _fn(p2, "ring_release")["offset"]
 
-    # 4) gesture_fwd (whole .text; two entry points)
-    gf = build_blob("gesture_fwd.c")
-    gesture = bytes.fromhex(gf["text"])
-    gesture_off = place(gesture)
-    gesture_base = mram_addr(gesture_off)
-    longpress_addr = gesture_base + _fn(gf, "evenhub_longpress")["offset"]
-    release_addr   = gesture_base + _fn(gf, "ring_release")["offset"]
-
-    # --- assemble the appended payload bytes (old_ps .. cursor) ---
-    end_off = cursor
+    # --- assemble the appended payload bytes (old_ps .. end) ---
+    pad = blob_off - old_ps                     # alignment gap before the blob
+    end_off = blob_off + len(blob)
     append = bytearray(end_off - old_ps)
-    for off, blob in pieces:
-        append[off - old_ps:off - old_ps + len(blob)] = blob
+    append[pad:pad + len(blob)] = blob
 
     # --- MRAM ceiling check (duplicate of g2flash.check_mainapp_fits_mram) ---
     prog_end = mram_addr(end_off)   # exclusive MRAM end once flashed
-    print("  append layout:")
-    for name, off, sz in (("frag_write", frag_off, len(frag)),
-                          ("zlib glue", glue_off, len(glue)), ("settings", settings_off, len(settings)),
-                          ("gesture_fwd", gesture_off, len(gesture))):
-        print(f"    {name:<12} @ MRAM 0x{mram_addr(off):08x}  +{sz} B")
+    rodata = p2.get("rodata_len", 0)
+    print(f"  combined blob @ MRAM 0x{base:08x}  +{len(blob)} B "
+          f"(.text {p2['text_len'] - rodata} + rodata {rodata})")
     if prog_end > APP_MAX_END:
         over = prog_end - APP_MAX_END
         raise SystemExit(
