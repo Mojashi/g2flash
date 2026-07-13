@@ -319,10 +319,21 @@ static void bzero(uint8_t *buf, uint32_t len);
 static int cfw_diag(int has_fid, uint16_t fid);
 static void cfw_draw_flags(uint8_t *disp, uint32_t w, uint32_t h);
 static uint32_t rd16(const uint8_t *p);
-static void present_shadow(uint8_t *state, uint32_t w, uint32_t h);
+
+/* Per-frame list of updated rectangles (pixel coords), assembled on the stack of the
+ * top-level image_worker and threaded through image_dispatch; present_shadow outlines
+ * them in the display buffer when the debug overlay is on, to visualize update regions. */
+#define CFW_RECT_MAX 16
+typedef struct { uint16_t l, t, w, h; } cfw_rect;
+typedef struct { uint32_t n; cfw_rect r[CFW_RECT_MAX]; } cfw_rectlist;
+static void rl_add(cfw_rectlist *rl, uint32_t l, uint32_t t, uint32_t w, uint32_t h);
+static void draw_rect_outline(uint8_t *disp, uint32_t w, uint32_t h, const cfw_rect *r);
+
+static void present_shadow(uint8_t *state, uint32_t w, uint32_t h, cfw_rectlist *rl);
 static void rect_copy_4bpp(uint8_t *buf, uint32_t stride, uint32_t sL, uint32_t sT,
                            uint32_t dL, uint32_t dT, uint32_t bw, uint32_t bh);
-static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, int present);
+static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
+                          int present, cfw_rectlist *rl);
 static uint32_t strlcpy(char *dst, const char *src, uint32_t len);
 static uint32_t strnlen(const char *s, uint32_t maxlen);
 static uint32_t strlcat(char *dst, const char *str, uint32_t len);
@@ -379,8 +390,11 @@ static int image_worker(void *state_, uint8_t *src, uint32_t srclen) {
     uint32_t cyc_per_us = cpm ? (cpm / 1000u) : 250u;  /* fallback: assume 250 MHz */
     if (cyc_per_us == 0) cyc_per_us = 1;
 
+    cfw_rectlist rl;                               /* per-frame updated-rect list (stack) */
+    rl.n = 0;
+
     uint32_t c0 = DWT_CYCCNT;
-    int r = image_dispatch((uint8_t *)state_, src, srclen, 1);
+    int r = image_dispatch((uint8_t *)state_, src, srclen, 1, &rl);
     uint32_t dc = DWT_CYCCNT - c0;                  /* unsigned: tolerates one wrap */
 
     if (ctx) {
@@ -397,7 +411,8 @@ static int image_worker(void *state_, uint8_t *src, uint32_t srclen) {
  * only mutate the shadow) and then presents once, giving an atomic multi-op update
  * (e.g. scroll = rect-copy + delta). The high bit of the mode byte is the "lenses
  * differ" flag; most modes ignore it. */
-static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, int present) {
+static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen,
+                          int present, cfw_rectlist *rl) {
     if (src == 0 || srclen < 1) return load_bmp_fast(state, src, srclen);
 
     int lenses_differ = src[0] & 0x80;             /* high bit: per-lens variant */
@@ -514,10 +529,10 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, i
             uint32_t seglen = rd16(src + pos);
             pos += 2;
             if (seglen < 1 || pos + seglen > srclen) return -1;
-            image_dispatch(state, src + pos, seglen, 0);   /* shadow-only, no present */
+            image_dispatch(state, src + pos, seglen, 0, rl);  /* shadow-only, accrue rects */
             pos += seglen;
         }
-        present_shadow(state, w, h);                   /* one atomic present */
+        present_shadow(state, w, h, rl);               /* one atomic present */
         return 0;
     }
 
@@ -539,7 +554,8 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, i
         uint8_t *shadow = cfw_back_buffer(state, w, h);
         if (shadow == 0) return -1;
         rect_copy_4bpp(shadow, (w + 1) >> 1, sL, sT, dL, dT, sW, sH);
-        if (present) present_shadow(state, w, h);
+        rl_add(rl, dL, dT, dW, dH);                     /* updated region = destination rect */
+        if (present) present_shadow(state, w, h, rl);
         return 0;
     }
 
@@ -599,7 +615,8 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, i
             FW_END(strm);
         }
         if (!ok) return -1;
-        if (present) present_shadow(state, w, h);
+        rl_add(rl, 0, 0, w, h);                       /* keyframe updates the whole screen */
+        if (present) present_shadow(state, w, h, rl);
         return 0;
     }
 
@@ -677,7 +694,8 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, i
         }
         if (!ok) return -1;                           /* leave the old frame on screen */
 
-        if (present) present_shadow(state, w, h);     /* rebuild full 8bpp frame + push */
+        rl_add(rl, left, top, bw, bh);                /* updated region = this lens's box */
+        if (present) present_shadow(state, w, h, rl); /* rebuild full 8bpp frame + push */
         return 0;
     }
 
@@ -723,14 +741,48 @@ static int image_dispatch(uint8_t *state, const uint8_t *src, uint32_t srclen, i
     return 0;
 }
 
-/* Expand this container's 4bpp shadow into the 8bpp display buffer, overlay the
- * diagnostic flags, and push. The single "present" step shared by the shadow-mutating
- * modes (3/6/9) and by the multi-segment batch (which presents once after all subs). */
-static void present_shadow(uint8_t *state, uint32_t w, uint32_t h) {
+/* Append (l,t,w,h) to the per-frame updated-rect list, if there's room. */
+static void rl_add(cfw_rectlist *rl, uint32_t l, uint32_t t, uint32_t w, uint32_t h) {
+    if (rl && rl->n < CFW_RECT_MAX) {
+        rl->r[rl->n].l = (uint16_t)l; rl->r[rl->n].t = (uint16_t)t;
+        rl->r[rl->n].w = (uint16_t)w; rl->r[rl->n].h = (uint16_t)h;
+        rl->n++;
+    }
+}
+
+/* Draw a 1px outline of rect `r` into the 8bpp display buffer by INVERTING the border
+ * pixels (255 - v), so it's visible over any content. Clipped to w x h; the corners are
+ * left undrawn so no pixel is inverted twice. */
+static void draw_rect_outline(uint8_t *disp, uint32_t w, uint32_t h, const cfw_rect *r) {
+    if (r->w == 0 || r->h == 0 || r->l >= w || r->t >= h) return;
+    uint32_t l = r->l, t = r->t;
+    uint32_t right = l + r->w - 1, bot = t + r->h - 1;
+    if (right >= w) right = w - 1;
+    if (bot >= h) bot = h - 1;
+    for (uint32_t x = l; x <= right; x++) {           /* top + bottom edges */
+        disp[t * w + x]   = (uint8_t)(255 - disp[t * w + x]);
+        disp[bot * w + x] = (uint8_t)(255 - disp[bot * w + x]);
+    }
+    for (uint32_t y = t + 1; y < bot; y++) {          /* left + right edges (skip corners) */
+        disp[y * w + l]     = (uint8_t)(255 - disp[y * w + l]);
+        disp[y * w + right] = (uint8_t)(255 - disp[y * w + right]);
+    }
+}
+
+/* Expand this container's 4bpp shadow into the 8bpp display buffer, then (when the debug
+ * overlay is on) outline the frame's updated regions and draw the flag/timing text, and
+ * push. The single "present" step shared by the shadow-mutating modes (3/6/9) and by the
+ * multi-segment batch (which presents once after all subs). */
+static void present_shadow(uint8_t *state, uint32_t w, uint32_t h, cfw_rectlist *rl) {
     uint8_t *shadow = cfw_back_buffer(state, w, h);
     if (shadow == 0) return;
     uint8_t *disp = *(uint8_t **)(state + 0x8);
     unpack4bpp(disp, w, shadow, w, h, (w + 1) >> 1, 0);
+    customCfwContext *ctx = getCustomCfwContext();
+    if (ctx && !ctx->diag_hide && rl) {               /* visualize updated regions */
+        for (uint32_t i = 0; i < rl->n; i++)
+            draw_rect_outline(disp, w, h, &rl->r[i]);
+    }
     cfw_draw_flags(disp, w, h);
     push_display(state, disp, w, h);
 }
