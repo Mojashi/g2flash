@@ -7,7 +7,7 @@
 // a CFW display path. G2_MODE picks the encoding (handy for comparing 4bpp-BMP
 // vs 8bpp compressibility and throughput):
 //   full  (default) 8bpp: every frame -> mode 2 (full 8bpp frame, raw pixels)
-//   delta           8bpp: first frame mode 2, rest mode 3 (XOR delta vs prev)
+//   delta           4bpp: first frame mode 2, rest mode 3 (bounding-box update)
 //   bmp             4bpp: every frame -> mode 1 (full 4bpp indexed BMP)
 //   raw4            4bpp: every frame -> mode 6 (headerless 4bpp, fast expander)
 // 8bpp carries a full byte per pixel (the panel requantizes to ~16 levels);
@@ -15,9 +15,10 @@
 // stock BMP loader, which decodes with two function calls per pixel; `raw4`
 // (mode 6) sends headerless 4bpp and expands it on-device with a plain nibble
 // copy, so it gets the 4bpp airtime without the stock decoder's CPU cost.
-// Deltas are tiny for content like Bad Apple (mostly-static), so in `delta` mode
-// the framerate is dominated by ack latency, not wire bytes; the other three
-// send a whole frame every time.
+// `delta` sends only the bounding box of pixels that changed vs the previous
+// frame (as 4bpp), so for mostly-static content like Bad Apple it moves very few
+// pixels per frame — the cheapest mode both on wire and on-device CPU, at the
+// cost of one full keyframe up front (and every G2_KEYFRAME_INTERVAL frames).
 //
 //   bun video-bench.ts path/to/bad_apple.gif
 //
@@ -32,7 +33,18 @@
 //   G2_KEYFRAME_INTERVAL  (delta mode) force a full frame every N (default 0 = only the first)
 //   G2_MODE               "full" (default), "delta", "bmp", or "raw4" (see above)
 //   G2_DRY_RUN=1          decode+compress+report only, don't connect/stream
+//   G2_MEASURE_PERSIST=1  also report frame sizes if zlib state persisted across
+//                         frames (measurement only; firmware doesn't do this yet)
 //   G2_WINDOW             pipelined image messages in flight at once (default 2; 1 = serial)
+//
+// About G2_MEASURE_PERSIST: today every frame is an independent zlib stream, so a
+// frame can only back-reference itself. If the firmware instead kept one inflate
+// stream alive across frames, later frames could back-reference the sliding-window
+// history of earlier ones (and skip the per-frame zlib header/adler framing). This
+// flag feeds every frame's raw bytes through a single deflate stream, flushing
+// (Z_SYNC_FLUSH) at each frame boundary, and reports what the per-frame message
+// sizes would then be — so we can judge whether the firmware complexity is worth it
+// before implementing it. It doesn't change what gets streamed to the device.
 
 import {
   G2Session,
@@ -44,7 +56,7 @@ import {
   type ImageContainerSpec,
 } from "g2-kit/ble";
 import { startHeartbeat } from "g2-kit/ui";
-import { deflateSync } from "node:zlib";
+import { deflateSync, createDeflate, constants as zconst } from "node:zlib";
 import { GifReader } from "omggif";
 
 const ACK_MS = 12_000;
@@ -63,7 +75,9 @@ const BMP4 = MODE === "bmp";    // mode 1: full 4bpp BMP per frame (stock BMP pa
 const RAW4 = MODE === "raw4";   // mode 6: headerless 4bpp, our fast expander
 const DELTA = MODE === "delta"; // mode 2 keyframes + mode 3 XOR deltas
 const DRY_RUN = process.env.G2_DRY_RUN === "1";
+const MEASURE_PERSIST = process.env.G2_MEASURE_PERSIST === "1";
 const WINDOW = Math.max(1, Number(process.env.G2_WINDOW ?? "2"));
+const FRAME_SLEEP = Math.max(0, Number(process.env.G2_FRAME_SLEEP ?? "0"));
 const IMAGE_SEND_ARM = "R";
 
 let magic = 100;
@@ -108,13 +122,34 @@ function rescaleGray(rgba: Uint8Array): Uint8Array {
 }
 
 // ---- build per-frame payloads up front ([mode][zlib]) ----
-type FrameStat = { bytes: number; key: boolean };
+type FrameStat = { bytes: number; key: boolean; persist: number };
 const payloads: Uint8Array[] = [];
 const stats: FrameStat[] = [];
 const rgba = new Uint8Array(W0 * H0 * 4);
 let dispose: { x: number; y: number; w: number; h: number } | null = null;
 let prev: Uint8Array | null = null;
 let used = 0;
+let boxAreaSum = 0; // sum of mode-3 box areas (px), for avg-coverage reporting
+
+// Optional persistent-zlib measurement: one long-lived deflate stream fed every
+// frame's raw (pre-compression) bytes in order, flushed at each frame boundary so
+// we can read off the per-frame output size. Later frames get to back-reference
+// the sliding-window history of earlier ones, which independent per-frame deflate
+// throws away. Returns the compressed bytes emitted for the just-pushed frame.
+let persistPush: ((raw: Uint8Array) => Promise<number>) | null = null;
+if (MEASURE_PERSIST) {
+  const def = createDeflate();
+  let chunks: Buffer[] = [];
+  def.on("data", (c: Buffer) => chunks.push(c));
+  persistPush = (raw) =>
+    new Promise<number>((resolve, reject) => {
+      chunks = [];
+      def.write(raw, (e) => { if (e) reject(e); });
+      // Z_SYNC_FLUSH keeps the window/dictionary (cross-frame refs survive);
+      // Z_FULL_FLUSH would reset it and defeat the whole point of measuring.
+      def.flush(zconst.Z_SYNC_FLUSH, () => resolve(chunks.reduce((a, c) => a + c.length, 0)));
+    });
+}
 
 const t0 = performance.now();
 for (let i = 0; i < total; i++) {
@@ -130,24 +165,41 @@ for (let i = 0; i < total; i++) {
   const gray = rescaleGray(rgba);
   // In delta mode a frame is a keyframe on the first frame or every Nth; full
   // and bmp modes send a whole frame every time.
-  const isKey = !DELTA || prev === null || (KEYFRAME_INTERVAL > 0 && used % KEYFRAME_INTERVAL === 0);
-  let payload: Uint8Array;
+  //const isKey = !DELTA || prev === null || (KEYFRAME_INTERVAL > 0 && used % KEYFRAME_INTERVAL === 0);
+  const isKey = (i==0);
+  // Build this frame's payload. Simple modes are [mode][zlib(raw)]; the mode-3
+  // box carries a 4-byte uncompressed header before its zlib box pixels. For the
+  // persist measurement we also track the pre-compression bytes and the length of
+  // the uncompressed prefix (mode byte + any header).
+  let payload: Uint8Array, persistRaw: Uint8Array, prefixLen: number;
   if (BMP4) {
     // mode 1: full 4bpp indexed BMP (gray 0..255 -> 0..15), zlib-compressed.
-    const bmp = buildEvenHubBmp(W, H, (x, y) => gray[y * W + x]! >> 4);
-    payload = pack(1, bmp);
+    persistRaw = buildEvenHubBmp(W, H, (x, y) => gray[y * W + x]! >> 4);
+    payload = pack(1, persistRaw); prefixLen = 1;
   } else if (RAW4) {
     // mode 6: headerless tight 4bpp (gray>>4), our fast on-device expander.
-    payload = pack(6, pack4bpp(gray));
+    persistRaw = pack4bpp(gray);
+    payload = pack(6, persistRaw); prefixLen = 1;
+  } else if (isKey && DELTA) {
+    // delta keyframe: mode 6 full 4bpp — seeds the firmware's persistent 4bpp
+    // shadow (which the box deltas composite onto), unlike an 8bpp mode-2 frame.
+    persistRaw = pack4bpp(gray);
+    payload = pack(6, persistRaw); prefixLen = 1;
   } else if (isKey) {
-    payload = pack(2, gray);
+    // G2_MODE=full: full 8bpp frame every frame.
+    persistRaw = gray;
+    payload = pack(2, gray); prefixLen = 1;
   } else {
-    const d = new Uint8Array(W * H);
-    for (let k = 0; k < d.length; k++) d[k] = gray[k]! ^ prev![k]!;
-    payload = pack(3, d);
+    // mode 3: bounding-box delta — send only the changed rectangle as 4bpp.
+    const box = computeBox(gray, prev!);
+    boxAreaSum += box.w * box.h;
+    persistRaw = box.pixels;
+    payload = packBox(box, used & 0xffff); prefixLen = 7; // used = this frame's index
+
   }
   payloads.push(payload);
-  stats.push({ bytes: payload.length, key: isKey });
+  const persist = persistPush ? prefixLen + (await persistPush(persistRaw)) : 0;
+  stats.push({ bytes: payload.length, key: isKey, persist });
   prev = gray;
   used++;
   if (MAX_FRAMES && used >= MAX_FRAMES) break;
@@ -155,16 +207,49 @@ for (let i = 0; i < total; i++) {
 }
 const prepMs = performance.now() - t0;
 
+// Defensive check: the mode-3 (delta) payloads must carry strictly increasing,
+// unique frame ids in the exact order they'll be sent (payloads are streamed in
+// array order, writes awaited, so build order == send order). If this passes, the
+// sender is NOT reordering/duplicating frames — so any reorder/dup/skip the
+// firmware's diagnostic flags must originate in the transport or the firmware.
+{
+  let prev = -1, bad = 0, n3 = 0;
+  for (const p of payloads) {
+    if (p[0] !== 3) continue; // only deltas carry a fid
+    n3++;
+    const fid = p[5]! | (p[6]! << 8);
+    if (fid <= prev) { if (bad++ < 5) console.error(`[check] delta fid ${fid} not > prev ${prev} (out-of-order/dup in build)`); }
+    prev = fid;
+  }
+  console.log(bad
+    ? `[check] FAIL: ${bad}/${n3} delta fids out of order or duplicated in the build`
+    : `[check] ok: ${n3} delta fids strictly increasing & unique (send side is clean)`);
+}
+
 const keyBytes = stats.filter((s) => s.key).reduce((a, s) => a + s.bytes, 0);
 const keyN = stats.filter((s) => s.key).length;
 const deltaBytes = stats.filter((s) => !s.key).reduce((a, s) => a + s.bytes, 0);
 const deltaN = stats.length - keyN;
 const totalBytes = keyBytes + deltaBytes;
+const boxCov = DELTA && deltaN ? ` | avg box ${(100 * boxAreaSum / (deltaN * W * H)).toFixed(1)}% of frame` : "";
 console.log(
   `[prepared] mode=${MODE} ${W}x${H} ${payloads.length} frames in ${(prepMs / 1000).toFixed(1)}s | ` +
     `${(totalBytes / 1024).toFixed(0)} KiB total, avg ${(totalBytes / payloads.length).toFixed(0)} B/frame ` +
-    `(keyframes ${keyN}@${keyN ? (keyBytes / keyN).toFixed(0) : 0}B, deltas ${deltaN}@${deltaN ? (deltaBytes / deltaN).toFixed(0) : 0}B)`,
+    `(keyframes ${keyN}@${keyN ? (keyBytes / keyN).toFixed(0) : 0}B, deltas ${deltaN}@${deltaN ? (deltaBytes / deltaN).toFixed(0) : 0}B)${boxCov}`,
 );
+
+if (MEASURE_PERSIST) {
+  const pKeyBytes = stats.filter((s) => s.key).reduce((a, s) => a + s.persist, 0);
+  const pDeltaBytes = stats.filter((s) => !s.key).reduce((a, s) => a + s.persist, 0);
+  const pTotal = pKeyBytes + pDeltaBytes;
+  const deltaPct = totalBytes ? 100 * (1 - pTotal / totalBytes) : 0;
+  console.log(
+    `[persist]  if zlib state persisted across frames: ${(pTotal / 1024).toFixed(0)} KiB total, ` +
+      `avg ${(pTotal / payloads.length).toFixed(0)} B/frame ` +
+      `(keyframes ${keyN}@${keyN ? (pKeyBytes / keyN).toFixed(0) : 0}B, deltas ${deltaN}@${deltaN ? (pDeltaBytes / deltaN).toFixed(0) : 0}B) ` +
+      `-> ${deltaPct >= 0 ? "saves" : "costs"} ${Math.abs(deltaPct).toFixed(1)}% vs per-frame deflate`,
+  );
+}
 
 function pack(mode: number, raw: Uint8Array): Uint8Array {
   const z = deflateSync(raw);
@@ -187,6 +272,59 @@ function pack4bpp(gray: Uint8Array): Uint8Array {
       out[y * stride + (x >> 1)] = (hi << 4) | lo;
     }
   }
+  return out;
+}
+
+// mode 3: bounding box of the pixels whose displayed (4bpp) value changed vs the
+// previous frame, quantized so left/width are multiples of 4 and top/height of 2
+// (the units the wire header stores, and what the firmware requires). The box's
+// pixels are extracted as tight 4bpp (gray>>4). If nothing changed, we emit a
+// minimal 4x2 box at the origin (a no-op update) to keep every frame a message.
+type Box = { left: number; top: number; w: number; h: number; pixels: Uint8Array };
+function computeBox(cur: Uint8Array, prev: Uint8Array): Box {
+  let minx = W, miny = H, maxx = -1, maxy = -1;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      if (cur[i]! >> 4 !== prev[i]! >> 4) {
+        if (x < minx) minx = x;
+        if (x > maxx) maxx = x;
+        if (y < miny) miny = y;
+        if (y > maxy) maxy = y;
+      }
+    }
+  }
+  if (maxx < 0) { minx = 0; maxx = 3; miny = 0; maxy = 1; } // no change -> tiny box
+  const left = minx & ~3;
+  const right = Math.min(W, (maxx + 4) & ~3); // round up to a multiple of 4
+  const top = miny & ~1;
+  const bottom = Math.min(H, (maxy + 2) & ~1); // round up to a multiple of 2
+  const w = right - left, h = bottom - top;
+  const stride = w >> 1;
+  const pixels = new Uint8Array(stride * h);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x += 2) {
+      const hi = cur[(top + y) * W + left + x]! >> 4;
+      const lo = cur[(top + y) * W + left + x + 1]! >> 4; // w is even, so x+1 < w
+      pixels[y * stride + (x >> 1)] = (hi << 4) | lo;
+    }
+  }
+  return { left, top, w, h, pixels };
+}
+
+// [3][left/4][top/2][width/4][height/2][fid_lo][fid_hi][zlib(tight 4bpp box pixels)]
+// fid = uint16 per-frame counter, so the firmware can flag out-of-order/skipped frames.
+function packBox(box: Box, fid: number): Uint8Array {
+  const z = deflateSync(box.pixels);
+  const out = new Uint8Array(7 + z.length);
+  out[0] = 3;
+  out[1] = box.left >> 2;
+  out[2] = box.top >> 1;
+  out[3] = box.w >> 2;
+  out[4] = box.h >> 1;
+  out[5] = fid & 0xff;
+  out[6] = (fid >> 8) & 0xff;
+  out.set(z, 7);
   return out;
 }
 
@@ -234,6 +372,9 @@ try {
   const sendMsg = async (pb: Uint8Array, mg: number): Promise<boolean> => {
     while (inflight.length >= WINDOW) {
       if (!(await awaitOldest())) return false;
+    }
+    if (FRAME_SLEEP > 0) {
+      await new Promise((r) => setTimeout(r, FRAME_SLEEP));
     }
     const r = await session.sendPbPipelined(0xe0, pb, mg, { ackTimeoutMs: ACK_MS, arm: IMAGE_SEND_ARM });
     inflight.push({ ack: r.ack, t: performance.now() });
