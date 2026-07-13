@@ -22,28 +22,24 @@ typedef int (*send_fn)(int type, int sid, unsigned char *buf, unsigned len);
 
 #define FW_SEND 0x0047398d /* FUN_0047398c | thumb bit */
 
-// "EVENCFW/1 img576 imgz xordelta stereo"
+// Capability string "EVENCFW/<ver> <space-separated feature tokens>":
 //   EVENCFW/1  -> magic prefix + contract version (detect: starts-with "EVENCFW/")
 //   img576     -> 576x288 image containers (vs stock 288x144 cap)
 //   imgz       -> zlib (DEFLATE) compressed image payloads
 //   xordelta   -> 8bpp XOR-delta frame updates (modes 2/3)
 //   stereo     -> per-lens stereo image pairs (mode 4)
+//
+// The string is a normal rodata literal now that build.py emits/relocates .rodata
+// (earlier this had to be spelled out byte-by-byte to avoid a rodata section). strlcpy
+// comes from zlib_glue.c, which shares this translation unit via patches_main.c.
 int settings_send_wrapper(int type, int sid, unsigned char *buf, unsigned len) {
     if (sid == 9) {
+        static const char caps[] = "EVENCFW/1 img576 imgz xordelta stereo";
         unsigned char *p = buf + len;
-        unsigned n = 0;
-        p[n++] = 0xA2; p[n++] = 0x06;            // tag: (100<<3)|2 = 802
-        p[n++] = 37;                             // payload length
-        p[n++]='E';p[n++]='V';p[n++]='E';p[n++]='N';p[n++]='C';p[n++]='F';p[n++]='W';p[n++]='/';p[n++]='1';
-        p[n++]=' ';
-        p[n++]='i';p[n++]='m';p[n++]='g';p[n++]='5';p[n++]='7';p[n++]='6';
-        p[n++]=' ';
-        p[n++]='i';p[n++]='m';p[n++]='g';p[n++]='z';
-        p[n++]=' ';
-        p[n++]='x';p[n++]='o';p[n++]='r';p[n++]='d';p[n++]='e';p[n++]='l';p[n++]='t';p[n++]='a';
-        p[n++]=' ';
-        p[n++]='s';p[n++]='t';p[n++]='e';p[n++]='r';p[n++]='e';p[n++]='o';
-        len += n;
+        p[0] = 0xA2; p[1] = 0x06;                          // field 100, wire type 2: tag 802
+        unsigned clen = strlcpy((char *)(p + 3), caps, sizeof(caps));
+        p[2] = (unsigned char)clen;                        // length-delimited payload length
+        len += 3 + clen;
     }
     return ((send_fn)FW_SEND)(type, sid, buf, len);
 }
