@@ -1,0 +1,12 @@
+import { G2Session } from "g2-kit/ble";
+const SID = 0x7b, MODE = 1;
+const send = (d: number[]) => Uint8Array.from([3, MODE, ...d]);
+const hex = (b: Uint8Array) => Buffer.from(b).toString("hex");
+const s = await G2Session.open({ quiet: true }); let seq = 1;
+const w = async (pb: Uint8Array) => { const { ack } = await s.sendPbPipelined(SID, pb, seq++ & 0xff, { arm: "L" }); ack.catch(() => null); };
+s.onRawFrame((f: any) => { if (!f.ok || f.sid !== SID) return; const p = f.pb;
+  if (p.length >= 2 && p[0] === 0xa7) console.log(`  <- reply op=0x${p[1].toString(16)} len=${p.length} hex=${hex(p).slice(0,60)}`); });
+console.log("send 'k' (should reply)..."); await w(send([0x6b])); await Bun.sleep(600);
+console.log("send 'I' (0x49, should reply 114B)..."); await w(send([0x49])); await Bun.sleep(600);
+console.log("send 'k' again..."); await w(send([0x6b])); await Bun.sleep(600);
+await s.close(); process.exit(0);

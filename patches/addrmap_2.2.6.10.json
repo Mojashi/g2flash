@@ -1,0 +1,163 @@
+{
+ "FW_INVAL_lv_obj_invalidate": {
+  "old": "0x004405f7",
+  "new": "0x00464b5d"
+ },
+ "SS_FW_DISPATCH": {
+  "old": "0x00441c69",
+  "new": "0x00466a2b"
+ },
+ "FW_TICK_get_tick_ms": {
+  "old": "0x00448139",
+  "new": "0x0043e0d9"
+ },
+ "FW_TIMER_NEW": {
+  "old": "0x00448403",
+  "new": "0x0043e3a3"
+ },
+ "FW_TIMER_START": {
+  "old": "0x004484eb",
+  "new": "0x0043e48b"
+ },
+ "FW_TIMER_STOP": {
+  "old": "0x0044852b",
+  "new": "0x0046d9df"
+ },
+ "FW_SIDE_lens_side": {
+  "old": "0x0045a8ed",
+  "new": "0x0047ea6f"
+ },
+ "FW_MODE_foreground_ctx": {
+  "old": "0x0045fc6b",
+  "new": "0x00483ded"
+ },
+ "FW_FC80_post_ui_event": {
+  "old": "0x0045fc81",
+  "new": "0x00483e03"
+ },
+ "DBG_FW_ENQUEUE_queue_send": {
+  "old": "0x0046435b",
+  "new": "0x004890b9"
+ },
+ "FW_MALLOC": {
+  "old": "0x00472b6f",
+  "new": "0x004991d9"
+ },
+ "FW_FREE": {
+  "old": "0x00472bb3",
+  "new": "0x0049921d",
+  "note": "corrected: malloc-pool partner (lock 0x46dcbc); prev 0x0043d549 was wrong pool (brick)"
+ },
+ "FW_FLUSH_dcache_clean": {
+  "old": "0x00472f87",
+  "new": "0x00499615"
+ },
+ "FW_SEND_aa21_noack": {
+  "old": "0x0047398d",
+  "new": "0x0049a01b"
+ },
+ "FW_SETSRC_lv_image_set_src": {
+  "old": "0x004b0f01",
+  "new": "0x004bcb87"
+ },
+ "FW_BUZZ_RESET": {
+  "old": "0x004e9759",
+  "new": "0x00526fcb"
+ },
+ "FW_BUZZ_PRESET": {
+  "old": "0x004e97ef",
+  "new": "0x00527061"
+ },
+ "FW_BUZZ_NOTE": {
+  "old": "0x004e988d",
+  "new": "0x00527101"
+ },
+ "FW_BUZZ_RAW": {
+  "old": "0x004e991d",
+  "new": "0x00527191"
+ },
+ "FW_LOADBMP_bmp_decoder": {
+  "old": "0x0050164b",
+  "new": "0x00500ab5"
+ },
+ "FW_SYSEVT_evenhub": {
+  "old": "0x004ff233",
+  "new": "0x004fe671"
+ },
+ "FW_COMPLETE_EMIT": {
+  "old": "0x004ff44b",
+  "new": "0x004fe889"
+ },
+ "FW_END_inflateEnd": {
+  "old": "0x005be607",
+  "new": "0x005e2f8d"
+ },
+ "FW_INIT2_inflateInit2": {
+  "old": "0x005be643",
+  "new": "0x005e2fc9"
+ },
+ "FW_INFLATE_inflate": {
+  "old": "0x005be711",
+  "new": "0x005e3097"
+ },
+ "fire_ui_event": {
+  "old": "0x005e535e",
+  "new": "0x006088d9"
+ },
+ "terminal_rx_dispatcher_5e5590": {
+  "old": "0x005e5590",
+  "new": "0x00608b0b"
+ },
+ "DBG_FW_FSM_terminal_ui_fsm_handler": {
+  "old": "0x005e8b01",
+  "new": "0x0060c07b"
+ },
+ "DBG_FSM_CTX_flashptr": {
+  "old": "0x005e8d98",
+  "new": "0x0060c314"
+ },
+ "ZLIB_VER_str": {
+  "old": "0x007885e4",
+  "new": "0x007b1b5b"
+ },
+ "UI_CTX": {
+  "old": "0x2007440c",
+  "new": "0x200744d0"
+ },
+ "EVT_SRC": {
+  "old": "0x2034e130",
+  "new": "0x2034dc30"
+ },
+ "terminal_state_singleton": {
+  "old": "0x2006e0b0",
+  "new": "0x2006e0d0"
+ },
+ "SS_FB_CANVAS_PTR": {
+  "old": "0x20074464",
+  "new": "0x20074528"
+ },
+ "SS_FB_DRAWBUF_PTR": {
+  "old": "0x200745cc",
+  "new": "0x200746b4"
+ },
+ "FW_MS_TICK": {
+  "old": "0x20074940",
+  "new": "0x20027148"
+ },
+ "FW_CORE_HZ": {
+  "old": "0x2007419c",
+  "new": "0x20027034"
+ },
+ "BUZZ_TIMER_ADDR": {
+  "old": "0x20074440",
+  "new": "0x20074504"
+ },
+ "heartbeat_counter": {
+  "old": "0x200744e8",
+  "new": "0x200745ac"
+ },
+ "CFW_CTX_SLOT": {
+  "old": "0x20003fdc",
+  "new": "0x20003ffc"
+ }
+}

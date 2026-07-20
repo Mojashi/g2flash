@@ -1,0 +1,1405 @@
+// Even Realities G2 protobuf schema — reconstructed from libapp.so via Blutter
+// (Flutter Dart AOT). Names+tags+types are authoritative (app side). 26 services, 246 messages.
+syntax = "proto3";
+
+// ===== service: EvenHub =====
+message AudioCtrCmd {
+  uint32 AudoFuncEn = 1;
+}
+message AudioResCmd {
+  uint32 AudioStat = 1;
+}
+message CommonDevicePrivateEvent {
+  uint32 ContainerID = 1;
+  uint32 eventId = 3;
+  uint32 eventData = 4;
+}
+message CommonDevicePrivateSystemEvent {
+  SystmEventCommandList EventCmd = 1;
+  uint32 EventValue = 2;
+}
+message CreateStartUpPageContainer {
+  uint32 ContainerTotalNum = 1;
+  repeated ListContainerProperty ListObject = 2;
+  repeated TextContainerProperty TextObject = 3;
+  repeated ImageContainerProperty ImageObject = 4;
+  uint32 widgetId = 5;
+}
+message HeartBeatPacket {
+  uint32 Cnt = 1;
+}
+message IMU_CtrlCmd {
+  uint32 IMUReportEn = 1;
+  uint32 reportFrq = 2;
+}
+message IMU_CtrlCmd_Response {
+  uint32 IMUReportEnStatus = 1;
+}
+message IMU_Report_Data {
+  uint32 x = 1;
+  uint32 y = 2;
+  uint32 z = 3;
+}
+message ImageContainerProperty {
+  uint32 XPosition = 1;
+  uint32 YPosition = 2;
+  uint32 Width = 3;
+  uint32 Height = 4;
+  uint32 ContainerID = 5;
+  uint32 zOrderIndex = 7;
+}
+message ImageRawDataUpdate {
+  uint32 ContainerID = 1;
+  uint32 MapSessionId = 3;
+  uint32 MapTotalSize = 4;
+  uint32 CompressMode = 5;
+  uint32 MapFragmentIndex = 6;
+  uint32 MapFragmentPacketSize = 7;
+  uint32 MapRawData = 8;
+}
+message ListContainerProperty {
+  uint32 XPosition = 1;
+  uint32 YPosition = 2;
+  uint32 Width = 3;
+  uint32 Height = 4;
+  uint32 BorderWidth = 5;
+  uint32 BorderColor = 6;
+  uint32 BorderRadius = 7;
+  uint32 PaddingLength = 8;
+  uint32 ContainerID = 9;
+  List_ItemContainerProperty ItemContainer = 11;
+  uint32 IsEventCapture = 12;
+  uint32 zOrderIndex = 13;
+}
+message List_ItemContainerProperty {
+  uint32 ItemCount = 1;
+  uint32 ItemWidth = 2;
+  uint32 IsItemSelectBorderEn = 3;
+}
+message List_ItemEvent {
+  uint32 ContainerID = 1;
+  uint32 CurrentSelectItemIndex = 4;
+  OsEventTypeList EventType = 5;
+}
+message MenuStartUpEvent {
+  uint32 widgetId = 1;
+}
+message MenuStartUpResPonse {
+  uint32 errorCode = 1;
+}
+message RebuildPageContainer {
+  uint32 ContainerTotalNum = 1;
+  repeated ListContainerProperty ListObject = 2;
+  repeated TextContainerProperty TextObject = 3;
+  repeated ImageContainerProperty ImageObject = 4;
+}
+message ResponseCreateStartupCmd {
+  EvenHub_ErrorCode_List ResCmdMsg = 1;
+}
+message ResponseHeartBeatCmd {
+  uint32 Cnt = 1;
+  EvenHub_ErrorCode_List ResCmdMsg = 2;
+}
+message ResponseImageRawDataCmd {
+  uint32 ContainerID = 1;
+  uint32 MapSessionId = 3;
+  uint32 MapTotalSize = 4;
+  uint32 CompressMode = 5;
+  uint32 MapFragmentIndex = 6;
+  uint32 MapFragmentPacketSize = 7;
+  EvenHub_ErrorCode_List ErrorCode = 8;
+}
+message ResponseRebuildCmd {
+  EvenHub_ErrorCode_List ResCmdMsg = 1;
+}
+message ResponseShutDownCmd {
+  EvenHub_ErrorCode_List ResCmdMsg = 1;
+}
+message ResponseTextUpgradeCmd {
+  EvenHub_ErrorCode_List ResCmdMsg = 1;
+}
+message SendDeviceEvent {
+  List_ItemEvent ListEvent = 1;
+  Text_ItemEvent TextEvent = 2;
+  Sys_ItemEvent SysEvent = 3;
+}
+message ShutDownContaniner {
+  uint32 exitMode = 1;
+}
+message Sys_ItemEvent {
+  OsEventTypeList EventType = 1;
+  EventSourceType EventSource = 2;
+  IMU_Report_Data IMUData = 3;
+  uint32 systemExitReasonCode = 4;
+}
+message TextContainerProperty {
+  uint32 XPosition = 1;
+  uint32 YPosition = 2;
+  uint32 Width = 3;
+  uint32 Height = 4;
+  uint32 BorderWidth = 5;
+  uint32 BorderColor = 6;
+  uint32 BorderRadius = 7;
+  uint32 PaddingLength = 8;
+  uint32 ContainerID = 9;
+  uint32 IsEventCapture = 11;
+  uint32 zOrderIndex = 13;
+}
+message TextContainerUpgrade {
+  uint32 ContainerID = 1;
+  uint32 ContentOffset = 3;
+  uint32 ContentLength = 4;
+}
+message Text_ItemEvent {
+  uint32 ContainerID = 1;
+  OsEventTypeList EventType = 3;
+}
+message evenhub_main_msg_ctx {
+  EvenHub_Cmd_List Cmd = 1;
+  uint32 MagicRandom = 2;
+  CreateStartUpPageContainer CreateMessage = 3;
+  ResponseCreateStartupCmd StartupResCmd = 4;
+  ImageRawDataUpdate ImgRawMsg = 5;
+  ResponseImageRawDataCmd ImgResCmd = 6;
+  RebuildPageContainer RebuildContainer = 7;
+  ResponseRebuildCmd RebuildResCmd = 8;
+  TextContainerUpgrade TextUpgrade = 9;
+  ResponseTextUpgradeCmd TextResCmd = 10;
+  ShutDownContaniner ShutDownCmd = 11;
+  ResponseShutDownCmd ShutDownResCmd = 12;
+  SendDeviceEvent DevEvent = 13;
+  HeartBeatPacket HeartPacketCmd = 14;
+  ResponseHeartBeatCmd DevResHeartPacket = 15;
+  CommonDevicePrivateEvent DevPrivateEvent = 16;
+  CommonDevicePrivateSystemEvent DevSysEvent = 17;
+  AudioCtrCmd AudioCtrCommand = 18;
+  AudioResCmd AudioResCommand = 19;
+  MenuStartUpEvent MenuStartEv = 20;
+  MenuStartUpResPonse MenuRes = 21;
+  IMU_CtrlCmd ImuCtrl = 22;
+  IMU_CtrlCmd_Response IMURes = 23;
+}
+
+// ===== service: conversate =====
+message ConversateCommResp {
+  ConversateErrorCode errCode = 1;
+}
+message ConversateControl {
+  ConversateCtrlCmd cmd = 1;
+  ConversateSettings settings = 2;
+  ConversatePrepNote noteInfo = 3;
+  ConversateErrorCode errCode = 4;
+}
+message ConversateDataPackage {
+  ConversateCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  ConversateControl ctrl = 3;
+  ConversatePrepNoteListRequest prepNoteListRequest = 4;
+  ConversatePrepNoteList prepNoteList = 5;
+  ConversatePrepNoteSelect prepNoteSelect = 6;
+  ConversateTagData tagData = 7;
+  ConversateTranscribeData transcribeData = 8;
+  ConversateStatusNotify statusNotify = 9;
+  ConversateCommResp commResp = 10;
+  ConversateHeartBeat heartBeat = 11;
+  ConversateTagTrackingData tagTrackingData = 12;
+  ConversatePrepNotePacket prepNotePacket = 13;
+}
+message ConversatePrepNote {
+  uint32 title = 1;
+  uint32 totalPackets = 2;
+}
+message ConversatePrepNoteList {
+  repeated ConversatePrepNoteListItem list = 1;
+  uint32 selectId = 2;
+}
+message ConversatePrepNoteListItem {
+  uint32 id = 1;
+  uint32 title = 2;
+}
+message ConversatePrepNotePacket {
+  uint32 packetIndex = 1;
+  uint32 text = 2;
+}
+message ConversatePrepNoteSelect {
+  uint32 isSkip = 1;
+  uint32 selectId = 2;
+}
+message ConversateSettings {
+  uint32 aiCue = 1;
+  uint32 transcribe = 2;
+  uint32 autoPopEn = 3;
+  uint32 useAudio = 4;
+  uint32 cueDuration = 5;
+}
+message ConversateStatusNotify {
+  ConversateCtrlCmd cmd = 1;
+  ConversateErrorCode errCode = 2;
+}
+message ConversateTagData {
+  ConversateTagType tagType = 1;
+  uint32 tagText = 2;
+  uint32 tagTextExtend = 3;
+  uint32 tagId = 4;
+}
+message ConversateTagTrackingData {
+  uint32 tagId = 1;
+  uint32 openType = 2;
+  uint32 closeType = 3;
+  uint32 durationTimeMs = 4;
+}
+message ConversateTranscribeData {
+  uint32 transcribeText = 1;
+  uint32 transcribeEndFlag = 2;
+}
+
+// ===== service: dashboard =====
+message AppRequest {
+  uint32 appRequestNewsInfo = 1;
+}
+message AppRequestDeviceNewsInfo {
+  uint32 cmd = 1;
+}
+message AppResetClearAllDataMsg {
+  uint32 cmd = 1;
+}
+message AppRespondToDashboard {
+  uint32 packageId = 1;
+  AppReceiveFLAG flag = 2;
+}
+message AppSendNewsData {
+  uint32 sessionId = 1;
+  uint32 sessionStatus = 2;
+  uint32 sessionTotalCount = 3;
+  uint32 sessionNewsIndex = 4;
+  uint32 newsId = 5;
+  uint32 reportTime = 7;
+}
+message CalendarExpandedPageState {
+  uint32 currentPageIndex = 1;
+}
+message DashboardContent {
+  rStatusComponent statusComponents = 1;
+  rWidgetComponent widgetComponents = 2;
+}
+message DashboardDataPackage {
+  eDashboardCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  DashboardRespondToApp dashboardRespond = 3;
+  DashboardReceiveFromApp dashboardReceive = 4;
+  AppRespondToDashboard appRespond = 5;
+  DashboardSendToApp appReceive = 6;
+  RequestNewsFifoCountCmd ReqNewsCmd = 7;
+  ResponseNewsFifoMsg ResNewsMsg = 8;
+  AppRequestDeviceNewsInfo ReqNewsInfo = 9;
+  DeviceResponseNewsInfo ResNewsInfo = 10;
+  AppSendNewsData SendNewsData = 11;
+  DeviceResponseNewData ResNewsData = 12;
+  DeviceRequestNewsUpgrade ReqNewsUpgrade = 13;
+  DeviceNotifyNewsEvent NotifyNewsEvent = 14;
+  AppResetClearAllDataMsg ResClearAllData = 15;
+  DeviceResponseClearAllDataMsg RespClearAllData = 16;
+}
+message DashboardDisplaySetting {
+  uint32 displayMode = 1;
+  uint32 statusDisplayCount = 2;
+  repeated StatusType statusDisplayOrder = 3;
+  uint32 widgetDisplayCount = 4;
+  repeated WidgetType widgetDisplayOrder = 5;
+  uint32 halfDayFormat = 6;
+  uint32 temperatureUnit = 7;
+}
+message DashboardMainPageState {
+  uint32 activeTileIndex = 1;
+  PageWidgetType activeWidgetType = 2;
+}
+message DashboardReceiveFromApp {
+  uint32 packageId = 1;
+  DashboardDisplaySetting bashboardDisplaySetting = 2;
+  DashboardContent bashboardConfig = 3;
+  AppRequest appRequest = 4;
+}
+message DashboardRespondToApp {
+  uint32 packageId = 1;
+  DashboardReceiveFLAG flag = 2;
+}
+message DashboardSendToApp {
+  uint32 packageId = 1;
+  sStatusComponent statusComponents = 3;
+  sWidgetComponent widgetComponents = 4;
+  sPageStateSync pageStateSync = 5;
+}
+message DeviceNotifyNewsEvent {
+  NewsNotifyEvent eventID = 1;
+  uint32 value = 2;
+}
+message DeviceRequestNewsUpgrade {
+  uint32 cmd = 1;
+}
+message DeviceResponseClearAllDataMsg {
+  uint32 cmd = 1;
+}
+message DeviceResponseNewData {
+  uint32 sessionId = 1;
+  uint32 sessionTotalCount = 2;
+  uint32 sessionNewsIndex = 3;
+  uint32 newsId = 4;
+  uint32 newsStatus = 5;
+}
+message DeviceResponseNewsInfo {
+  uint32 totalNewsCount = 1;
+  repeated int newsId = 2;
+}
+message HealthExpandedPageState {
+  uint32 currentPageIndex = 1;
+}
+message News {
+  uint32 newsId = 1;
+  uint32 reportTime = 3;
+}
+message NewsExpandedPageState {
+  uint32 currentNewsIndex = 1;
+}
+message QuicklistExpandedPageState {
+  uint32 displayedUidCount = 1;
+  repeated int displayedUidList = 2;
+  uint32 borderState = 3;
+  uint32 focusedUidIndex = 4;
+}
+message RequestNewsFifoCountCmd {
+  uint32 cmd = 1;
+}
+message ResponseNewsFifoMsg {
+  uint32 count = 1;
+}
+message Schedule {
+  uint32 scheduleId = 1;
+  uint32 endTimestamp = 5;
+}
+message Stock {
+  uint32 marketCap = 3;
+  uint32 priceChangePercent = 4;
+  uint32 currentPrice = 5;
+  uint32 dayHigh = 7;
+  uint32 dayLow = 8;
+  uint32 openPrice = 9;
+  uint32 volume = 10;
+  uint32 marketValue = 11;
+  uint32 peRatio = 12;
+  uint32 changingTrend = 13;
+  uint32 pointTotal = 14;
+  uint32 darkPrice = 15;
+  repeated double brightPrice = 16;
+}
+message StockExpandedPageState {
+  uint32 currentPageIndex = 1;
+}
+message rNewsWidget {
+  uint32 newsTotal = 1;
+  uint32 newsNum = 2;
+  News news = 3;
+  uint32 newsForceUpgrade = 4;
+}
+message rScheduleWidget {
+  uint32 scheduleTotal = 1;
+  uint32 scheduleNum = 2;
+  Schedule schedule = 3;
+  uint32 scheduleAuthority = 4;
+}
+message rStatusComponent {
+  rWeatherStatus weather = 1;
+}
+message rStockWidget {
+  uint32 stockTotal = 1;
+  uint32 stockNum = 2;
+  Stock stock = 3;
+}
+message rWeatherStatus {
+  uint32 temperature = 1;
+  TemperatureUnit unit = 2;
+  WeatherType type = 3;
+  uint32 updateTime = 4;
+  uint32 rainfallProbabilityIcon = 6;
+  uint32 sunsetSelect = 8;
+}
+message rWidgetComponent {
+  rNewsWidget news = 1;
+  rStockWidget stock = 2;
+  rScheduleWidget schedule = 3;
+}
+message sNewsWidget {
+  sNewsWidgetApplyNews applyEvent = 1;
+  sNewsWidgetSync syncEvent = 2;
+}
+message sNewsWidgetApplyNews {
+  uint32 requiredCount = 1;
+  uint32 requiredStartId = 2;
+}
+message sNewsWidgetSync {
+  uint32 syncNewsId = 1;
+  uint32 syncNewsBytesRead = 2;
+}
+message sNotificationStatus {
+  uint32 unreadCount = 1;
+}
+message sPageStateSync {
+  PageType currentPageType = 1;
+  DashboardMainPageState dashboardMain = 2;
+  NewsExpandedPageState newsExpanded = 3;
+  StockExpandedPageState stockExpanded = 4;
+  CalendarExpandedPageState calendarExpanded = 5;
+  QuicklistExpandedPageState quicklistExpanded = 6;
+  HealthExpandedPageState healthExpanded = 7;
+}
+message sPowerStatus {
+  uint32 powerLeft = 1;
+  uint32 powerRight = 2;
+}
+message sScheduleWidget {
+  uint32 syncScheduleId = 1;
+  uint32 syncScheduleLine = 2;
+}
+message sStatusComponent {
+  sNotificationStatus notification = 1;
+  sPowerStatus power = 2;
+}
+message sWidgetComponent {
+  sNewsWidget news = 1;
+  sStockWidget stock = 2;
+  sScheduleWidget schedule = 3;
+}
+
+// ===== service: dashboard_ext =====
+message AppRequestPbFileInfo {
+  uint32 cmd = 1;
+}
+message AppRequestUpgradePbFile {
+  uint32 cmd = 1;
+}
+message AppSendPbFileData {
+  uint32 sessionId = 1;
+  uint32 totalSize = 2;
+  uint32 compressMode = 3;
+  uint32 fragmentIndex = 4;
+  uint32 fragmentPacketSize = 5;
+  uint32 rawData = 6;
+}
+message DashboardExtLayoutConfigureFile {
+  watchface_pos pos = 3;
+  uint32 widgetCount = 4;
+  repeated widget_component_seq widgetSeq = 6;
+  watchfaceLayoutConfigure watchfaceLayout = 7;
+}
+message DashboardExtPackage {
+  dashboard_ext_cmd_list cmdId = 1;
+  uint32 magicRandom = 2;
+  AppRequestPbFileInfo ReqPbInfoMsg = 3;
+  OsResponsePbFileInfo ResPbInfoMsg = 4;
+  AppRequestUpgradePbFile ReqPbUpgrade = 5;
+  OsResponseUpgradePbFile ResPbupgrade = 6;
+  OsNotifyPbFileTransmitStart NotifyPbTransStart = 7;
+  AppSendPbFileData SendPbFile = 8;
+  OsResponsePbFileData ResPbFile = 9;
+  OsNotifyPbFileUpdate NotifyPbUpdate = 10;
+}
+message OsNotifyPbFileTransmitStart {
+  uint32 cmd = 1;
+}
+message OsNotifyPbFileUpdate {
+  uint32 cmd = 1;
+}
+message OsResponsePbFileData {
+  uint32 sessionId = 1;
+  uint32 totalSize = 2;
+  uint32 compressMode = 3;
+  uint32 fragmentIndex = 4;
+  uint32 fragmentPacketSize = 5;
+  uint32 OsStatus = 6;
+}
+message OsResponsePbFileInfo {
+  uint32 isPbFileExist = 1;
+}
+message OsResponseUpgradePbFile {
+  uint32 status = 1;
+}
+message WatchfaceLayout1Cfg {
+  uint32 clockType = 1;
+  watchfaceComponentList leftSelect = 2;
+  watchfaceComponentList rightSelect = 3;
+}
+message WatchfaceLayout2Cfg {
+  uint32 alignIndex = 1;
+  uint32 clockType = 2;
+  uint32 dateEn = 3;
+  repeated watchfaceComponentList list = 4;
+}
+message WatchfaceLayout3Cfg {
+  uint32 alignIndex = 1;
+  uint32 dateEn = 2;
+  uint32 temperatureEn = 3;
+}
+message WatchfaceLayout4Cfg {
+  uint32 alignIndex = 1;
+  uint32 worldClockCnt = 2;
+  repeated double timezoneOffset = 4;
+}
+message watchfaceLayoutConfigure {
+  WatchfaceLayout1Cfg layout1Msg = 1;
+  WatchfaceLayout2Cfg layout2Msg = 2;
+  WatchfaceLayout3Cfg layout3Msg = 3;
+  WatchfaceLayout4Cfg layout4Msg = 4;
+}
+
+// ===== service: dev_config_protocol =====
+message DevCfgCmdException {
+  eDevCfgCommandId commandId = 1;
+  eErrorCode result = 2;
+}
+message DevCfgDataPackage {
+  eDevCfgCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  AuthMgr authMgr = 3;
+  PipeRoleChange roleChange = 4;
+  RingInfo ringInfo = 5;
+  BleConnectParam connParam = 6;
+  DisconnectInfo disconnectInfo = 7;
+  UnpairInfo unpairInfo = 8;
+  DevCfgCmdException commandException = 9;
+  DeviceInfo setDeviceInfo = 10;
+  DeviceInfo getDeviceInfo = 11;
+  RestoreFactory restoreFactory = 12;
+  BaseConnHeartBeat baseHeartBeat = 13;
+  QuickRestart quickRestart = 14;
+  TimeSync timeSync = 128;
+  AudControl AudControl = 129;
+}
+
+// ===== service: dev_infomation =====
+message ALSInfo {
+  uint32 brightness = 1;
+  eSwitchState autoOC = 2;
+  eErrorCode result = 3;
+}
+message BleMac {
+  uint32 mac = 1;
+  eErrorCode result = 2;
+}
+message DeviceInfo {
+  repeated DeviceInfoValue infoValue = 1;
+  eErrorCode result = 2;
+}
+message DeviceInfoValue {
+  eDeviceConfigInfoItem cfgInfoItem = 1;
+  ALSInfo alsState = 2;
+  eSwitchState antiShakeEnable = 3;
+  Mode displayMode = 4;
+  Mode wakeMode = 5;
+  HeadAngle wakeupAngle = 6;
+  SnInfo glassesSN = 7;
+  SnInfo deviceSN = 8;
+  BleMac bleMac = 9;
+}
+message HeadAngle {
+  uint32 angle = 1;
+  uint32 offset = 2;
+  eErrorCode result = 3;
+}
+message Mode {
+  uint32 mode = 1;
+  eErrorCode result = 2;
+}
+message SnInfo {
+  uint32 snId = 1;
+  eErrorCode result = 2;
+}
+
+// ===== service: dev_pair_manager =====
+message AuthMgr {
+  eDevice phoneType = 2;
+  eErrorCode result = 3;
+}
+message BleConnectParam {
+  uint32 MTU = 1;
+  uint32 connInterval = 2;
+  eConnParamState setSpeed = 3;
+  eErrorCode result = 5;
+}
+message DisconnectInfo {
+  eDevice dev = 1;
+  uint32 ringMac = 2;
+  eErrorCode result = 3;
+}
+message PipeRoleChange {
+  eGlassesLR asCmdRole = 1;
+  eErrorCode result = 2;
+}
+message RingInfo {
+  uint32 ringMac = 2;
+  uint32 ringName = 3;
+  uint32 connRet = 4;
+  eErrorCode result = 5;
+}
+message UnpairInfo {
+  eDevice dev = 1;
+  uint32 ringMac = 2;
+  eErrorCode result = 3;
+}
+
+// ===== service: dev_settings =====
+message AudControl {
+  eAudCmd cmd = 1;
+  uint32 status = 2;
+  eErrorCode result = 3;
+}
+message BaseConnHeartBeat {
+  eErrorCode result = 1;
+}
+message QuickRestart {
+  eErrorCode result = 1;
+}
+message RestoreFactory {
+  eErrorCode result = 1;
+}
+message TimeSync {
+  uint32 timestamp = 1;
+  uint32 timezone = 2;
+  eErrorCode result = 3;
+}
+
+// ===== service: even_ai =====
+message EvenAIAnalyseInfo {
+  eErrorCode errorCode = 1;
+}
+message EvenAIAskInfo {
+  uint32 cmdCnt = 1;
+  uint32 streamEnable = 2;
+  uint32 textMode = 3;
+  uint32 text = 4;
+  eErrorCode errorCode = 5;
+}
+message EvenAICommRsp {
+  eErrorCode errorCode = 1;
+}
+message EvenAIConfig {
+  uint32 voiceSwitch = 1;
+  uint32 streamSpeed = 2;
+  eErrorCode errorCode = 3;
+  uint32 duplexMode = 4;
+}
+message EvenAIControl {
+  eEvenAIStatus status = 1;
+  eErrorCode errorCode = 2;
+}
+message EvenAIDataPackage {
+  eEvenAICommandId commandId = 1;
+  uint32 magicRandom = 2;
+  EvenAIControl ctrl = 3;
+  EvenAIVADInfo vadInfo = 4;
+  EvenAIAskInfo askInfo = 5;
+  EvenAIAnalyseInfo analyseInfo = 6;
+  EvenAIReplyInfo replyInfo = 7;
+  EvenAISkillInfo skillInfo = 8;
+  EvenAIPromptInfo promptInfo = 9;
+  EvenAIEvent event = 10;
+  EvenAIHeartbeat heartbeat = 11;
+  EvenAICommRsp resp = 12;
+  EvenAIConfig config = 13;
+}
+message EvenAIEvent {
+  eEvenAIEvent event = 1;
+  eErrorCode errorCode = 2;
+}
+message EvenAIHeartbeat {
+  uint32 hbCnt = 1;
+  eErrorCode errorCode = 2;
+}
+message EvenAIPromptInfo {
+  eEvenAIPrompt promptType = 1;
+  eErrorCode errorCode = 2;
+}
+message EvenAIReplyInfo {
+  uint32 cmdCnt = 1;
+  uint32 streamEnable = 2;
+  uint32 textMode = 3;
+  uint32 text = 4;
+  eErrorCode errorCode = 5;
+  uint32 fTextEnd = 6;
+}
+message EvenAISkillInfo {
+  uint32 streamEnable = 1;
+  eEvenAISkill skillId = 2;
+  uint32 skillParam = 3;
+  uint32 text = 4;
+  eErrorCode errorCode = 5;
+  uint32 fTextEnd = 6;
+}
+message EvenAIVADInfo {
+  eEvenAIVADStatus vadStatus = 1;
+  eErrorCode errorCode = 2;
+}
+
+// ===== service: g2_setting =====
+message APP_Control_Device {
+  uint32 turnOnDevice = 1;
+}
+message APP_Send_Dominant_Hand {
+  uint32 dominantHand = 1;
+  uint32 ringMac = 2;
+}
+message APP_Send_Gesture_Control {
+  uint32 screenOn = 1;
+  uint32 operationType = 2;
+  ApplicationType apptype = 3;
+}
+message APP_Send_Gesture_Control_List {
+  repeated APP_Send_Gesture_Control gestureControlList = 1;
+}
+message APP_Send_Universe_Setting {
+  uint32 unitFormat = 1;
+  uint32 distanceUnit = 2;
+  uint32 timeFormat = 3;
+  uint32 dateFormat = 4;
+  uint32 temperatureUnit = 5;
+}
+message App_Respond_To_Device {
+  uint32 packageId = 1;
+  App_Respond_Flag receiveFlag = 2;
+}
+message DeviceReceiveInfoFromAPP {
+  DeviceReceive_Brightness deviceReceiveBrightness = 1;
+  DeviceReceive_Y_Coordinate deviceReceiveYCoordinate = 2;
+  DeviceReceive_X_Coordinate deviceReceiveXCoordinate = 3;
+  DeviceReceive_Head_UP_Setting deviceReceiveHeadUpSetting = 4;
+  Wear_Detection_Setting deviceReceiveWearDetection = 5;
+  DeviceReceive_Silent_Mode_Setting deviceReceiveSilentMode = 6;
+  DeviceReceive_APP_PAGE deviceReceiveAppPage = 7;
+  DeviceReceive_Advanced_Setting deviceReceiveAdvancedSetting = 8;
+  APP_Send_Universe_Setting appSendUniverseSetting = 9;
+  APP_Send_Gesture_Control_List appSendGestureControlList = 10;
+  APP_Send_Dominant_Hand appSendDominantHand = 11;
+  APP_Control_Device appControlDevice = 12;
+}
+message DeviceReceiveRequestFromAPP {
+  APPRequestSettingType settingInfoType = 1;
+  uint32 autoBrightnessLevel = 2;
+  uint32 yCoordinateLevelRestored = 3;
+  uint32 xCoordinateLevelRestored = 4;
+  uint32 headUpSwitchRestored = 7;
+  uint32 headUpAngleRestored = 8;
+  uint32 headUpAngleCalibrationRestored = 9;
+  uint32 wearDetectionSwitchRestored = 10;
+  uint32 deviceRunningStatus = 11;
+  uint32 battery = 12;
+  uint32 chargingStatus = 13;
+  uint32 silentModeSwitchRestored = 14;
+  uint32 leftCalibrationRestored = 15;
+  uint32 rightCalibrationRestored = 16;
+  uint32 headUpRecalibrationSuccess = 17;
+  uint32 autoBrightnessSwitchRestored = 18;
+  uint32 unreadMessageCount = 19;
+}
+message DeviceReceive_APP_PAGE {
+  uint32 appPage = 1;
+}
+message DeviceReceive_Advanced_Setting {
+  uint32 killAllFeature = 1;
+}
+message DeviceReceive_Brightness {
+  uint32 autoAdjust = 1;
+  uint32 brightnessLevel = 2;
+  uint32 leftCalibration = 3;
+  uint32 rightCalibration = 4;
+}
+message DeviceReceive_Head_UP_Setting {
+  uint32 headUpSwitch = 1;
+  uint32 headUpAngle = 2;
+  uint32 headUpCalibrationSwitch = 3;
+  uint32 headUpCalibration = 4;
+}
+message DeviceReceive_Silent_Mode_Setting {
+  uint32 silentModeSwitch = 1;
+}
+message DeviceReceive_X_Coordinate {
+  uint32 xCoordinateLevel = 1;
+}
+message DeviceReceive_Y_Coordinate {
+  uint32 yCoordinateLevel = 1;
+}
+message DeviceSendInfoToAPP {
+  uint32 currentRecalibrationStatus = 1;
+  uint32 silentModeSwitch = 2;
+}
+message Device_Respond_To_App {
+  uint32 packageId = 1;
+  Device_Respond_Flag receiveFlag = 2;
+}
+message G2SettingPackage {
+  g2_settingCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  DeviceReceiveInfoFromAPP deviceReceiveInfoFromApp = 3;
+  DeviceReceiveRequestFromAPP deviceReceiveRequestFromApp = 4;
+  DeviceSendInfoToAPP deviceSendInfoToApp = 5;
+  Device_Respond_To_App deviceRespondToApp = 6;
+  App_Respond_To_Device appRespondToDevice = 7;
+}
+message Wear_Detection_Setting {
+  uint32 wearDetectionSwitch = 1;
+}
+
+// ===== service: glasses_case =====
+message GlassesCaseDataPackage {
+  eGlassesCaseCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  GlassesCaseInfo caseInfo = 3;
+}
+message GlassesCaseInfo {
+  uint32 soc = 1;
+  uint32 chargeStatus = 2;
+  uint32 lidStatus = 3;
+  uint32 inCaseStatus = 4;
+  eErrorCode errorCode = 5;
+}
+
+// ===== service: health =====
+message HealthDataPackage {
+  eHealthCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  HealthSingleData singleData = 3;
+  HealthMultData multData = 4;
+  HealthSingleHighlight singleHighlight = 5;
+  HealthMultHighlight multHighlight = 6;
+}
+message HealthMultData {
+  eHealthDataType dataType = 1;
+  repeated HealthSingleData dataSet = 2;
+  eErrorCode errorCode = 3;
+}
+message HealthMultHighlight {
+  repeated HealthSingleHighlight Highlight = 1;
+  eErrorCode errorCode = 2;
+}
+message HealthSingleData {
+  eHealthDataType dataType = 1;
+  uint32 goal = 2;
+  uint32 value = 3;
+  uint32 avgValue = 4;
+  uint32 duration = 5;
+  eErrorCode errorCode = 6;
+  eHealthDataTrend trend = 7;
+}
+message HealthSingleHighlight {
+  eHealthDataType dataType = 1;
+  uint32 text = 2;
+  eErrorCode errorCode = 3;
+}
+
+// ===== service: logger =====
+message ble_trans_level_msg {
+  uint32 bleTransLevel = 1;
+}
+message logger_main_msg_ctx {
+  logger_Cmd_list cmd = 1;
+  uint32 magicRandom = 2;
+  uint32 bleTransEn = 3;
+  ble_trans_level_msg levelMsg = 4;
+  request_filelist_msg requestMsg = 6;
+  delete_file_msg delMsg = 7;
+}
+
+// ===== service: menu =====
+message MenuInfoSend {
+  uint32 itemTotalNum = 1;
+  repeated Menu_Item_Ctx item = 2;
+}
+message Menu_Item_Ctx {
+  uint32 itemType = 1;
+  uint32 iconNum = 2;
+  uint32 itemAppId = 4;
+}
+message ResponseMenuInfo {
+  uint32 respValue = 1;
+}
+message meun_main_msg_ctx {
+  Menu_Cmd_List Cmd = 1;
+  uint32 MagicRandom = 2;
+  MenuInfoSend sendData = 3;
+  ResponseMenuInfo resData = 4;
+}
+
+// ===== service: module_configure =====
+message dashboard_general_setting {
+  uint32 autoCloseValue = 1;
+}
+message module_configure_main_msg_ctx {
+  module_configure_Cmd_list cmd = 1;
+  uint32 magicRandom = 2;
+  send_system_general_setting SysGeneralSetting = 3;
+  dashboard_general_setting DashboardGeneralSetting = 4;
+}
+message send_system_general_setting {
+  uint32 languageIndex = 1;
+}
+
+// ===== service: navigation =====
+message LocationList_msg {
+  uint32 listNum = 1;
+  repeated int locationIconIndex = 3;
+  eErrorCode errorCode = 4;
+}
+message basic_info_msg {
+  uint32 directionSignIndex = 1;
+  uint32 navigateWorkMethod = 8;
+  eErrorCode errorCode = 9;
+}
+message compass_info_msg {
+  uint32 compassIndex = 1;
+}
+message extend_info_msg {
+  eErrorCode errorCode = 1;
+  uint32 errorIndex = 3;
+}
+message max_map_msg {
+  uint32 mapSessionId = 1;
+  uint32 mapTotalSize = 2;
+  uint32 compressMode = 3;
+  uint32 mapFragmentIndex = 4;
+  uint32 mapFragmentPacketSize = 5;
+  uint32 mapRawData = 6;
+  eErrorCode errorCode = 7;
+}
+message mini_map_msg {
+  uint32 mapSize = 1;
+  uint32 compressMode = 2;
+  uint32 mapRawData = 3;
+  eErrorCode errorCode = 4;
+  uint32 rotationAngle = 5;
+  uint32 miniMapBorderEn = 6;
+  uint32 mapSessionId = 7;
+  uint32 mapFragmentIndex = 8;
+  uint32 mapFragmentPacketSize = 9;
+}
+message navigation_main_msg_ctx {
+  Navigation_Cmd_list cmd = 1;
+  uint32 magicRandom = 2;
+  extend_info_msg extMsg = 3;
+  LocationList_msg list = 4;
+  basic_info_msg info = 5;
+  mini_map_msg miniMapData = 6;
+  max_map_msg maxMapData = 7;
+  os_select_location_msg selectIndex = 8;
+  view_info_msg viewMsg = 9;
+  compass_info_msg compassMsg = 10;
+}
+message os_select_location_msg {
+  eErrorCode errorCode = 2;
+  uint32 locationIndex = 3;
+  uint32 navigateMethod = 4;
+}
+message view_info_msg {
+  uint32 viewIndex = 1;
+}
+
+// ===== service: notification =====
+message NotificationCommRsp {
+  eNotificationCommandId commandId = 1;
+  eErrorCode errorCode = 2;
+}
+message NotificationControl {
+  uint32 notifEnable = 1;
+  uint32 autoDispEnable = 2;
+  uint32 dispTime = 3;
+  eErrorCode errorCode = 4;
+  uint32 avoidDisturbEnable = 5;
+}
+message NotificationDataPackage {
+  eNotificationCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  NotificationControl ctrl = 3;
+  NotificationIOS IOS = 4;
+  NotificationCommRsp resp = 5;
+  NotificationWhitelistCtrl whitelistCtrl = 6;
+  NotificationWhitelistChk whitelistChk = 7;
+}
+message NotificationIOS {
+  uint32 appID = 1;
+  uint32 displayName = 2;
+  eErrorCode errorCode = 3;
+}
+message NotificationWhitelistChk {
+  uint32 whitelistCrc = 1;
+  eWhitelistCheckStatus checkStatus = 2;
+  eErrorCode errorCode = 3;
+}
+message NotificationWhitelistCtrl {
+  uint32 whitelistDisable = 1;
+  eErrorCode errorCode = 2;
+}
+
+// ===== service: onboarding =====
+message OnboardingConfig {
+  eOnboardingProcessId processId = 1;
+  eErrorCode errorCode = 2;
+}
+message OnboardingDataPackage {
+  eOnboardingCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  OnboardingConfig config = 3;
+  OnboardingHeartbeat heartbeat = 4;
+  OnboardingEvent event = 5;
+}
+message OnboardingEvent {
+  eOnboardingEvent event = 1;
+  uint32 eventParam = 2;
+  eErrorCode errorCode = 3;
+}
+message OnboardingHeartbeat {
+  eErrorCode errorCode = 1;
+}
+
+// ===== service: quicklist =====
+message QuicklistDataPackage {
+  eQuicklistCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  QuicklistItem item = 3;
+  QuicklistMultItems multItems = 4;
+  QuicklistEvent event = 5;
+}
+message QuicklistEvent {
+  eQuicklistEvent event = 1;
+  uint32 uid = 2;
+  eErrorCode errorCode = 3;
+}
+message QuicklistItem {
+  uint32 uid = 1;
+  uint32 index = 2;
+  uint32 isCompleted = 3;
+  uint32 title = 5;
+  eErrorCode errorCode = 6;
+  eQuicklistTsType tsType = 7;
+}
+message QuicklistMultItems {
+  eQuicklistDataType dataType = 1;
+  uint32 totalCount = 2;
+  repeated QuicklistItem items = 3;
+  eErrorCode errorCode = 4;
+}
+
+// ===== service: ring =====
+message RingDataPackage {
+  eRingCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  RingEvent event = 3;
+  RingRawData rawData = 4;
+}
+message RingEvent {
+  uint32 ringMac = 1;
+  eRingEvent eventId = 2;
+  uint32 eventParam = 3;
+  eErrorCode errorCode = 4;
+}
+message RingRawData {
+  uint32 battery = 1;
+  uint32 chargeStates = 2;
+  uint32 hr = 3;
+  uint32 hrTimestamp = 4;
+  uint32 spo2 = 5;
+  uint32 spo2Timestamp = 6;
+  uint32 hrv = 7;
+  uint32 hrvTimestamp = 8;
+  uint32 temp = 9;
+  uint32 tempTimestamp = 10;
+  uint32 actKcal = 11;
+  uint32 actKcalTimestamp = 12;
+  uint32 allKcal = 13;
+  uint32 allKcalTimestamp = 14;
+  uint32 steps = 15;
+  uint32 stepsTimestamp = 16;
+  eErrorCode errorCode = 17;
+}
+
+// ===== service: sync_info =====
+message sync_info_data_msg {
+  uint32 backgroundAppID = 1;
+  uint32 foregroundAppID = 2;
+}
+message sync_info_main_msg_ctx {
+  Sync_Info_Cmd_list cmdList = 1;
+  uint32 magicRandom = 2;
+  sync_info_data_msg dataMsg = 3;
+}
+
+// ===== service: teleprompt =====
+message TelepromptAISync {
+  uint32 pageId = 1;
+  uint32 lineId = 2;
+  uint32 charId = 3;
+}
+message TelepromptCommResp {
+  TelepromptErrorCode errCode = 1;
+}
+message TelepromptControl {
+  TelepromptCtrlCmd cmd = 1;
+  TelepromptSetting startSettings = 2;
+}
+message TelepromptDataPackage {
+  TelepromptCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  TelepromptControl ctrl = 3;
+  TelepromptFileList fileList = 4;
+  TelepromptPageData pageData = 5;
+  TelepromptAISync aiSync = 6;
+  TelepromptStatusNotify statusNotify = 7;
+  TelepromptFileListRequest fileListReq = 8;
+  TelepromptFileSelect fileSelect = 9;
+  TelepromptPageDataRequest pageDataReq = 10;
+  TelepromptScrollSync scrollSync = 11;
+  TelepromptCommResp commResp = 12;
+  TelepromptHeartBeat heartBeat = 13;
+}
+message TelepromptFileInfo {
+  uint32 fileId = 1;
+  uint32 filename = 2;
+}
+message TelepromptFileList {
+  repeated TelepromptFileInfo files = 1;
+}
+message TelepromptFileSelect {
+  uint32 fileId = 1;
+}
+message TelepromptHeartBeat {
+  uint32 appPageId = 1;
+  uint32 appLineId = 2;
+  uint32 osPageId = 3;
+  uint32 osLineId = 4;
+}
+message TelepromptPageData {
+  uint32 pageId = 1;
+  uint32 pageLineCount = 2;
+  uint32 pageText = 3;
+}
+message TelepromptPageDataRequest {
+  uint32 pageId = 1;
+}
+message TelepromptScrollSync {
+  uint32 pageId = 1;
+  uint32 lineId = 2;
+  uint32 mode = 3;
+}
+message TelepromptSetting {
+  TelepromptMode mode = 1;
+  uint32 startPageId = 2;
+  uint32 startLineId = 3;
+  uint32 totalPages = 4;
+  uint32 totalLines = 5;
+  uint32 displayWidth = 6;
+  uint32 scrollIntervalMs = 7;
+  uint32 countdownSeconds = 8;
+  uint32 useAudio = 9;
+  uint32 displayLines = 10;
+  TelepromptScrollMode scrollMode = 11;
+}
+message TelepromptStatusNotify {
+  TelepromptCtrlCmd cmd = 1;
+  TelepromptErrorCode errCode = 2;
+}
+
+// ===== service: terminal =====
+message TerminalAgentContent {
+  TerminalContentStyle style = 1;
+  uint32 text = 2;
+  TerminalAgentContentOp contentOp = 3;
+  uint32 contentId = 4;
+  TerminalAgentContentEvent event = 5;
+  uint32 sessionId = 6;
+}
+message TerminalAgentInterrupt {
+  uint32 dummyField = 1;
+}
+message TerminalAsrResult {
+  uint32 text = 1;
+  uint32 sentenceFinal = 2;
+  uint32 allFinal = 3;
+}
+message TerminalCommResp {
+  TerminalErrorCode errCode = 1;
+}
+message TerminalDataPackage {
+  TerminalCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  TerminalModeSync modeSync = 3;
+  TerminalHostStatusMsg hostStatus = 4;
+  TerminalAsrResult asrResult = 5;
+  TerminalSessionStatusMsg sessionStatus = 6;
+  TerminalAgentContent agentContent = 7;
+  TerminalQuery query = 8;
+  TerminalStatusReply statusReply = 9;
+  TerminalVoiceInput voiceInput = 10;
+  TerminalQueryReply queryReply = 11;
+  TerminalAgentInterrupt agentInterrupt = 12;
+  TerminalCommResp commResp = 13;
+  TerminalHeartBeat heartBeat = 14;
+  TerminalErrorMsg errorMsg = 15;
+  TerminalSessionList sessionList = 16;
+  TerminalSessionSwitchResult sessionSwitchResult = 17;
+  TerminalSessionSwitchRequest sessionSwitchRequest = 18;
+  TerminalNewSessionRequest newSessionRequest = 19;
+  TerminalDisplayState displayStateNotify = 20;
+  TerminalSessionChange sessionChange = 21;
+  TerminalNewSessionCancel newSessionCancel = 22;
+  TerminalNewSessionResult newSessionResult = 23;
+  TerminalListFocus listFocus = 24;
+  TerminalOverlayFocus overlayFocus = 25;
+}
+message TerminalDisplayState {
+  TerminalDisplayStateNotify state = 1;
+  uint32 sessionId = 2;
+  TerminalOverlayKind overlay = 3;
+}
+message TerminalErrorMsg {
+  TerminalErrorCode errCode = 1;
+}
+message TerminalHostStatusMsg {
+  TerminalHostStatus hostStatus = 1;
+  TerminalErrorCode errCode = 2;
+}
+message TerminalListFocus {
+  uint32 focusedIndex = 1;
+}
+message TerminalModeSync {
+  TerminalMode targetMode = 1;
+  TerminalErrorCode errCode = 2;
+}
+message TerminalNewSessionRequest {
+  uint32 hostId = 1;
+}
+message TerminalNewSessionResult {
+  TerminalNewSessionResultCode result = 1;
+}
+message TerminalOverlayFocus {
+  TerminalOverlayKind overlay = 1;
+  uint32 focusedIndex = 2;
+}
+message TerminalQuery {
+  uint32 queryId = 1;
+  uint32 question = 2;
+  repeated TerminalQueryOption options = 3;
+  uint32 sessionId = 4;
+}
+message TerminalQueryOption {
+  uint32 optionId = 1;
+  uint32 optionText = 2;
+}
+message TerminalQueryReply {
+  uint32 queryId = 1;
+  uint32 optionId = 2;
+}
+message TerminalSessionChange {
+  uint32 sessionId = 1;
+}
+message TerminalSessionList {
+  uint32 hostId = 1;
+  uint32 currentSessionId = 2;
+  repeated TerminalSessionListItem sessions = 3;
+}
+message TerminalSessionListItem {
+  uint32 sessionId = 1;
+  uint32 title = 2;
+  TerminalSessionStatus sessionStatus = 3;
+}
+message TerminalSessionStatusMsg {
+  TerminalSessionStatus status = 1;
+  uint32 sessionId = 2;
+}
+message TerminalSessionSwitchRequest {
+  uint32 sessionId = 1;
+  uint32 hostId = 2;
+}
+message TerminalSessionSwitchResult {
+  TerminalSessionSwitchResultCode result = 1;
+}
+message TerminalStatusReply {
+  TerminalMode currentMode = 1;
+  TerminalErrorCode errCode = 2;
+}
+message TerminalVoiceInput {
+  TerminalVoiceCmd cmd = 1;
+}
+
+// ===== service: tracepoint =====
+message tracepoint_common_rsp_msg {
+  uint32 result = 1;
+}
+message tracepoint_main_msg_ctx {
+  tracepoint_Cmd_list cmd = 1;
+  uint32 magicRandom = 2;
+  tracepoint_filelist_msg requestMsg = 3;
+  tracepoint_delete_file_msg delMsg = 4;
+  tracepoint_common_rsp_msg rspMsg = 5;
+}
+
+// ===== service: transcribe =====
+message TranscribeControl {
+  TranscribeCmd cmd = 1;
+  uint32 noteIdx = 2;
+  eErrorCode errorCode = 3;
+}
+message TranscribeDataPackage {
+  eTranscribeCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  TranscribeControl ctrl = 3;
+  TranscribeResult result = 4;
+  TranscribeNotify notify = 5;
+  TranscribeResp resp = 6;
+  TranscribeHeartBeat heartbeat = 7;
+}
+message TranscribeHeartBeat {
+  eErrorCode errorCode = 1;
+}
+message TranscribeNotify {
+  TranscribeCmd cmd = 1;
+  eErrorCode errorCode = 2;
+}
+message TranscribeResp {
+  eErrorCode errorCode = 1;
+}
+message TranscribeResult {
+  uint32 text = 1;
+  eErrorCode errorCode = 2;
+  uint32 endFlag = 3;
+  uint32 speaker = 4;
+}
+
+// ===== service: translate =====
+message TranslateControl {
+  TranslateCmd cmd = 1;
+  uint32 languagePair = 2;
+  uint32 useAudio = 3;
+  eErrorCode errorCode = 4;
+}
+message TranslateDataPackage {
+  eTranslateCommandId commandId = 1;
+  uint32 magicRandom = 2;
+  TranslateControl ctrl = 3;
+  TranslateResult result = 4;
+  TranslateNotify notify = 5;
+  TranslateModeSwitch modeSwitch = 6;
+  TranslateResp resp = 7;
+  TranslateHeartBeat heartbeat = 8;
+}
+message TranslateModeSwitch {
+  uint32 mode = 1;
+}
+message TranslateNotify {
+  TranslateCmd cmd = 1;
+  eErrorCode errorCode = 2;
+}
+message TranslateResp {
+  eErrorCode errorCode = 1;
+}
+message TranslateResult {
+  uint32 srcText = 1;
+  uint32 dstText = 2;
+  eErrorCode errorCode = 3;
+  uint32 endFlag = 4;
+  uint32 speaker = 5;
+}

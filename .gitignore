@@ -10,3 +10,21 @@ __pycache__/
 # Build intermediates (build.py writes .o / .text.bin here).
 /obj/
 *.o
+
+# Ghidra project database — large binary artifact (~125M). Rebuild it from the
+# firmware with ghidra/rebuild_db.sh, which re-applies the ghidra/apply_*.py
+# RE annotations. The scripts are the source of truth; the .rep is generated.
+/ghidra/ghidra_proj/
+*.rep/
+*.gpr
+*.lock
+*.class
+
+# Framebuffer / screenshot dumps captured while debugging on-device.
+*.qoi
+
+# Large demo video assets (bad_apple_*.gif) — supply your own for video-test.sh.
+demos/*.gif
+
+# Stray runtime logs.
+*.log

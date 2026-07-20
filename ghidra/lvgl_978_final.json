@@ -1,0 +1,6365 @@
+[
+  {
+    "name": "lv_obj_move_to",
+    "disposition": "MATCHED",
+    "size": 458
+  },
+  {
+    "name": "lv_anim_set_custom_exec_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_set_antialias",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_is_initialized",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_set_node_size",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_set_scale",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_text_encoded_letter_next_2",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_cache_entry_get_node_size",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_array_concat",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_anim_path_linear",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_obj_clean",
+    "disposition": "MATCHED",
+    "size": 276
+  },
+  {
+    "name": "lv_anim_set_early_apply",
+    "disposition": "MATCHED",
+    "size": 14
+  },
+  {
+    "name": "lv_image_get_antialias",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_get_entry",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_rb_minimum",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_obj_set_scroll_snap_y",
+    "disposition": "MATCHED",
+    "size": 34
+  },
+  {
+    "name": "lv_obj_set_scroll_snap_x",
+    "disposition": "MATCHED",
+    "size": 34
+  },
+  {
+    "name": "lv_anim_init",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_obj_get_scroll_snap_y",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_scroll_snap_x",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_dump_tree",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_chart_get_series_next",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_layer_init",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_display_get_user_data",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_open",
+    "disposition": "MATCHED",
+    "size": 248
+  },
+  {
+    "name": "lv_display_get_dpi",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B with matched callers: [u'lv_tabview_set_tab_bar_position', u'lv_obj_get_scrollbar_area']"
+    ]
+  },
+  {
+    "name": "lv_iter_get_context",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_get_text",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_display_add_event_cb",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_draw_buf_clear_flag",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_font_get_glyph_dsc_fmt_txt",
+    "disposition": "MATCHED",
+    "size": 364
+  },
+  {
+    "name": "lv_array_at",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_cache_create",
+    "disposition": "MATCHED",
+    "size": 160
+  },
+  {
+    "name": "lv_spinbox_set_range",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_get_recolor",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_label_get_text_selection_end",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_textarea_get_label",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_to",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_display_get_tile_cnt",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_delete_refr_timer",
+    "disposition": "MATCHED",
+    "size": 48
+  },
+  {
+    "name": "lv_buttonmatrix_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_rotation",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_send_vsync_event",
+    "disposition": "INLINED_SMALL",
+    "size": 40,
+    "evidence": [
+      "40B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_roller_set_visible_row_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 128,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_set_cache",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_original_vertical_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_expand_width",
+    "disposition": "MATCHED",
+    "size": 380
+  },
+  {
+    "name": "lv_fs_read",
+    "disposition": "MATCHED",
+    "size": 496
+  },
+  {
+    "name": "lv_tabview_set_active",
+    "disposition": "MATCHED",
+    "size": 280
+  },
+  {
+    "name": "lv_group_set_default",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_path_bounce",
+    "disposition": "ABSENT_LIKELY",
+    "size": 228,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_dropdown_get_selected_highlight",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_scroll_dir",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_palette_main",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_obj_get_index_by_type",
+    "disposition": "ABSENT_LIKELY",
+    "size": 120,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_create",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_dropdown_close",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_event_add",
+    "disposition": "MATCHED",
+    "size": 112
+  },
+  {
+    "name": "lv_spangroup_delete_span",
+    "disposition": "MATCHED",
+    "size": 122
+  },
+  {
+    "name": "lv_draw_buf_adjust_stride",
+    "disposition": "MATCHED",
+    "size": 328
+  },
+  {
+    "name": "lv_timer_handler_run_in_period",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_event_get_layer",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_textarea_get_current_char",
+    "disposition": "MATCHED",
+    "size": 136
+  },
+  {
+    "name": "lv_chart_set_series_values",
+    "disposition": "INLINED_SMALL",
+    "size": 40,
+    "evidence": [
+      "40B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_to_view_recursive",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_obj_get_scrollbar_mode",
+    "disposition": "INLINED_SMALL",
+    "size": 18,
+    "evidence": [
+      "18B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_bar_get_max_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_keyboard_get_map_array",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_init_handlers",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_malloc",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_obj_calculate_ext_draw_size",
+    "disposition": "MATCHED",
+    "size": 218
+  },
+  {
+    "name": "lv_anim_get_delay",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_custom_get",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_arc_set_knob_offset",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_clear_button_ctrl_all",
+    "disposition": "MATCHED",
+    "size": 124
+  },
+  {
+    "name": "lv_cache_set_name",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_rotate_area",
+    "disposition": "MATCHED",
+    "size": 196
+  },
+  {
+    "name": "lv_anim_set_reverse_duration",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_get_playtime",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_clamp_width",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 152,
+    "evidence": [
+      "Matched callers [u'lv_obj_refr_size'], 152B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_obj_report_style_change",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_anim_get_repeat_count",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_release_data",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_span_stack_deinit",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_cache_set_create_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_keyboard_set_mode",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_draw_border_dsc_init",
+    "disposition": "MATCHED",
+    "size": 40
+  },
+  {
+    "name": "lv_menu_set_sidebar_page",
+    "disposition": "MATCHED",
+    "size": 364
+  },
+  {
+    "name": "lv_event_get_rotary_diff",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_draw_label",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_font_get_glyph_dsc",
+    "disposition": "MATCHED",
+    "size": 240
+  },
+  {
+    "name": "lv_array_copy",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 132,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_refr_deinit",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 2,
+    "evidence": [
+      "2B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_layer_init",
+    "disposition": "MATCHED",
+    "size": 112
+  },
+  {
+    "name": "lv_spangroup_set_overflow",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 88,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_style_transition_dsc_init",
+    "disposition": "MATCHED",
+    "size": 52
+  },
+  {
+    "name": "lv_obj_get_transformed_area",
+    "disposition": "MATCHED",
+    "size": 186
+  },
+  {
+    "name": "lv_display_set_user_data",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_remove_event_cb_with_user_data",
+    "disposition": "MATCHED",
+    "size": 156
+  },
+  {
+    "name": "lv_keyboard_get_selected_button",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_align_ex",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_open",
+    "disposition": "MATCHED",
+    "size": 692
+  },
+  {
+    "name": "lv_spinbox_set_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_remove_event",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_dropdown_get_text",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_x",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_chart_set_all_values",
+    "disposition": "MATCHED",
+    "size": 136
+  },
+  {
+    "name": "lv_textarea_cursor_right",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_obj_get_y",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_display_enable_invalidation",
+    "disposition": "MATCHED",
+    "size": 40
+  },
+  {
+    "name": "lv_anim_core_init",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_timer_create",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_bar_get_min_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_style_opa_recursive",
+    "disposition": "MATCHED",
+    "size": 166
+  },
+  {
+    "name": "lv_obj_is_scrolling",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_array_remove",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 152,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_set_color_format",
+    "disposition": "ABSENT_LIKELY",
+    "size": 52,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_font_get_glyph_width",
+    "disposition": "MATCHED",
+    "size": 164
+  },
+  {
+    "name": "lv_calendar_get_today_date",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_group_get_obj_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_width",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_obj_delete",
+    "disposition": "MATCHED",
+    "size": 12
+  },
+  {
+    "name": "lv_bin_decoder_open",
+    "disposition": "MATCHED",
+    "size": 1032
+  },
+  {
+    "name": "lv_style_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_animimg_set_src",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_draw_get_dependent_count",
+    "disposition": "MATCHED",
+    "size": 58
+  },
+  {
+    "name": "lv_spangroup_get_span_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_dec_ref",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_tabview_set_tab_bar_size",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_rb_remove",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 128,
+    "evidence": [
+      "Matched callers [u'lv_rb_drop'], 128B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_max_length",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_grid_align",
+    "disposition": "INLINED_SMALL",
+    "size": 30,
+    "evidence": [
+      "30B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_by_raw",
+    "disposition": "MATCHED",
+    "size": 98
+  },
+  {
+    "name": "lv_event_get_current_target",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_is_invalid",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_display_register_vsync_event",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_cache_entry_get_cache",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_deinit",
+    "disposition": "MATCHED",
+    "size": 140
+  },
+  {
+    "name": "lv_anim_path_ease_in",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_obj_remove_state",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_textarea_delete_char",
+    "disposition": "MATCHED",
+    "size": 244
+  },
+  {
+    "name": "lv_display_get_event_dsc",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_timer_core_deinit",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B with matched callers: [u'lv_deinit']"
+    ]
+  },
+  {
+    "name": "lv_obj_set_pos",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_spangroup_set_span_style",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 128,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_bin_decoder_init",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_spangroup_set_align",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_speed",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_layout",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_draw_buf_handlers_init",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_iter_peek",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_spangroup_get_span_by_point",
+    "disposition": "MATCHED",
+    "size": 252
+  },
+  {
+    "name": "lv_obj_get_width",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_anim_resume",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_palette_lighten",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_calendar_get_pressed_date",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 144,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_layer_go_to_xy",
+    "disposition": "MATCHED",
+    "size": 6
+  },
+  {
+    "name": "lv_animimg_get_duration",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_set_text_fmt",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_timer_core_init",
+    "disposition": "MATCHED",
+    "size": 52
+  },
+  {
+    "name": "lv_timer_set_repeat_count",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_obj_align",
+    "disposition": "ABSENT_LIKELY",
+    "size": 88,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_copy",
+    "disposition": "MATCHED",
+    "size": 392
+  },
+  {
+    "name": "lv_timer_set_period",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_flush_cache",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_anim_refr_now",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_event_base",
+    "disposition": "MATCHED",
+    "size": 54
+  },
+  {
+    "name": "lv_obj_transform_point",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_chart_get_x_start_point",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_init",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_bin_decoder_info",
+    "disposition": "ABSENT_LIKELY",
+    "size": 144,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_image_get_offset_y",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_offset_x",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_text_get_width_with_flags",
+    "disposition": "MATCHED",
+    "size": 182
+  },
+  {
+    "name": "lv_font_get_glyph_bitmap",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_span_get_style",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_text_set_text_vfmt",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_chart_set_x_start_point",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 108,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_readjust_scroll",
+    "disposition": "MATCHED",
+    "size": 182
+  },
+  {
+    "name": "lv_group_get_wrap",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_animimg_get_src_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_text_selection",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_deinit",
+    "disposition": "MATCHED",
+    "size": 52
+  },
+  {
+    "name": "lv_chart_get_point_pos_by_id",
+    "disposition": "MATCHED",
+    "size": 564
+  },
+  {
+    "name": "lv_obj_invalidate_area",
+    "disposition": "MATCHED",
+    "size": 140
+  },
+  {
+    "name": "lv_menu_section_create",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_label_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_group",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_obj_set_local_style_prop",
+    "disposition": "MATCHED",
+    "size": 396
+  },
+  {
+    "name": "lv_draw_image_normal_helper",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 220,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_rotate_obj_to_angle",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 236,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_mode",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 108,
+    "evidence": [
+      "Matched callers [u'lv_spangroup_get_expand_height'], 108B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_event_get_hit_test_info",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_fs_get_drv",
+    "disposition": "ABSENT_LIKELY",
+    "size": 44,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_chart_add_series",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 328,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_letter_dsc_init",
+    "disposition": "ABSENT_LIKELY",
+    "size": 72,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_one_line",
+    "disposition": "ABSENT_LIKELY",
+    "size": 192,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_event_get_draw_task",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_inner_align",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_text_get_next_line",
+    "disposition": "MATCHED",
+    "size": 54
+  },
+  {
+    "name": "lv_cache_release",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_font_has_static_bitmap",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_obj_is_group_def",
+    "disposition": "INLINED_SMALL",
+    "size": 34,
+    "evidence": [
+      "34B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_delete_all",
+    "disposition": "ABSENT_LIKELY",
+    "size": 64,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_timer_set_cb",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_bitmap_map_src",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_line_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_switch_get_orientation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_get_rotation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_font_glyph_release_draw_data",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_obj_is_visible",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_image_decoder_deinit",
+    "disposition": "MATCHED",
+    "size": 40
+  },
+  {
+    "name": "lv_event_get_target_obj",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_menu_get_cur_sidebar_page",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_dropdown_set_selected",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 116,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_fs_close",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_display_set_theme",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_obj_init_draw_arc_dsc",
+    "disposition": "MATCHED",
+    "size": 242
+  },
+  {
+    "name": "lv_buttonmatrix_set_button_ctrl",
+    "disposition": "MATCHED",
+    "size": 160
+  },
+  {
+    "name": "lv_draw_task_get_fill_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_label_set_text_static",
+    "disposition": "MATCHED",
+    "size": 136
+  },
+  {
+    "name": "lv_draw_line",
+    "disposition": "MATCHED",
+    "size": 192
+  },
+  {
+    "name": "lv_display_set_offset",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_path_ease_in_out",
+    "disposition": "ABSENT_LIKELY",
+    "size": 58,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_event_get_cover_area",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_set_reverse_delay",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_border",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_spangroup_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_iter_destroy",
+    "disposition": "MATCHED",
+    "size": 104
+  },
+  {
+    "name": "lv_arc_set_start_angle",
+    "disposition": "MATCHED",
+    "size": 296
+  },
+  {
+    "name": "lv_arc_get_bg_angle_end",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_anim_set_get_value_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_get_scale",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_get_info",
+    "disposition": "MATCHED",
+    "size": 48
+  },
+  {
+    "name": "lv_obj_delete_anim_completed_cb",
+    "disposition": "MATCHED",
+    "size": 14
+  },
+  {
+    "name": "lv_iter_make_peekable",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_obj_get_click_area",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_fs_dir_close",
+    "disposition": "MATCHED",
+    "size": 42
+  },
+  {
+    "name": "lv_tabview_set_tab_bar_position",
+    "disposition": "MATCHED",
+    "size": 416
+  },
+  {
+    "name": "lv_obj_get_layer_type",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B with matched callers: [u'lv_obj_transform_point_array']"
+    ]
+  },
+  {
+    "name": "lv_anim_path_step",
+    "disposition": "MATCHED",
+    "size": 14
+  },
+  {
+    "name": "lv_textarea_get_cursor_pos",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_obj_get_screen",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_display_get_physical_horizontal_resolution",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_fs_get_last",
+    "disposition": "ABSENT_LIKELY",
+    "size": 84,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_obj_set_flex_flow",
+    "disposition": "MATCHED",
+    "size": 28
+  },
+  {
+    "name": "lv_draw_buf_get_image_handlers",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_type",
+    "disposition": "MATCHED",
+    "size": 4
+  },
+  {
+    "name": "lv_draw_label_iterate_characters",
+    "disposition": "MATCHED",
+    "size": 1842
+  },
+  {
+    "name": "lv_obj_set_flex_align",
+    "disposition": "MATCHED",
+    "size": 52
+  },
+  {
+    "name": "lv_obj_set_parent",
+    "disposition": "MATCHED",
+    "size": 364
+  },
+  {
+    "name": "lv_draw_wait_for_finish",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_set_ctrl_map",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_draw_buf_from_image",
+    "disposition": "MATCHED",
+    "size": 42
+  },
+  {
+    "name": "lv_screen_active",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_calendar_add_header_arrow",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_font_get_glyph_static_bitmap",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_label_get_text_selection_start",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_fs_dir_open",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_layer_sys",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_max_length",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_draw_glyph_dsc_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_child_count",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_anim_get_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_trigger_activity",
+    "disposition": "MATCHED",
+    "size": 40
+  },
+  {
+    "name": "lv_draw_arc_get_area",
+    "disposition": "MATCHED",
+    "size": 1196
+  },
+  {
+    "name": "lv_draw_buf_create",
+    "disposition": "MATCHED",
+    "size": 28
+  },
+  {
+    "name": "lv_textarea_set_text_selection",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_rb_insert",
+    "disposition": "MATCHED",
+    "size": 572
+  },
+  {
+    "name": "lv_chart_get_cursor_point",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_grid_init",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_group_remove_obj",
+    "disposition": "MATCHED",
+    "size": 196
+  },
+  {
+    "name": "lv_obj_swap",
+    "disposition": "MATCHED",
+    "size": 228
+  },
+  {
+    "name": "lv_chart_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_unregister_vsync_event",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_roller_set_selected",
+    "disposition": "MATCHED",
+    "size": 160
+  },
+  {
+    "name": "lv_malloc_zeroed",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_obj_get_x2",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_textarea_cursor_up",
+    "disposition": "MATCHED",
+    "size": 148
+  },
+  {
+    "name": "lv_display_dpx",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_span_get_text",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_rb_drop_node",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_draw_task_get_image_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_to_view",
+    "disposition": "MATCHED",
+    "size": 38
+  },
+  {
+    "name": "lv_cache_get_size",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_y2",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_calendar_set_today_date",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_draw_buf_dup_ex",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_chart_set_point_count",
+    "disposition": "MATCHED",
+    "size": 184
+  },
+  {
+    "name": "lv_style_get_prop",
+    "disposition": "MATCHED",
+    "size": 88
+  },
+  {
+    "name": "lv_chart_set_series_ext_x_array",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 140,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_timer_ready",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_display_get_buf_active",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_align",
+    "disposition": "MATCHED",
+    "size": 18
+  },
+  {
+    "name": "lv_draw_letter",
+    "disposition": "ABSENT_LIKELY",
+    "size": 136,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_event_remove",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_arc_get_angle_end",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_set_series_color",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 112,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_set_page_title",
+    "disposition": "ABSENT_LIKELY",
+    "size": 164,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_reallocf",
+    "disposition": "MATCHED",
+    "size": 104
+  },
+  {
+    "name": "lv_bin_decoder_close",
+    "disposition": "MATCHED",
+    "size": 42
+  },
+  {
+    "name": "lv_obj_get_x_aligned",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_clear",
+    "disposition": "MATCHED",
+    "size": 272
+  },
+  {
+    "name": "lv_event_get_old_size",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_chart_set_series_value_by_id2",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_draw_buf_goto_xy",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_group_set_refocus_policy",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_mask_rect",
+    "disposition": "MATCHED",
+    "size": 114
+  },
+  {
+    "name": "lv_image_set_scale_x",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 88,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_horizontal_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B with matched callers: [u'lv_display_refr_timer', u'lv_obj_scroll_by', u'lv_obj_class_create_obj'"
+    ]
+  },
+  {
+    "name": "lv_animimg_set_start_cb",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_is_double_buffered",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_set_scale_y",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_post_process",
+    "disposition": "MATCHED",
+    "size": 224
+  },
+  {
+    "name": "lv_text_is_cmd",
+    "disposition": "MATCHED",
+    "size": 58
+  },
+  {
+    "name": "lv_timer_handler_set_resume_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_cache_set_max_size",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_arc_set_change_rate",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_zalloc",
+    "disposition": "ABSENT_LIKELY",
+    "size": 44,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_label_set_text_selection_end",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_chart_set_series_value_by_id",
+    "disposition": "MATCHED",
+    "size": 132
+  },
+  {
+    "name": "lv_image_set_rotation",
+    "disposition": "MATCHED",
+    "size": 324
+  },
+  {
+    "name": "lv_keyboard_def_event_cb",
+    "disposition": "MATCHED",
+    "size": 568
+  },
+  {
+    "name": "lv_obj_get_parent",
+    "disposition": "MATCHED",
+    "size": 6
+  },
+  {
+    "name": "lv_rb_destroy",
+    "disposition": "MATCHED",
+    "size": 136
+  },
+  {
+    "name": "lv_label_set_recolor",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_obj_get_coords",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_fs_deinit",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_premultiply",
+    "disposition": "MATCHED",
+    "size": 416
+  },
+  {
+    "name": "lv_image_get_src_width",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_timer_create_basic",
+    "disposition": "MATCHED",
+    "size": 12
+  },
+  {
+    "name": "lv_image_set_offset_y",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_ext_click_area",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_set_matrix_rotation",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 2,
+    "evidence": [
+      "2B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_set_offset_x",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_code",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_draw_buf_dup",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_obj_get_scroll_bottom",
+    "disposition": "MATCHED",
+    "size": 284
+  },
+  {
+    "name": "lv_cache_entry_delete",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_display_get_antialiasing",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_arc_get_min_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_arc_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_get_pivot",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_label_get_letter_on",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_image_buf_set_palette",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 76,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_fs_tell",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 62,
+    "evidence": [
+      "Matched callers [u'load_indexed'], 62B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_draw_layer",
+    "disposition": "MATCHED",
+    "size": 156
+  },
+  {
+    "name": "lv_draw_task_get_area",
+    "disposition": "MATCHED",
+    "size": 12
+  },
+  {
+    "name": "lv_array_init",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_menu_get_main_header",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_bin_decoder_get_area",
+    "disposition": "MATCHED",
+    "size": 612
+  },
+  {
+    "name": "lv_group_get_count",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_style_set_prop",
+    "disposition": "MATCHED",
+    "size": 252
+  },
+  {
+    "name": "lv_keyboard_get_popovers",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_get_map",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_get_free_size",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_textarea_cursor_left",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_cache_evict_one",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_buf_free",
+    "disposition": "INLINED_SMALL",
+    "size": 40,
+    "evidence": [
+      "40B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_cache_drop",
+    "disposition": "MATCHED",
+    "size": 200
+  },
+  {
+    "name": "lv_spangroup_refresh",
+    "disposition": "MATCHED",
+    "size": 34
+  },
+  {
+    "name": "lv_obj_delete_delayed",
+    "disposition": "ABSENT_LIKELY",
+    "size": 68,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_get_handlers",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_get_theme",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_switch_set_orientation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_flush_ready",
+    "disposition": "MATCHED",
+    "size": 6
+  },
+  {
+    "name": "lv_obj_null_on_delete",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_obj_set_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_mask_rect_dsc_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_group_by_index",
+    "disposition": "ABSENT_LIKELY",
+    "size": 44,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_group_focus_freeze",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_stop_bubbling",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_fs_drv_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_spinbox_set_rollover",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_style_prop_get_default",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 260,
+    "evidence": [
+      "Matched callers [u'lv_obj_get_style_opa_recursive'], 260B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_group_focus_obj",
+    "disposition": "MATCHED",
+    "size": 6
+  },
+  {
+    "name": "lv_obj_stop_scroll_anim",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_remove_style",
+    "disposition": "MATCHED",
+    "size": 312
+  },
+  {
+    "name": "lv_arc_set_mode",
+    "disposition": "MATCHED",
+    "size": 248
+  },
+  {
+    "name": "lv_obj_get_transform",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_center",
+    "disposition": "MATCHED",
+    "size": 88
+  },
+  {
+    "name": "lv_refr_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 2,
+    "evidence": [
+      "2B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_rect_dsc_init",
+    "disposition": "MATCHED",
+    "size": 192
+  },
+  {
+    "name": "lv_anim_pause",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_calendar_set_highlighted_dates",
+    "disposition": "MATCHED",
+    "size": 104
+  },
+  {
+    "name": "lv_bar_set_value",
+    "disposition": "MATCHED",
+    "size": 164
+  },
+  {
+    "name": "lv_image_decoder_get_next",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_physical_vertical_resolution",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_obj_redraw",
+    "disposition": "MATCHED",
+    "size": 724
+  },
+  {
+    "name": "lv_display_get_layer_bottom",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_display_get_layer_top",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_buttonmatrix_set_button_ctrl_all",
+    "disposition": "ABSENT_LIKELY",
+    "size": 160,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_timer_get_next",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_animimg_set_repeat_count",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_spinbox_get_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_separator_create",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_mem_monitor",
+    "disposition": "MATCHED",
+    "size": 26
+  },
+  {
+    "name": "lv_calendar_get_showed_date",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_obj_has_style_prop",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_bar_get_start_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_drop_all",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_mem_test",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_set_digit_format",
+    "disposition": "MATCHED",
+    "size": 156
+  },
+  {
+    "name": "lv_display_set_render_mode",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_src_height",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_array_deinit",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_chart_add_cursor",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 156,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_pop",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_replace_style",
+    "disposition": "MATCHED",
+    "size": 216
+  },
+  {
+    "name": "lv_cache_reserve",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_delete_event",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_add_option",
+    "disposition": "MATCHED",
+    "size": 480
+  },
+  {
+    "name": "lv_obj_remove_event_dsc",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 112,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_style_copy",
+    "disposition": "MATCHED",
+    "size": 112
+  },
+  {
+    "name": "lv_chart_set_next_value",
+    "disposition": "ABSENT_LIKELY",
+    "size": 152,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_animimg_get_repeat_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_anim_count_running",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_image_get_transformed_height",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 124,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_group_set_wrap",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_sibling_by_type",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_fade_in",
+    "disposition": "ABSENT_LIKELY",
+    "size": 84,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_display_remove_event_cb_with_user_data",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 132,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_inc_ref",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_group_set_focus_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_spinbox_decrement",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 116,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_delete_char_forward",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_arc_set_bg_end_angle",
+    "disposition": "ABSENT_CHAIN",
+    "size": 336,
+    "evidence": [
+      "Callers are also unmatched/absent -> chain ABSENT"
+    ]
+  },
+  {
+    "name": "lv_roller_get_options",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 76,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_arc_dsc_init",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_textarea_set_password_show_time",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_set_ext_draw_size",
+    "disposition": "MATCHED",
+    "size": 34
+  },
+  {
+    "name": "lv_group_send_data",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_animimg_set_duration",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_obj_get_content_coords",
+    "disposition": "MATCHED",
+    "size": 300
+  },
+  {
+    "name": "lv_obj_set_y",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_obj_set_x",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_chart_get_point_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_set_bg_start_angle",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 336,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_dsc_get_user_data",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_alloc",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_group_get_editing",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_default",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_arc_get_bg_angle_start",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_refr_timer",
+    "disposition": "MATCHED",
+    "size": 1456
+  },
+  {
+    "name": "lv_chart_set_cursor_pos",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 140,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_check_type",
+    "disposition": "MATCHED",
+    "size": 14
+  },
+  {
+    "name": "lv_anim_delete",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 148,
+    "evidence": [
+      "Matched callers [u'lv_label_set_long_mode', u'lv_bar_set_value'], 148B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_get_size",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_timer_get_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_chart_set_cursor_point",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 188,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_get_series_x_array",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_get_cur_main_page",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_dropdown_get_options",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_init_draw_rect_dsc",
+    "disposition": "MATCHED",
+    "size": 1194
+  },
+  {
+    "name": "lv_dropdown_set_text",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_roller_get_selected_str",
+    "disposition": "MATCHED",
+    "size": 176
+  },
+  {
+    "name": "lv_spangroup_set_max_lines",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_set_info_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_chart_set_axis_range",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 112,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_insert_replace",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_display",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_dpx",
+    "disposition": "MATCHED",
+    "size": 48
+  },
+  {
+    "name": "lv_draw_add_task",
+    "disposition": "MATCHED",
+    "size": 212
+  },
+  {
+    "name": "lv_display_set_antialiasing",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_src_get_type",
+    "disposition": "MATCHED",
+    "size": 26
+  },
+  {
+    "name": "lv_image_decoder_init",
+    "disposition": "MATCHED",
+    "size": 36
+  },
+  {
+    "name": "lv_flex_init",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_iter_next",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 144,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_align",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_obj_remove_local_style_prop",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_roller_get_option_count",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_event_remove_dsc",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_draw_rect",
+    "disposition": "MATCHED",
+    "size": 1336
+  },
+  {
+    "name": "lv_spangroup_get_overflow",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_move_children_by",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_obj_set_grid_cell",
+    "disposition": "MATCHED",
+    "size": 94
+  },
+  {
+    "name": "lv_event_set_cover_res",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_set_delay",
+    "disposition": "MATCHED",
+    "size": 6
+  },
+  {
+    "name": "lv_array_push_back",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_obj_move_to_index",
+    "disposition": "MATCHED",
+    "size": 228
+  },
+  {
+    "name": "lv_tabview_rename_tab",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_remove_flag",
+    "disposition": "MATCHED",
+    "size": 176
+  },
+  {
+    "name": "lv_group_get_edge_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_arc_get_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_index",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_display_set_buffers_with_stride",
+    "disposition": "ABSENT_VERIFIED",
+    "size": 396,
+    "evidence": [
+      "No LVGL callers + strings [u'/Users/mojashi/repos/odd/lv_port_ambiq/LVGL/src/display/lv_display.c', "
+    ]
+  },
+  {
+    "name": "lv_chart_set_series_ext_y_array",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 140,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_bar_is_symmetrical",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_spangroup_set_span_text_static",
+    "disposition": "ABSENT_LIKELY",
+    "size": 74,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_image_set_pivot",
+    "disposition": "MATCHED",
+    "size": 336
+  },
+  {
+    "name": "lv_anim_is_paused",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_get_series_y_array",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_refresh",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_fs_is_ready",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_fs_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_inv_area",
+    "disposition": "MATCHED",
+    "size": 332
+  },
+  {
+    "name": "lv_cache_entry_get_data",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_chart_set_div_line_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_content_width",
+    "disposition": "MATCHED",
+    "size": 124
+  },
+  {
+    "name": "lv_obj_get_content_width",
+    "disposition": "MATCHED",
+    "size": 184
+  },
+  {
+    "name": "lv_obj_get_scrollbar_area",
+    "disposition": "MATCHED",
+    "size": 1996
+  },
+  {
+    "name": "lv_keyboard_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_label_ins_text",
+    "disposition": "MATCHED",
+    "size": 248
+  },
+  {
+    "name": "lv_tabview_get_content",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_scroll_left",
+    "disposition": "MATCHED",
+    "size": 332
+  },
+  {
+    "name": "lv_obj_refr_size",
+    "disposition": "MATCHED",
+    "size": 2036
+  },
+  {
+    "name": "lv_group_get_focused",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_dpi",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_draw_buf_size",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_font_set_kerning",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_span_stack_init",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_spangroup_set_span_text",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_menu_set_load_page_event",
+    "disposition": "MATCHED",
+    "size": 196
+  },
+  {
+    "name": "lv_group_focus_prev",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_anim_set_var",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_rotation",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_indent",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_invalidate_cache",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_fs_get_letters",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_display_set_tile_cnt",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_font_get_bitmap_fmt_txt",
+    "disposition": "MATCHED",
+    "size": 924
+  },
+  {
+    "name": "lv_obj_destruct",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B with matched callers: [u'obj_delete_core']"
+    ]
+  },
+  {
+    "name": "lv_obj_get_class",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_bar_get_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_border_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_fill_dsc_init",
+    "disposition": "INLINED_SMALL",
+    "size": 30,
+    "evidence": [
+      "30B with matched callers: [u'lv_draw_label_iterate_characters']"
+    ]
+  },
+  {
+    "name": "lv_fs_drv_register",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_obj_tree_walk",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_refresh_self_size",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 96,
+    "evidence": [
+      "Matched callers [u'lv_image_set_src'], 96B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_obj_style_create_transition",
+    "disposition": "MATCHED",
+    "size": 464
+  },
+  {
+    "name": "lv_bar_set_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_cursor_pos",
+    "disposition": "MATCHED",
+    "size": 324
+  },
+  {
+    "name": "lv_group_add_obj",
+    "disposition": "MATCHED",
+    "size": 148
+  },
+  {
+    "name": "lv_group_set_editing",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_spangroup_add_span",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 124,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_keyboard_get_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_add_flag",
+    "disposition": "MATCHED",
+    "size": 204
+  },
+  {
+    "name": "lv_dropdown_is_open",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_image_set_bitmap_map_src",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B with matched callers: [u'lv_menu_set_sidebar_page']"
+    ]
+  },
+  {
+    "name": "lv_anim_get_timer",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_set_one_checked",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 132,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_content_height",
+    "disposition": "MATCHED",
+    "size": 176
+  },
+  {
+    "name": "lv_dropdown_set_symbol",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_init_draw_image_dsc",
+    "disposition": "MATCHED",
+    "size": 292
+  },
+  {
+    "name": "lv_image_get_transformed_width",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 124,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_draw_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_text_get_width",
+    "disposition": "MATCHED",
+    "size": 110
+  },
+  {
+    "name": "lv_display_get_event_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_has_class",
+    "disposition": "MATCHED",
+    "size": 20
+  },
+  {
+    "name": "lv_spangroup_get_child",
+    "disposition": "MATCHED",
+    "size": 98
+  },
+  {
+    "name": "lv_group_remove_all_objs",
+    "disposition": "MATCHED",
+    "size": 132
+  },
+  {
+    "name": "lv_obj_enable_style_refresh",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_has_button_ctrl",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_timer_delete",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B with matched callers: [u'lv_display_delete', u'lv_display_delete_refr_timer']"
+    ]
+  },
+  {
+    "name": "lv_group_swap_obj",
+    "disposition": "MATCHED",
+    "size": 122
+  },
+  {
+    "name": "lv_bar_set_start_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 168,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_is_char_under_pos",
+    "disposition": "MATCHED",
+    "size": 588
+  },
+  {
+    "name": "lv_obj_class_create_obj",
+    "disposition": "MATCHED",
+    "size": 252
+  },
+  {
+    "name": "lv_obj_add_style",
+    "disposition": "MATCHED",
+    "size": 380
+  },
+  {
+    "name": "lv_textarea_get_one_line",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_chart_get_first_point_center_offset",
+    "disposition": "MATCHED",
+    "size": 90
+  },
+  {
+    "name": "lv_textarea_add_char",
+    "disposition": "MATCHED",
+    "size": 364
+  },
+  {
+    "name": "lv_draw_dispatch_layer",
+    "disposition": "MATCHED",
+    "size": 356
+  },
+  {
+    "name": "lv_anim_set_completed_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_array_shrink",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 112,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_clamp_height",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_timer_get_idle",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_update_snap",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_draw_buf_set_palette",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 76,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_get_sidebar_header",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_flex_grow",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B with matched callers: [u'lv_tabview_set_tab_bar_position']"
+    ]
+  },
+  {
+    "name": "lv_fs_seek",
+    "disposition": "MATCHED",
+    "size": 124
+  },
+  {
+    "name": "lv_obj_remove_event_cb",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_array_resize",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_animimg_set_completed_cb",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_tabview_add_tab",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 228,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_font_info_is_equal",
+    "disposition": "MATCHED",
+    "size": 148
+  },
+  {
+    "name": "lv_obj_set_grid_dsc_array",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_layer_top",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_get_step",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_set_long_mode",
+    "disposition": "MATCHED",
+    "size": 148
+  },
+  {
+    "name": "lv_text_cut",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_label_set_text_selection_start",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_realloc",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_label_set_text",
+    "disposition": "MATCHED",
+    "size": 284
+  },
+  {
+    "name": "lv_menu_set_mode_header",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 108,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_step_next",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_obj_class_init_obj",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 232,
+    "evidence": [
+      "Matched callers [u'lv_menu_set_sidebar_page', u'lv_obj_create'], 232B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_fs_open",
+    "disposition": "MATCHED",
+    "size": 248
+  },
+  {
+    "name": "lv_spinbox_set_cursor_pos",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 128,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_text",
+    "disposition": "MATCHED",
+    "size": 332
+  },
+  {
+    "name": "lv_menu_set_mode_root_back_button",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_init_draw_label_dsc",
+    "disposition": "ABSENT_CHAIN",
+    "size": 268,
+    "evidence": [
+      "Callers are also unmatched/absent -> chain ABSENT"
+    ]
+  },
+  {
+    "name": "lv_anim_set_duration",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_get_original_horizontal_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_style_prop",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_anim_set_exec_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_palette_darken",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_group_focus_next",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_group_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_layer_create",
+    "disposition": "MATCHED",
+    "size": 104
+  },
+  {
+    "name": "lv_font_get_default",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_set_repeat_delay",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_event_code_get_name",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_area_is_visible",
+    "disposition": "MATCHED",
+    "size": 294
+  },
+  {
+    "name": "lv_animimg_get_src",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_page_create",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_accepted_chars",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_obj_scrollbar_invalidate",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_image_set_inner_align",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 152,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_set_buffers",
+    "disposition": "ABSENT_VERIFIED",
+    "size": 532,
+    "evidence": [
+      "No LVGL callers + strings [u'stride != 0', u'/Users/mojashi/repos/odd/lv_port_ambiq/LVGL/src/display"
+    ]
+  },
+  {
+    "name": "lv_tabview_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_width_to_stride_ex",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_bar_set_range",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 188,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_tabview_get_tab_active",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_obj_get_event_dsc",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_buttonmatrix_set_selected_button",
+    "disposition": "ABSENT_LIKELY",
+    "size": 176,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_menu_get_sidebar_header_back_button",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_set_type",
+    "disposition": "MATCHED",
+    "size": 232
+  },
+  {
+    "name": "lv_rb_remove_node",
+    "disposition": "MATCHED",
+    "size": 284
+  },
+  {
+    "name": "lv_obj_reset_transform",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 2,
+    "evidence": [
+      "2B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_keyboard_set_map",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_roller_set_selected_str",
+    "disposition": "MATCHED",
+    "size": 156
+  },
+  {
+    "name": "lv_obj_add_state",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_roller_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_scrollbar_mode",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_obj_style_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_menu_set_page_title_static",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_obj_update_layout",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_obj_set_flag",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_menu_clear_history",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_obj_set_scroll_dir",
+    "disposition": "MATCHED",
+    "size": 38
+  },
+  {
+    "name": "lv_image_decoder_delete",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_sibling",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_anim_speed_to_time",
+    "disposition": "MATCHED",
+    "size": 28
+  },
+  {
+    "name": "lv_display_get_offset_y",
+    "disposition": "ABSENT_LIKELY",
+    "size": 72,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_rb_maximum",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_group_delete",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 212,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_invalidate",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_display_get_screen_active",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_anim_pause_for",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_create",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_display_get_offset_x",
+    "disposition": "ABSENT_LIKELY",
+    "size": 72,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_draw_dispatch_request",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_tabview_get_tab_bar",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_animimg_start",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_dropdown_set_dir",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_align_obj_to_angle",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 208,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_set_free_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_core_deinit",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_arc_set_rotation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 88,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_inactive_time",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_chart_set_next_value2",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 172,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_box_shadow",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_animimg_set_reverse_duration",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_get_value",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_spinbox_set_digit_step_direction",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_send",
+    "disposition": "MATCHED",
+    "size": 254
+  },
+  {
+    "name": "lv_draw_task_get_mask_rect_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_bar_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_get_list",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_unit_draw_letter",
+    "disposition": "MATCHED",
+    "size": 456
+  },
+  {
+    "name": "lv_fs_up",
+    "disposition": "ABSENT_LIKELY",
+    "size": 88,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_calendar_set_day_names",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_refr_pos",
+    "disposition": "MATCHED",
+    "size": 20
+  },
+  {
+    "name": "lv_obj_style_state_compare",
+    "disposition": "MATCHED",
+    "size": 596
+  },
+  {
+    "name": "lv_animimg_delete",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_set_angles",
+    "disposition": "MATCHED",
+    "size": 42
+  },
+  {
+    "name": "lv_obj_send_event",
+    "disposition": "MATCHED",
+    "size": 236
+  },
+  {
+    "name": "lv_draw_label_dsc_init",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_image_decoder_close",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_dropdown_set_options_static",
+    "disposition": "MATCHED",
+    "size": 196
+  },
+  {
+    "name": "lv_spangroup_get_expand_height",
+    "disposition": "MATCHED",
+    "size": 1024
+  },
+  {
+    "name": "lv_chart_set_update_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_get_long_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spangroup_set_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 224,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_clear_options",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 120,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_calendar_set_month_shown",
+    "disposition": "ABSENT_CHAIN",
+    "size": 472,
+    "evidence": [
+      "Callers are also unmatched/absent -> chain ABSENT"
+    ]
+  },
+  {
+    "name": "lv_draw_get_unit_count",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_password_show_time",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_arc",
+    "disposition": "MATCHED",
+    "size": 122
+  },
+  {
+    "name": "lv_display_get_matrix_rotation",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_set_blend_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_hide_series",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 116,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_param",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_transform_point_array",
+    "disposition": "MATCHED",
+    "size": 118
+  },
+  {
+    "name": "lv_chart_get_series_color",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 128,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_keyboard_get_textarea",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_refresh_style",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_keyboard_set_popovers",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_arc_set_end_angle",
+    "disposition": "MATCHED",
+    "size": 296
+  },
+  {
+    "name": "lv_textarea_add_text",
+    "disposition": "MATCHED",
+    "size": 352
+  },
+  {
+    "name": "lv_anim_set_start_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_screen_load_anim",
+    "disposition": "MATCHED",
+    "size": 1072
+  },
+  {
+    "name": "lv_event_register_id",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_style_reset",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_image_get_scale_x",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_scale_y",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_set_value",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_obj_set_size",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_event_get_current_target_obj",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_array_erase",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_image_decoder_get_area",
+    "disposition": "MATCHED",
+    "size": 34
+  },
+  {
+    "name": "lv_draw_image_tiled_helper",
+    "disposition": "MATCHED",
+    "size": 292
+  },
+  {
+    "name": "lv_timer_handler",
+    "disposition": "MATCHED",
+    "size": 36
+  },
+  {
+    "name": "lv_obj_is_layout_positioned",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_cache_get_name",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_keyboard_get_button_text",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_start",
+    "disposition": "MATCHED",
+    "size": 256
+  },
+  {
+    "name": "lv_event_push",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_cache_acquire_or_create",
+    "disposition": "MATCHED",
+    "size": 240
+  },
+  {
+    "name": "lv_obj_fade_out",
+    "disposition": "ABSENT_LIKELY",
+    "size": 84,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_anim_set_reverse_time",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_line_dsc_init",
+    "disposition": "ABSENT_LIKELY",
+    "size": 52,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_chart_set_series_values2",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_display_create",
+    "disposition": "MATCHED",
+    "size": 596
+  },
+  {
+    "name": "lv_layer_reset",
+    "disposition": "MATCHED",
+    "size": 112
+  },
+  {
+    "name": "lv_anim_speed_clamped",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_cache_destroy",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_textarea_set_placeholder_text",
+    "disposition": "MATCHED",
+    "size": 196
+  },
+  {
+    "name": "lv_image_set_src",
+    "disposition": "MATCHED",
+    "size": 492
+  },
+  {
+    "name": "lv_anim_set_values",
+    "disposition": "MATCHED",
+    "size": 12
+  },
+  {
+    "name": "lv_textarea_get_placeholder_text",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_array_init_from_buf",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_arc_get_knob_offset",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_obj_has_flag",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_obj_get_self_width",
+    "disposition": "MATCHED",
+    "size": 32
+  },
+  {
+    "name": "lv_image_buf_get_transformed_area",
+    "disposition": "MATCHED",
+    "size": 270
+  },
+  {
+    "name": "lv_cache_entry_set_invalid",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_event_get_count",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_calendar_get_highlighted_dates",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_dispatch_wait_for_request",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_set_open_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_fs_make_path_from_buffer",
+    "disposition": "MATCHED",
+    "size": 26
+  },
+  {
+    "name": "lv_draw_buf_align",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_indev",
+    "disposition": "MATCHED",
+    "size": 28
+  },
+  {
+    "name": "lv_font_get_line_height",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_is_invalidation_enabled",
+    "disposition": "MATCHED",
+    "size": 32
+  },
+  {
+    "name": "lv_text_get_size",
+    "disposition": "MATCHED",
+    "size": 220
+  },
+  {
+    "name": "lv_draw_image_dsc_init",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_anim_custom_delete",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_mark_layout_as_dirty",
+    "disposition": "MATCHED",
+    "size": 46
+  },
+  {
+    "name": "lv_draw_box_shadow_dsc_init",
+    "disposition": "INLINED_SMALL",
+    "size": 30,
+    "evidence": [
+      "30B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_timer_enable",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_timer_reset",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_chart_remove_series",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 168,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_refresh_ext_draw_size",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_buttonmatrix_set_button_width",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_accepted_chars",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_get_next_available_task",
+    "disposition": "MATCHED",
+    "size": 164
+  },
+  {
+    "name": "lv_anim_set_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_path_custom_bezier3",
+    "disposition": "ABSENT_LIKELY",
+    "size": 72,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_textarea_clear_selection",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_cache_entry_reset_ref",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_flush_is_last",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_character",
+    "disposition": "MATCHED",
+    "size": 228
+  },
+  {
+    "name": "lv_timer_set_auto_delete",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_child_by_type",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_tabview_get_tab_count",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_anim_set_bezier3_param",
+    "disposition": "MATCHED",
+    "size": 40
+  },
+  {
+    "name": "lv_obj_init_draw_line_dsc",
+    "disposition": "ABSENT_CHAIN",
+    "size": 268,
+    "evidence": [
+      "Callers are also unmatched/absent -> chain ABSENT"
+    ]
+  },
+  {
+    "name": "lv_display_set_driver_data",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_task_get_box_shadow_dsc",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_switch_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_set_get_area_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_fs_get_ext",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 56,
+    "evidence": [
+      "Matched callers [u'lv_bin_decoder_open'], 56B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_refr_get_disp_refreshing",
+    "disposition": "MATCHED",
+    "size": 12
+  },
+  {
+    "name": "lv_draw_buf_get_font_handlers",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_state",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_cache_acquire",
+    "disposition": "MATCHED",
+    "size": 160
+  },
+  {
+    "name": "lv_obj_get_user_data",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_rb_init",
+    "disposition": "MATCHED",
+    "size": 148
+  },
+  {
+    "name": "lv_dropdown_get_selected",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_ext_draw_size",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_style_register_prop",
+    "disposition": "MATCHED",
+    "size": 164
+  },
+  {
+    "name": "lv_textarea_cursor_down",
+    "disposition": "MATCHED",
+    "size": 168
+  },
+  {
+    "name": "lv_dropdown_get_symbol",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_span_set_text_static",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_draw_dispatch",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_calendar_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_menu_get_main_header_back_button",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_group_deinit",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_image_decoder_add_to_cache",
+    "disposition": "MATCHED",
+    "size": 80
+  },
+  {
+    "name": "lv_calendar_get_highlighted_dates_num",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_by",
+    "disposition": "MATCHED",
+    "size": 336
+  },
+  {
+    "name": "lv_textarea_get_password_bullet",
+    "disposition": "MATCHED",
+    "size": 116
+  },
+  {
+    "name": "lv_obj_calculate_style_text_align",
+    "disposition": "MATCHED",
+    "size": 38
+  },
+  {
+    "name": "lv_obj_get_event_count",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_spangroup_set_indent",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_set_flush_wait_cb",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_local_style_prop",
+    "disposition": "MATCHED",
+    "size": 66
+  },
+  {
+    "name": "lv_buttonmatrix_get_selected_button",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_event_get_scroll_anim",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_height",
+    "disposition": "MATCHED",
+    "size": 96
+  },
+  {
+    "name": "lv_group_get_default",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_style_apply_color_filter",
+    "disposition": "MATCHED",
+    "size": 8
+  },
+  {
+    "name": "lv_obj_hit_test",
+    "disposition": "MATCHED",
+    "size": 102
+  },
+  {
+    "name": "lv_grid_fr",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_flush_cb",
+    "disposition": "MATCHED",
+    "size": 20
+  },
+  {
+    "name": "lv_animimg_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_password_mode",
+    "disposition": "MATCHED",
+    "size": 236
+  },
+  {
+    "name": "lv_buttonmatrix_set_map",
+    "disposition": "MATCHED",
+    "size": 340
+  },
+  {
+    "name": "lv_event_get_invalidated_area",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_width_to_stride",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B with matched callers: [u'lv_display_refr_timer', u'lv_draw_layer_alloc_buf', u'lv_image_decoder_"
+    ]
+  },
+  {
+    "name": "lv_timer_get_paused",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_get_layer_sys",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_layer_bottom",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_animimg_get_anim",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_textarea_get_password_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_self_size_info",
+    "disposition": "INLINED_SMALL",
+    "size": 14,
+    "evidence": [
+      "14B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_acquire_data",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_style_prop_lookup_flags",
+    "disposition": "MATCHED",
+    "size": 56
+  },
+  {
+    "name": "lv_arc_set_range",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_label_cut_text",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 116,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_group_get_obj_by_index",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_menu_cont_create",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_allocate_spec_attr",
+    "disposition": "MATCHED",
+    "size": 136
+  },
+  {
+    "name": "lv_obj_update_layer_type",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 216,
+    "evidence": [
+      "Matched callers [u'lv_obj_refresh_style'], 216B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_dropdown_set_selected_highlight",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 84,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_rotation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_anim_get_time",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_has_flag_any",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_draw_buf_destroy",
+    "disposition": "MATCHED",
+    "size": 160
+  },
+  {
+    "name": "lv_display_get_next",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B with matched callers: [u'lv_draw_dispatch', u'lv_obj_dump_tree', u'lv_refr_now']"
+    ]
+  },
+  {
+    "name": "lv_cache_get_max_size",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_to_image",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_get_button_text",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_refr_now",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_fs_write",
+    "disposition": "MATCHED",
+    "size": 258
+  },
+  {
+    "name": "lv_textarea_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_event_get_dsc",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_bar_set_orientation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_keyboard_set_textarea",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_span_set_text",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_fs_dir_read",
+    "disposition": "MATCHED",
+    "size": 54
+  },
+  {
+    "name": "lv_anim_path_ease_out",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_draw_finalize_task_creation",
+    "disposition": "MATCHED",
+    "size": 156
+  },
+  {
+    "name": "lv_timer_get_time_until_next",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_create_unit",
+    "disposition": "MATCHED",
+    "size": 88
+  },
+  {
+    "name": "lv_label_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B with matched callers: [u'lv_menu_set_sidebar_page']"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_span_coords",
+    "disposition": "MATCHED",
+    "size": 190
+  },
+  {
+    "name": "lv_roller_get_selected",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 92,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_arc_get_max_value",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_text_is_selected",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 104,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_invalidated_draw_buf_size",
+    "disposition": "MATCHED",
+    "size": 200
+  },
+  {
+    "name": "lv_iter_create",
+    "disposition": "MATCHED",
+    "size": 144
+  },
+  {
+    "name": "lv_obj_set_align",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_draw_init",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_rb_maximum_from",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_get_style_recolor_recursive",
+    "disposition": "ABSENT_LIKELY",
+    "size": 84,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_draw_image",
+    "disposition": "MATCHED",
+    "size": 536
+  },
+  {
+    "name": "lv_obj_get_scroll_y",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_chart_get_type",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_scroll_x",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_rb_find",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_event_get_target",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_timer_resume",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_animimg_set_src_reverse",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 80,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_image_get_src",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_array_assign",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 96,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_get_one_checked",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_back_button_is_root",
+    "disposition": "MATCHED",
+    "size": 92
+  },
+  {
+    "name": "lv_draw_layer_alloc_buf",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_anim_resolve_speed",
+    "disposition": "MATCHED",
+    "size": 66
+  },
+  {
+    "name": "lv_draw_buf_reshape",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 80,
+    "evidence": [
+      "Matched callers [u'lv_draw_unit_draw_letter', u'lv_bin_decoder_get_area'], 80B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_timer_periodic_handler",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_animimg_set_reverse_delay",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_dropdown_set_options",
+    "disposition": "MATCHED",
+    "size": 272
+  },
+  {
+    "name": "lv_style_get_num_custom_props",
+    "disposition": "MATCHED",
+    "size": 16
+  },
+  {
+    "name": "lv_iter_inspect",
+    "disposition": "MATCHED",
+    "size": 192
+  },
+  {
+    "name": "lv_text_ins",
+    "disposition": "MATCHED",
+    "size": 132
+  },
+  {
+    "name": "lv_obj_remove_style_all",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_event_get_key",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_display_set_physical_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 32,
+    "evidence": [
+      "32B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_init_with_default_handlers",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_obj_get_child_count_by_type",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_obj_set_content_height",
+    "disposition": "MATCHED",
+    "size": 124
+  },
+  {
+    "name": "lv_obj_get_scroll_top",
+    "disposition": "MATCHED",
+    "size": 10
+  },
+  {
+    "name": "lv_obj_style_deinit",
+    "disposition": "MATCHED",
+    "size": 36
+  },
+  {
+    "name": "lv_obj_set_transform",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 2,
+    "evidence": [
+      "2B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_refr_set_disp_refreshing",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_cache_is_enabled",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_is_editable",
+    "disposition": "INLINED_SMALL",
+    "size": 34,
+    "evidence": [
+      "34B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_chart_set_cursor_pos_x",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 120,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_menu_set_page",
+    "disposition": "MATCHED",
+    "size": 300
+  },
+  {
+    "name": "lv_draw_buf_has_flag",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_cache_add",
+    "disposition": "MATCHED",
+    "size": 152
+  },
+  {
+    "name": "lv_chart_set_cursor_pos_y",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 120,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_init",
+    "disposition": "MATCHED",
+    "size": 184
+  },
+  {
+    "name": "lv_display_get_driver_data",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_set_repeat_count",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_group_create",
+    "disposition": "MATCHED",
+    "size": 104
+  },
+  {
+    "name": "lv_roller_set_options",
+    "disposition": "MATCHED",
+    "size": 100
+  },
+  {
+    "name": "lv_anim_get",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 52,
+    "evidence": [
+      "Matched callers [u'lv_obj_is_scrolling', u'lv_obj_get_scroll_end'], 52B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_event_stop_processing",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 10,
+    "evidence": [
+      "10B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_obj_add_event_cb",
+    "disposition": "MATCHED",
+    "size": 88
+  },
+  {
+    "name": "lv_textarea_set_password_bullet",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 188,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_set_state",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 84,
+    "evidence": [
+      "Matched callers [u'lv_tabview_set_active'], 84B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_draw_fill",
+    "disposition": "ABSENT_LIKELY",
+    "size": 56,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_buttonmatrix_clear_button_ctrl",
+    "disposition": "MATCHED",
+    "size": 120
+  },
+  {
+    "name": "lv_bar_get_orientation",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_cursor_click_pos",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_height",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_dropdown_get_dir",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_color_format",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_get_rollover",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_child",
+    "disposition": "MATCHED",
+    "size": 88
+  },
+  {
+    "name": "lv_style_remove_prop",
+    "disposition": "MATCHED",
+    "size": 164
+  },
+  {
+    "name": "lv_obj_get_y_aligned",
+    "disposition": "INLINED_SMALL",
+    "size": 16,
+    "evidence": [
+      "16B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_obj_get_scroll_right",
+    "disposition": "MATCHED",
+    "size": 316
+  },
+  {
+    "name": "lv_group_set_edge_cb",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_calloc",
+    "disposition": "MATCHED",
+    "size": 52
+  },
+  {
+    "name": "lv_obj_align_to",
+    "disposition": "MATCHED",
+    "size": 1454
+  },
+  {
+    "name": "lv_spinbox_set_step",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_has_state",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_chart_get_pressed_point",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_dropdown_get_selected_str",
+    "disposition": "MATCHED",
+    "size": 180
+  },
+  {
+    "name": "lv_display_delete",
+    "disposition": "MATCHED",
+    "size": 260
+  },
+  {
+    "name": "lv_timer_set_user_data",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spinbox_increment",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 116,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_to_x",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 48,
+    "evidence": [
+      "Matched callers [u'lv_textarea_set_cursor_pos', u'lv_tabview_set_active'], 48B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_image_get_blend_mode",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 68,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_scroll_to_y",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 48,
+    "evidence": [
+      "Matched callers [u'lv_textarea_set_cursor_pos', u'lv_tabview_set_active'], 48B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_max_line_height",
+    "disposition": "MATCHED",
+    "size": 132
+  },
+  {
+    "name": "lv_obj_get_self_height",
+    "disposition": "MATCHED",
+    "size": 32
+  },
+  {
+    "name": "lv_image_decoder_set_close_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_rb_drop",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_display_set_draw_buffers",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_anim_set_deleted_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_get_refr_timer",
+    "disposition": "INLINED_SMALL",
+    "size": 24,
+    "evidence": [
+      "24B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_display_send_event",
+    "disposition": "MATCHED",
+    "size": 64
+  },
+  {
+    "name": "lv_display_get_default",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_textarea_get_text",
+    "disposition": "MATCHED",
+    "size": 76
+  },
+  {
+    "name": "lv_obj_get_scroll_end",
+    "disposition": "MATCHED",
+    "size": 84
+  },
+  {
+    "name": "lv_obj_delete_async",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_dropdown_get_option_count",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_mark_deleted",
+    "disposition": "MATCHED",
+    "size": 44
+  },
+  {
+    "name": "lv_arc_set_bg_angles",
+    "disposition": "ABSENT_LIKELY",
+    "size": 42,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_draw_buf_set_flag",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 8,
+    "evidence": [
+      "8B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_anim_set_path_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_iter_peek_advance",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_event_remove_all",
+    "disposition": "MATCHED",
+    "size": 124
+  },
+  {
+    "name": "lv_menu_create",
+    "disposition": "INLINED_SMALL",
+    "size": 28,
+    "evidence": [
+      "28B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_draw_get_available_task",
+    "disposition": "MATCHED",
+    "size": 36
+  },
+  {
+    "name": "lv_arc_get_angle_start",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_init",
+    "disposition": "MATCHED",
+    "size": 108
+  },
+  {
+    "name": "lv_event_dsc_get_cb",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 60,
+    "evidence": [
+      "Matched callers [u'lv_menu_set_load_page_event'], 60B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_style_is_empty",
+    "disposition": "MATCHED",
+    "size": 10
+  },
+  {
+    "name": "lv_timer_pause",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_bar_get_mode",
+    "disposition": "MATCHED",
+    "size": 68
+  },
+  {
+    "name": "lv_draw_buf_create_ex",
+    "disposition": "MATCHED",
+    "size": 212
+  },
+  {
+    "name": "lv_obj_scroll_by_bounded",
+    "disposition": "INLINED_INTO_CALLER",
+    "size": 220,
+    "evidence": [
+      "Matched callers [u'lv_obj_scroll_to'], 220B, likely inlined"
+    ]
+  },
+  {
+    "name": "lv_dropdown_get_option_index",
+    "disposition": "MATCHED",
+    "size": 204
+  },
+  {
+    "name": "lv_obj_is_valid",
+    "disposition": "ABSENT_LIKELY",
+    "size": 78,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_iter_peek_reset",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_display_get_screen_prev",
+    "disposition": "MATCHED",
+    "size": 24
+  },
+  {
+    "name": "lv_cache_set_compare_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 4,
+    "evidence": [
+      "4B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_textarea_set_cursor_click_pos",
+    "disposition": "ABSENT_LIKELY",
+    "size": 72,
+    "evidence": [
+      "Reclassified: no callers, insufficient evidence, likely unused API"
+    ]
+  },
+  {
+    "name": "lv_free",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B with matched callers: [u'lv_display_refr_timer', u'lv_style_copy', u'lv_label_set_text_static']"
+    ]
+  },
+  {
+    "name": "lv_group_get_focus_cb",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 6,
+    "evidence": [
+      "6B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  },
+  {
+    "name": "lv_display_set_3rd_draw_buffer",
+    "disposition": "MATCHED",
+    "size": 128
+  },
+  {
+    "name": "lv_screen_load",
+    "disposition": "INLINED_SMALL",
+    "size": 20,
+    "evidence": [
+      "20B: small enough for IAR inlining, no matched callers"
+    ]
+  },
+  {
+    "name": "lv_calendar_get_btnmatrix",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 60,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_cache_entry_get_ref",
+    "disposition": "MATCHED",
+    "size": 60
+  },
+  {
+    "name": "lv_label_get_letter_pos",
+    "disposition": "MATCHED",
+    "size": 508
+  },
+  {
+    "name": "lv_spinbox_step_prev",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 100,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_display_get_vertical_resolution",
+    "disposition": "INLINED_SMALL",
+    "size": 36,
+    "evidence": [
+      "36B with matched callers: [u'lv_display_refr_timer', u'lv_obj_scroll_by', u'lv_obj_class_create_obj'"
+    ]
+  },
+  {
+    "name": "lv_anim_path_overshoot",
+    "disposition": "ABSENT_LIKELY",
+    "size": 66,
+    "evidence": [
+      "No LVGL callers, no unique constants/strings to verify"
+    ]
+  },
+  {
+    "name": "lv_cache_iter_create",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 72,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_spangroup_get_max_lines",
+    "disposition": "ABSENT_GENERIC_STRINGS",
+    "size": 64,
+    "evidence": [
+      "Reclassified: only generic assert strings in FW, no unique constants, no LVGL callers"
+    ]
+  },
+  {
+    "name": "lv_obj_style_apply_recolor",
+    "disposition": "MATCHED",
+    "size": 72
+  },
+  {
+    "name": "lv_rb_minimum_from",
+    "disposition": "INLINED_TRIVIAL",
+    "size": 12,
+    "evidence": [
+      "12B: 1-3 instructions, always inlined by optimizing compiler"
+    ]
+  }
+]

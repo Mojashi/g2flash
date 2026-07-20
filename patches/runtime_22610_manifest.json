@@ -1,0 +1,35 @@
+{
+  "src": "g2_2.2.6.10.bin",
+  "dst": "rebuild.bin",
+  "src_len": 4301227,
+  "dst_len": 4303471,
+  "comp_off": 777703,
+  "idx": 5,
+  "old_ps": 3523396,
+  "new_ps": 3525640,
+  "blob_len": 2244,
+  "blob_off": 3523396,
+  "blob_file": 4301227,
+  "blob_mram": 7947044,
+  "blob_ghidra": 8095786,
+  "prog_end": 7949288,
+  "hook_a": {
+    "file": 918951,
+    "old": "e7f700ff",
+    "new": "39f300fe",
+    "site_ghidra": 4713510,
+    "target_ghidra": 8095786
+  },
+  "hook_b": {
+    "file": 822285,
+    "old": "f8b58ab0",
+    "new": "51f3c2be",
+    "site_ghidra": 4616844,
+    "target_ghidra": 8097812
+  },
+  "meta_edits": {
+    "subheader_ps_off": 777711,
+    "toc_size_off": 152,
+    "preamble_len_off": 777831
+  }
+}

@@ -1,0 +1,1347 @@
+// Auto-extracted nanopb schema from g2_2.2.4.34.bin (structure only; names known where noted)
+// 244 messages, 856 fields, 34 roots (16 oneof-envelopes)
+
+message M_770d18 {   // @0x00770d18  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_770df0 field3 = 3;
+  oneof M_770d90 field4 = 4;
+  oneof M_770d78 field5 = 5;
+  oneof M_770da8 field6 = 6;
+  oneof M_770e08 field7 = 7;
+  oneof M_770e20 field8 = 8;
+  oneof M_770e38 field9 = 9;
+  oneof M_770e68 field10 = 10;
+  oneof M_770e80 field11 = 11;
+  oneof M_770e50 field12 = 12;
+  oneof M_770dd8 field13 = 13;
+}
+message M_771300 {   // @0x00771300  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_7714e0 field3 = 3;
+  oneof M_7714f8 field4 = 4;
+  oneof M_771540 field5 = 5;
+  oneof M_771558 field6 = 6;
+  oneof M_7711f8 field7 = 7;
+  oneof M_771210 field8 = 8;
+  oneof M_771228 field9 = 9;
+  oneof M_771240 field10 = 10;
+  oneof M_771258 field11 = 11;
+  oneof M_771288 field12 = 12;
+  oneof M_7712a0 field13 = 13;
+  oneof M_7712b8 field14 = 14;
+  oneof M_7712d0 field15 = 15;
+  oneof M_7712e8 field16 = 16;
+}
+message M_771750 {   // @0x00771750  ROOT
+  oneof M_7716d8 field1 = 1;
+  oneof M_771708 field2 = 2;
+  oneof M_771720 field3 = 3;
+  oneof M_771738 field4 = 4;
+}
+message M_771858 {   // @0x00771858  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_771780 field3 = 3;
+  oneof M_7717b0 field4 = 4;
+  oneof M_7717c8 field5 = 5;
+  oneof M_7717e0 field6 = 6;
+  oneof M_7717f8 field7 = 7;
+  oneof M_771810 field8 = 8;
+  oneof M_771828 field9 = 9;
+  oneof M_771840 field10 = 10;
+}
+message M_7718e8 {   // @0x007718e8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771900 {   // @0x00771900  ROOT
+  repeated M_771918 field1 = 1;  // array[8]
+  uint32 field2 = 2;
+}
+message M_7719a8 {   // @0x007719a8  ROOT
+  bool field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_7719c0 {   // @0x007719c0  ROOT
+  bool field1 = 1;
+  string_or_bytes field2 = 2;
+  string_or_bytes field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_7719f0 {   // @0x007719f0  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  bool field4 = 4;
+  uint32 field5 = 5;
+}
+message M_771a08 {   // @0x00771a08  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771a20 {   // @0x00771a20  ROOT
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771a38 {   // @0x00771a38  ROOT
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771a50 {   // @0x00771a50  ROOT
+  uint32 field1 = 1;
+}
+message M_771a68 {   // @0x00771a68  ROOT
+  uint32 field1 = 1;
+}
+message M_771a80 {   // @0x00771a80  ROOT
+  uint32 field1 = 1;
+}
+message M_771a98 {   // @0x00771a98  ROOT
+  uint32 field1 = 1;
+  int32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771ab0 {   // @0x00771ab0  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_772398 {   // @0x00772398  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_7723b0 field3 = 3;
+  oneof M_7723c8 field4 = 4;
+  oneof M_7723e0 field5 = 5;
+  oneof M_7723f8 field6 = 6;
+  oneof M_772410 field7 = 7;
+  oneof M_772428 field8 = 8;
+  oneof M_772440 field9 = 9;
+  oneof M_772458 field10 = 10;
+  oneof M_772470 field11 = 11;
+  oneof M_772488 field12 = 12;
+  oneof M_7724a0 field13 = 13;
+}
+message M_7727a0 {   // @0x007727a0  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_772608 field3 = 3;
+  oneof M_772620 field4 = 4;
+  oneof M_7725c0 field5 = 5;
+  oneof M_7725d8 field6 = 6;
+  oneof M_772638 field7 = 7;
+  oneof M_772650 field8 = 8;
+  oneof M_772578 field9 = 9;
+  oneof M_772590 field10 = 10;
+  oneof M_772668 field11 = 11;
+  oneof M_772680 field12 = 12;
+  oneof M_772530 field13 = 13;
+  oneof M_7726c8 field14 = 14;
+  oneof M_7726e0 field15 = 15;
+  oneof M_7726b0 field16 = 16;
+  oneof M_7726f8 field17 = 17;
+  oneof M_772710 field18 = 18;
+  oneof M_772728 field19 = 19;
+  oneof M_772740 field20 = 20;
+  oneof M_772758 field21 = 21;
+  oneof M_772770 field22 = 22;
+  oneof M_772788 field23 = 23;
+}
+message M_772980 {   // @0x00772980  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_772a58 field3 = 3;
+  oneof M_772a70 field4 = 4;
+  oneof M_772a88 field5 = 5;
+  oneof M_772b18 field6 = 6;
+  oneof M_772b30 field7 = 7;
+}
+message M_772b90 {   // @0x00772b90  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_772bc0 field3 = 3;
+}
+message M_772c80 {   // @0x00772c80  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_772c98 field3 = 3;
+  oneof M_772cb0 field4 = 4;
+  oneof M_772cc8 field5 = 5;
+  oneof M_772ce0 field6 = 6;
+}
+message M_773010 {   // @0x00773010  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof uint32 field3 = 3;
+  oneof M_772ff8 field4 = 4;
+  oneof bytes field5 = 5;
+  oneof M_772fc8 field6 = 6;
+  oneof M_772fe0 field7 = 7;
+}
+message M_7748e8 {   // @0x007748e8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_7748b8 field3 = 3;
+  oneof M_7748d0 field4 = 4;
+}
+message M_7749f0 {   // @0x007749f0  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_7749c0 field3 = 3;
+  oneof M_7749d8 field4 = 4;
+}
+message M_774af8 {   // @0x00774af8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_774ab0 field3 = 3;
+  oneof M_774a20 field4 = 4;
+  oneof M_774a68 field5 = 5;
+  oneof M_774a80 field6 = 6;
+  oneof M_774a98 field7 = 7;
+  oneof M_774a50 field8 = 8;
+  oneof M_774ac8 field9 = 9;
+  oneof M_774ae0 field10 = 10;
+}
+message M_774c30 {   // @0x00774c30  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_774c60 field3 = 3;
+  oneof M_774c90 field4 = 4;
+  oneof M_774ca8 field5 = 5;
+  oneof M_774cc0 field6 = 6;
+}
+message M_774eb8 {   // @0x00774eb8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_774ed0 field3 = 3;
+  oneof M_774ee8 field4 = 4;
+  oneof M_774f00 field5 = 5;
+}
+message M_7761a8 {   // @0x007761a8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_7761c0 field3 = 3;
+  oneof M_7761d8 field4 = 4;
+  oneof M_7761f0 field5 = 5;
+}
+message M_776268 {   // @0x00776268  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_776298 field3 = 3;
+  oneof M_7762b0 field4 = 4;
+}
+message M_7773d8 {   // @0x007773d8  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  M_7773c0 field3 = 3;
+}
+message M_777510 {   // @0x00777510  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_777558 field3 = 3;
+  oneof M_777570 field4 = 4;
+  oneof M_777588 field5 = 5;
+  oneof M_7775a0 field6 = 6;
+  oneof M_7775b8 field7 = 7;
+  oneof M_7775d0 field8 = 8;
+  oneof M_7775e8 field9 = 9;
+  oneof M_777600 field10 = 10;
+  oneof M_777630 field11 = 11;
+  oneof M_777618 field12 = 12;
+  oneof M_777648 field13 = 13;
+}
+message TerminalEnvelope {   // @0x00777840  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof Terminal_mode_sync field3 = 3;
+  oneof Terminal_host_status field4 = 4;
+  oneof Terminal_asr_result field5 = 5;
+  oneof Terminal_session_status field6 = 6;
+  oneof Terminal_agent_content field7 = 7;
+  oneof Terminal_query field8 = 8;
+  oneof M_777990 field9 = 9;
+  oneof M_7779a8 field10 = 10;
+  oneof M_7779c0 field11 = 11;
+  oneof M_7779d8 field12 = 12;
+  oneof M_777a80 field13 = 13;
+  oneof Terminal_reset field14 = 14;
+  oneof Terminal_error_or_switch_or_new_result field15 = 15;
+  oneof Terminal_session_list field16 = 16;
+  oneof Terminal_error_or_switch_or_new_result field17 = 17;
+  oneof M_7779f0 field18 = 18;
+  oneof M_777a08 field19 = 19;
+  oneof M_777a38 field20 = 20;
+  oneof Terminal_session_id_changed field21 = 21;
+  oneof M_777a20 field22 = 22;
+  oneof Terminal_error_or_switch_or_new_result field23 = 23;
+  oneof M_777a50 field24 = 24;
+  oneof M_777a68 field25 = 25;
+}
+message M_777fc0 {   // @0x00777fc0  ROOT
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  oneof M_778038 field3 = 3;
+  oneof M_778050 field4 = 4;
+  oneof M_777fd8 field5 = 5;
+  oneof M_777ff0 field6 = 6;
+  oneof M_778008 field7 = 7;
+  oneof M_778068 field8 = 8;
+}
+message M_770d48 {   // @0x00770d48  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_770d60 {   // @0x00770d60  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+}
+message M_770d78 {   // @0x00770d78  
+  repeated M_770d60 field1 = 1;  // array[20]
+  uint32 field2 = 2;
+}
+message M_770d90 {   // @0x00770d90  
+}
+message M_770da8 {   // @0x00770da8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_770dc0 {   // @0x00770dc0  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+}
+message M_770dd8 {   // @0x00770dd8  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+}
+message M_770df0 {   // @0x00770df0  
+  uint32 field1 = 1;
+  M_770d48 field2 = 2;
+  M_770dc0 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_770e08 {   // @0x00770e08  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  string_or_bytes field3 = 3;
+  uint32 field4 = 4;
+}
+message M_770e20 {   // @0x00770e20  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+}
+message M_770e38 {   // @0x00770e38  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_770e50 {   // @0x00770e50  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_770e68 {   // @0x00770e68  
+  uint32 field1 = 1;
+}
+message M_770e80 {   // @0x00770e80  
+}
+message M_7711f8 {   // @0x007711f8  
+  uint32 field1 = 1;
+}
+message M_771210 {   // @0x00771210  
+  uint32 field1 = 1;
+}
+message M_771228 {   // @0x00771228  
+  uint32 field1 = 1;
+}
+message M_771240 {   // @0x00771240  
+  uint32 field1 = 1;
+  repeated uint32 field2 = 2;  // array[10]
+}
+message M_771258 {   // @0x00771258  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  bytes field6 = 6;
+  uint32 field7 = 7;
+  bytes field8 = 8;
+  bytes field9 = 9;
+}
+message M_771288 {   // @0x00771288  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_7712a0 {   // @0x007712a0  
+  uint32 field1 = 1;
+}
+message M_7712b8 {   // @0x007712b8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7712d0 {   // @0x007712d0  
+  uint32 field1 = 1;
+}
+message M_7712e8 {   // @0x007712e8  
+  uint32 field1 = 1;
+}
+message M_771318 {   // @0x00771318  
+  fixed32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  bytes field5 = 5;
+  uint32 field6 = 6;
+  bytes field7 = 7;
+  int32 field8 = 8;
+  bytes field9 = 9;
+}
+message M_771330 {   // @0x00771330  
+  uint32 field1 = 1;
+}
+message M_771348 {   // @0x00771348  
+  fixed32 field1 = 1;
+  fixed32 field2 = 2;
+}
+message M_771360 {   // @0x00771360  
+  M_771318 field1 = 1;
+}
+message M_771378 {   // @0x00771378  
+  M_771330 field1 = 1;
+  M_771348 field2 = 2;
+}
+message M_771390 {   // @0x00771390  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  M_7713a8 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_7713a8 {   // @0x007713a8  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+  bytes field4 = 4;
+  bytes field5 = 5;
+}
+message M_7713c0 {   // @0x007713c0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7713d8 {   // @0x007713d8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7713f0 {   // @0x007713f0  
+  oneof M_7713c0 field1 = 1;
+  oneof M_7713d8 field2 = 2;
+}
+message M_771408 {   // @0x00771408  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  M_771420 field3 = 3;
+}
+message M_771420 {   // @0x00771420  
+  bytes field1 = 1;
+  bytes field2 = 2;
+  fixed64 field3 = 3;
+  fixed32 field4 = 4;
+  fixed32 field5 = 5;
+  bytes field6 = 6;
+  fixed32 field7 = 7;
+  fixed32 field8 = 8;
+  fixed32 field9 = 9;
+  uint32 field10 = 10;
+  fixed64 field11 = 11;
+  fixed32 field12 = 12;
+  uint32 field13 = 13;
+  uint32 field14 = 14;
+  fixed32 field15 = 15;
+  repeated fixed32 field16 = 16;  // array[185]
+}
+message M_771438 {   // @0x00771438  
+  bytes field1 = 1;
+}
+message M_771450 {   // @0x00771450  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  M_771468 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_771468 {   // @0x00771468  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  bytes field3 = 3;
+  bytes field4 = 4;
+  uint32 field5 = 5;
+}
+message M_771480 {   // @0x00771480  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771498 {   // @0x00771498  
+  oneof M_771390 field1 = 1;
+  oneof M_771408 field2 = 2;
+  oneof M_771450 field3 = 3;
+}
+message M_7714b0 {   // @0x007714b0  
+  oneof M_7713f0 field1 = 1;
+  oneof M_771438 field2 = 2;
+  oneof M_771480 field3 = 3;
+}
+message M_7714c8 {   // @0x007714c8  
+  uint32 field1 = 1;
+}
+message M_7714e0 {   // @0x007714e0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7714f8 {   // @0x007714f8  
+  uint32 field1 = 1;
+  oneof M_771510 field2 = 2;
+  oneof M_771528 field3 = 3;
+  oneof M_7714c8 field4 = 4;
+}
+message M_771510 {   // @0x00771510  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  repeated uint32 field3 = 3;  // array[10]
+  uint32 field4 = 4;
+  repeated uint32 field5 = 5;  // array[10]
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+}
+message M_771528 {   // @0x00771528  
+  oneof M_771360 field1 = 1;
+  oneof M_771498 field2 = 2;
+}
+message M_771540 {   // @0x00771540  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771558 {   // @0x00771558  
+  uint32 field1 = 1;
+  bool field2 = 2;
+  oneof M_771378 field3 = 3;
+  oneof M_7714b0 field4 = 4;
+  oneof M_771600 field5 = 5;
+}
+message M_771570 {   // @0x00771570  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771588 {   // @0x00771588  
+  uint32 field1 = 1;
+}
+message M_7715a0 {   // @0x007715a0  
+  uint32 field1 = 1;
+}
+message M_7715b8 {   // @0x007715b8  
+  uint32 field1 = 1;
+}
+message M_7715d0 {   // @0x007715d0  
+  uint32 field1 = 1;
+  repeated uint32 field2 = 2;  // array[10]
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  bool field5 = 5;
+}
+message M_7715e8 {   // @0x007715e8  
+  uint32 field1 = 1;
+}
+message M_771600 {   // @0x00771600  
+  uint32 field1 = 1;
+  oneof M_771570 field2 = 2;
+  oneof M_771588 field3 = 3;
+  oneof M_7715a0 field4 = 4;
+  oneof M_7715b8 field5 = 5;
+  oneof M_7715d0 field6 = 6;
+  oneof M_7715e8 field7 = 7;
+}
+message M_7716d8 {   // @0x007716d8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771708 {   // @0x00771708  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  repeated uint32 field4 = 4;  // array[3]
+}
+message M_771720 {   // @0x00771720  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771738 {   // @0x00771738  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  repeated bytes field3 = 3;  // array[3]
+  repeated fixed32 field4 = 4;  // array[3]
+}
+message M_771780 {   // @0x00771780  
+  uint32 field1 = 1;
+}
+message M_7717b0 {   // @0x007717b0  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  bytes field3 = 3;
+}
+message M_7717c8 {   // @0x007717c8  
+  uint32 field1 = 1;
+}
+message M_7717e0 {   // @0x007717e0  
+  uint32 field1 = 1;
+}
+message M_7717f8 {   // @0x007717f8  
+  uint32 field1 = 1;
+}
+message M_771810 {   // @0x00771810  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  string_or_bytes field6 = 6;
+}
+message M_771828 {   // @0x00771828  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+}
+message M_771840 {   // @0x00771840  
+  uint32 field1 = 1;
+}
+message M_771918 {   // @0x00771918  
+  uint32 field1 = 1;
+  oneof M_771930 field2 = 2;
+  oneof uint32 field3 = 3;
+  oneof M_771948 field4 = 4;
+  oneof M_771948 field5 = 5;
+  oneof M_771978 field6 = 6;
+  oneof M_771960 field7 = 7;
+  oneof M_771960 field8 = 8;
+  oneof M_771990 field9 = 9;
+}
+message M_771930 {   // @0x00771930  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771948 {   // @0x00771948  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771960 {   // @0x00771960  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+}
+message M_771978 {   // @0x00771978  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_771990 {   // @0x00771990  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7723b0 {   // @0x007723b0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7723c8 {   // @0x007723c8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7723e0 {   // @0x007723e0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  string_or_bytes field4 = 4;
+  uint32 field5 = 5;
+}
+message M_7723f8 {   // @0x007723f8  
+  uint32 field1 = 1;
+}
+message M_772410 {   // @0x00772410  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  string_or_bytes field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+}
+message M_772428 {   // @0x00772428  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  string_or_bytes field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+}
+message M_772440 {   // @0x00772440  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772458 {   // @0x00772458  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772470 {   // @0x00772470  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772488 {   // @0x00772488  
+  uint32 field1 = 1;
+}
+message M_7724a0 {   // @0x007724a0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_7724b8 {   // @0x007724b8  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  bytes field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_7724d0 {   // @0x007724d0  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_7724e8 {   // @0x007724e8  
+  fixed32 field1 = 1;
+  fixed32 field2 = 2;
+  fixed32 field3 = 3;
+}
+message M_772518 {   // @0x00772518  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  M_7724e8 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_772530 {   // @0x00772530  
+  oneof M_7724b8 field1 = 1;
+  oneof M_7724d0 field2 = 2;
+  oneof M_772518 field3 = 3;
+}
+message M_772548 {   // @0x00772548  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  repeated bytes field4 = 4;  // array[20]
+}
+message M_772560 {   // @0x00772560  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+  bytes field10 = 10;
+  M_772548 field11 = 11;
+  uint32 field12 = 12;
+}
+message M_772578 {   // @0x00772578  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  bytes field5 = 5;
+}
+message M_772590 {   // @0x00772590  
+  uint32 field1 = 1;
+}
+message M_7725a8 {   // @0x007725a8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+  bytes field10 = 10;
+  uint32 field11 = 11;
+  bytes field12 = 12;
+}
+message M_7725c0 {   // @0x007725c0  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  string_or_bytes field8 = 8;
+}
+message M_7725d8 {   // @0x007725d8  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+}
+message M_7725f0 {   // @0x007725f0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  bytes field6 = 6;
+}
+message M_772608 {   // @0x00772608  
+  uint32 field1 = 1;
+  repeated M_772560 field2 = 2;  // array[4]
+  repeated M_7725a8 field3 = 3;  // array[8]
+  repeated M_7725f0 field4 = 4;  // array[4]
+  uint32 field5 = 5;
+}
+message M_772620 {   // @0x00772620  
+  uint32 field1 = 1;
+}
+message M_772638 {   // @0x00772638  
+  uint32 field1 = 1;
+  repeated M_772560 field2 = 2;  // array[4]
+  repeated M_7725a8 field3 = 3;  // array[8]
+  repeated M_7725f0 field4 = 4;  // array[4]
+}
+message M_772650 {   // @0x00772650  
+  uint32 field1 = 1;
+}
+message M_772668 {   // @0x00772668  
+  uint32 field1 = 1;
+}
+message M_772680 {   // @0x00772680  
+  uint32 field1 = 1;
+}
+message M_7726b0 {   // @0x007726b0  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_7726c8 {   // @0x007726c8  
+  uint32 field1 = 1;
+}
+message M_7726e0 {   // @0x007726e0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7726f8 {   // @0x007726f8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772710 {   // @0x00772710  
+  uint32 field1 = 1;
+}
+message M_772728 {   // @0x00772728  
+  uint32 field1 = 1;
+}
+message M_772740 {   // @0x00772740  
+  uint32 field1 = 1;
+}
+message M_772758 {   // @0x00772758  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+}
+message M_772770 {   // @0x00772770  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772788 {   // @0x00772788  
+  uint32 field1 = 1;
+}
+message M_772998 {   // @0x00772998  
+  oneof uint32 field1 = 1;
+  oneof uint32 field2 = 2;
+  oneof uint32 field3 = 3;
+  oneof uint32 field4 = 4;
+}
+message M_7729b0 {   // @0x007729b0  
+  uint32 field1 = 1;
+}
+message M_7729c8 {   // @0x007729c8  
+  uint32 field1 = 1;
+}
+message M_7729e0 {   // @0x007729e0  
+  oneof uint32 field1 = 1;
+  oneof uint32 field2 = 2;
+  oneof uint32 field3 = 3;
+  oneof uint32 field4 = 4;
+}
+message M_7729f8 {   // @0x007729f8  
+  uint32 field1 = 1;
+}
+message M_772a10 {   // @0x00772a10  
+  uint32 field1 = 1;
+}
+message M_772a28 {   // @0x00772a28  
+  uint32 field1 = 1;
+}
+message M_772a40 {   // @0x00772a40  
+  uint32 field1 = 1;
+}
+message M_772a58 {   // @0x00772a58  
+  oneof M_772998 field1 = 1;
+  oneof M_7729b0 field2 = 2;
+  oneof M_7729c8 field3 = 3;
+  oneof M_7729e0 field4 = 4;
+  oneof M_7729f8 field5 = 5;
+  oneof M_772a10 field6 = 6;
+  oneof M_772a28 field7 = 7;
+  oneof M_772a40 field8 = 8;
+  oneof M_772ab8 field9 = 9;
+  oneof M_772ae8 field10 = 10;
+  oneof M_772b00 field11 = 11;
+  oneof M_772b48 field12 = 12;
+}
+message M_772a70 {   // @0x00772a70  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  bytes field5 = 5;
+  bytes field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+  uint32 field10 = 10;
+  uint32 field11 = 11;
+  uint32 field12 = 12;
+  uint32 field13 = 13;
+  uint32 field14 = 14;
+  uint32 field15 = 15;
+  uint32 field16 = 16;
+  uint32 field17 = 17;
+  uint32 field18 = 18;
+  uint32 field19 = 19;
+}
+message M_772a88 {   // @0x00772a88  
+  oneof uint32 field1 = 1;
+  oneof uint32 field2 = 2;
+}
+message M_772ab8 {   // @0x00772ab8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_772ad0 {   // @0x00772ad0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_772ae8 {   // @0x00772ae8  
+  repeated M_772ad0 field1 = 1;  // array[5]
+}
+message M_772b00 {   // @0x00772b00  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+}
+message M_772b18 {   // @0x00772b18  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772b30 {   // @0x00772b30  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_772b48 {   // @0x00772b48  
+  uint32 field1 = 1;
+}
+message M_772bc0 {   // @0x00772bc0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_772c98 {   // @0x00772c98  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  fixed32 field3 = 3;
+  fixed32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+}
+message M_772cb0 {   // @0x00772cb0  
+  uint32 field1 = 1;
+  repeated M_772c98 field2 = 2;  // array[8]
+  uint32 field3 = 3;
+}
+message M_772cc8 {   // @0x00772cc8  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_772ce0 {   // @0x00772ce0  
+  repeated M_772cc8 field1 = 1;  // array[3]
+  uint32 field2 = 2;
+}
+message M_772fc8 {   // @0x00772fc8  
+  repeated bytes field1 = 1;  // array[40]
+}
+message M_772fe0 {   // @0x00772fe0  
+  bytes field1 = 1;
+}
+message M_772ff8 {   // @0x00772ff8  
+  uint32 field1 = 1;
+}
+message M_7748a0 {   // @0x007748a0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  bytes field3 = 3;
+  uint32 field4 = 4;
+}
+message M_7748b8 {   // @0x007748b8  
+  uint32 field1 = 1;
+  repeated M_7748a0 field2 = 2;  // array[20]
+}
+message M_7748d0 {   // @0x007748d0  
+  uint32 field1 = 1;
+}
+message M_7749c0 {   // @0x007749c0  
+  uint32 field1 = 1;
+}
+message M_7749d8 {   // @0x007749d8  
+  uint32 field1 = 1;
+}
+message M_774a20 {   // @0x00774a20  
+  uint32 field1 = 1;
+  repeated bytes field2 = 2;  // array[20]
+  repeated uint32 field3 = 3;  // array[20]
+  uint32 field4 = 4;
+}
+message M_774a50 {   // @0x00774a50  
+  bytes field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_774a68 {   // @0x00774a68  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  bytes field3 = 3;
+  bytes field4 = 4;
+  bytes field5 = 5;
+  bytes field6 = 6;
+  bytes field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+}
+message M_774a80 {   // @0x00774a80  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  string_or_bytes field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+}
+message M_774a98 {   // @0x00774a98  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  string_or_bytes field6 = 6;
+  uint32 field7 = 7;
+}
+message M_774ab0 {   // @0x00774ab0  
+  uint32 field1 = 1;
+  bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_774ac8 {   // @0x00774ac8  
+  uint32 field1 = 1;
+}
+message M_774ae0 {   // @0x00774ae0  
+  uint32 field1 = 1;
+}
+message M_774c60 {   // @0x00774c60  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+}
+message M_774c90 {   // @0x00774c90  
+  string_or_bytes field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message M_774ca8 {   // @0x00774ca8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_774cc0 {   // @0x00774cc0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_774ed0 {   // @0x00774ed0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_774ee8 {   // @0x00774ee8  
+  uint32 field1 = 1;
+}
+message M_774f00 {   // @0x00774f00  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_7761c0 {   // @0x007761c0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  int32 field4 = 4;
+  string_or_bytes field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+}
+message M_7761d8 {   // @0x007761d8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  repeated M_7761c0 field3 = 3;  // array[20]
+  uint32 field4 = 4;
+}
+message M_7761f0 {   // @0x007761f0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_776298 {   // @0x00776298  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_7762b0 {   // @0x007762b0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+  uint32 field10 = 10;
+  uint32 field11 = 11;
+  uint32 field12 = 12;
+  uint32 field13 = 13;
+  uint32 field14 = 14;
+  uint32 field15 = 15;
+  uint32 field16 = 16;
+  uint32 field17 = 17;
+}
+message M_7773c0 {   // @0x007773c0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_777528 {   // @0x00777528  
+  string_or_bytes field1 = 1;
+  string_or_bytes field2 = 2;
+}
+message M_777540 {   // @0x00777540  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+  uint32 field7 = 7;
+  uint32 field8 = 8;
+  uint32 field9 = 9;
+}
+message M_777558 {   // @0x00777558  
+  uint32 field1 = 1;
+  M_777540 field2 = 2;
+}
+message M_777570 {   // @0x00777570  
+  repeated M_777528 field1 = 1;  // array[20]
+}
+message M_777588 {   // @0x00777588  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  string_or_bytes field3 = 3;
+}
+message M_7775a0 {   // @0x007775a0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_7775b8 {   // @0x007775b8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7775d0 {   // @0x007775d0  
+}
+message M_7775e8 {   // @0x007775e8  
+  string_or_bytes field1 = 1;
+}
+message M_777600 {   // @0x00777600  
+  uint32 field1 = 1;
+}
+message M_777618 {   // @0x00777618  
+  uint32 field1 = 1;
+}
+message M_777630 {   // @0x00777630  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_777648 {   // @0x00777648  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message Terminal_mode_sync {   // @0x00777858  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message Terminal_host_status {   // @0x00777870  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message Terminal_asr_result {   // @0x00777888  
+  string_or_bytes field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message Terminal_session_status {   // @0x007778a0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message Terminal_agent_content {   // @0x007778b8  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  uint32 field5 = 5;
+  uint32 field6 = 6;
+}
+message Terminal_query {   // @0x007778d0  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  repeated M_7778e8 field3 = 3;  // array[8]
+  uint32 field4 = 4;
+}
+message M_7778e8 {   // @0x007778e8  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+}
+message Terminal_error_or_switch_or_new_result {   // @0x00777900  
+  uint32 field1 = 1;
+}
+message Terminal_session_list {   // @0x00777918  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  repeated M_777930 field3 = 3;  // array[10]
+}
+message M_777930 {   // @0x00777930  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+}
+message Terminal_error_or_switch_or_new_result {   // @0x00777948  
+  uint32 field1 = 1;
+}
+message Terminal_error_or_switch_or_new_result {   // @0x00777960  
+  uint32 field1 = 1;
+}
+message Terminal_session_id_changed {   // @0x00777978  
+  uint32 field1 = 1;
+}
+message M_777990 {   // @0x00777990  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7779a8 {   // @0x007779a8  
+  uint32 field1 = 1;
+}
+message M_7779c0 {   // @0x007779c0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_7779d8 {   // @0x007779d8  
+  uint32 field1 = 1;
+}
+message M_7779f0 {   // @0x007779f0  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_777a08 {   // @0x00777a08  
+  uint32 field1 = 1;
+}
+message M_777a20 {   // @0x00777a20  
+}
+message M_777a38 {   // @0x00777a38  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+  uint32 field3 = 3;
+}
+message M_777a50 {   // @0x00777a50  
+  uint32 field1 = 1;
+}
+message M_777a68 {   // @0x00777a68  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_777a80 {   // @0x00777a80  
+  uint32 field1 = 1;
+}
+message Terminal_reset {   // @0x00777a98  
+}
+message M_777fd8 {   // @0x00777fd8  
+  uint32 field1 = 1;
+  uint32 field2 = 2;
+}
+message M_777ff0 {   // @0x00777ff0  
+  uint32 field1 = 1;
+}
+message M_778008 {   // @0x00778008  
+  uint32 field1 = 1;
+}
+message M_778038 {   // @0x00778038  
+  uint32 field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+}
+message M_778050 {   // @0x00778050  
+  string_or_bytes field1 = 1;
+  string_or_bytes field2 = 2;
+  uint32 field3 = 3;
+  uint32 field4 = 4;
+  string_or_bytes field5 = 5;
+}
+message M_778068 {   // @0x00778068  
+}

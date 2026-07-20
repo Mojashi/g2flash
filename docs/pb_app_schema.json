@@ -1,0 +1,5694 @@
+{
+ "EvenHub": {
+  "evenhub_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "Cmd",
+    "method": "e",
+    "type": "enum:EvenHub_Cmd_List"
+   },
+   {
+    "tag": 2,
+    "name": "MagicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "CreateMessage",
+    "method": "aOM",
+    "type": "msg:CreateStartUpPageContainer"
+   },
+   {
+    "tag": 4,
+    "name": "StartupResCmd",
+    "method": "aOM",
+    "type": "msg:ResponseCreateStartupCmd"
+   },
+   {
+    "tag": 5,
+    "name": "ImgRawMsg",
+    "method": "aOM",
+    "type": "msg:ImageRawDataUpdate"
+   },
+   {
+    "tag": 6,
+    "name": "ImgResCmd",
+    "method": "aOM",
+    "type": "msg:ResponseImageRawDataCmd"
+   },
+   {
+    "tag": 7,
+    "name": "RebuildContainer",
+    "method": "aOM",
+    "type": "msg:RebuildPageContainer"
+   },
+   {
+    "tag": 8,
+    "name": "RebuildResCmd",
+    "method": "aOM",
+    "type": "msg:ResponseRebuildCmd"
+   },
+   {
+    "tag": 9,
+    "name": "TextUpgrade",
+    "method": "aOM",
+    "type": "msg:TextContainerUpgrade"
+   },
+   {
+    "tag": 10,
+    "name": "TextResCmd",
+    "method": "aOM",
+    "type": "msg:ResponseTextUpgradeCmd"
+   },
+   {
+    "tag": 11,
+    "name": "ShutDownCmd",
+    "method": "aOM",
+    "type": "msg:ShutDownContaniner"
+   },
+   {
+    "tag": 12,
+    "name": "ShutDownResCmd",
+    "method": "aOM",
+    "type": "msg:ResponseShutDownCmd"
+   },
+   {
+    "tag": 13,
+    "name": "DevEvent",
+    "method": "aOM",
+    "type": "msg:SendDeviceEvent"
+   },
+   {
+    "tag": 14,
+    "name": "HeartPacketCmd",
+    "method": "aOM",
+    "type": "msg:HeartBeatPacket"
+   },
+   {
+    "tag": 15,
+    "name": "DevResHeartPacket",
+    "method": "aOM",
+    "type": "msg:ResponseHeartBeatCmd"
+   },
+   {
+    "tag": 16,
+    "name": "DevPrivateEvent",
+    "method": "aOM",
+    "type": "msg:CommonDevicePrivateEvent"
+   },
+   {
+    "tag": 17,
+    "name": "DevSysEvent",
+    "method": "aOM",
+    "type": "msg:CommonDevicePrivateSystemEvent"
+   },
+   {
+    "tag": 18,
+    "name": "AudioCtrCommand",
+    "method": "aOM",
+    "type": "msg:AudioCtrCmd"
+   },
+   {
+    "tag": 19,
+    "name": "AudioResCommand",
+    "method": "aOM",
+    "type": "msg:AudioResCmd"
+   },
+   {
+    "tag": 20,
+    "name": "MenuStartEv",
+    "method": "aOM",
+    "type": "msg:MenuStartUpEvent"
+   },
+   {
+    "tag": 21,
+    "name": "MenuRes",
+    "method": "aOM",
+    "type": "msg:MenuStartUpResPonse"
+   },
+   {
+    "tag": 22,
+    "name": "ImuCtrl",
+    "method": "aOM",
+    "type": "msg:IMU_CtrlCmd"
+   },
+   {
+    "tag": 23,
+    "name": "IMURes",
+    "method": "aOM",
+    "type": "msg:IMU_CtrlCmd_Response"
+   }
+  ],
+  "IMU_CtrlCmd_Response": [
+   {
+    "tag": 1,
+    "name": "IMUReportEnStatus",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "IMU_CtrlCmd": [
+   {
+    "tag": 1,
+    "name": "IMUReportEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "reportFrq",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "MenuStartUpResPonse": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "MenuStartUpEvent": [
+   {
+    "tag": 1,
+    "name": "widgetId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AudioResCmd": [
+   {
+    "tag": 1,
+    "name": "AudioStat",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AudioCtrCmd": [
+   {
+    "tag": 1,
+    "name": "AudoFuncEn",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "CommonDevicePrivateSystemEvent": [
+   {
+    "tag": 1,
+    "name": "EventCmd",
+    "method": "e",
+    "type": "enum:SystmEventCommandList"
+   },
+   {
+    "tag": 2,
+    "name": "EventValue",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseHeartBeatCmd": [
+   {
+    "tag": 1,
+    "name": "Cnt",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "ResCmdMsg",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "HeartBeatPacket": [
+   {
+    "tag": 1,
+    "name": "Cnt",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "CommonDevicePrivateEvent": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "eventId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "eventData",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseShutDownCmd": [
+   {
+    "tag": 1,
+    "name": "ResCmdMsg",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "ShutDownContaniner": [
+   {
+    "tag": 1,
+    "name": "exitMode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseRebuildCmd": [
+   {
+    "tag": 1,
+    "name": "ResCmdMsg",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "RebuildPageContainer": [
+   {
+    "tag": 1,
+    "name": "ContainerTotalNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "ListObject",
+    "method": "pc",
+    "type": "repeated_msg:ListContainerProperty"
+   },
+   {
+    "tag": 3,
+    "name": "TextObject",
+    "method": "pc",
+    "type": "repeated_msg:TextContainerProperty"
+   },
+   {
+    "tag": 4,
+    "name": "ImageObject",
+    "method": "pc",
+    "type": "repeated_msg:ImageContainerProperty"
+   }
+  ],
+  "ResponseCreateStartupCmd": [
+   {
+    "tag": 1,
+    "name": "ResCmdMsg",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "CreateStartUpPageContainer": [
+   {
+    "tag": 1,
+    "name": "ContainerTotalNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "ListObject",
+    "method": "pc",
+    "type": "repeated_msg:ListContainerProperty"
+   },
+   {
+    "tag": 3,
+    "name": "TextObject",
+    "method": "pc",
+    "type": "repeated_msg:TextContainerProperty"
+   },
+   {
+    "tag": 4,
+    "name": "ImageObject",
+    "method": "pc",
+    "type": "repeated_msg:ImageContainerProperty"
+   },
+   {
+    "tag": 5,
+    "name": "widgetId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ImageContainerProperty": [
+   {
+    "tag": 1,
+    "name": "XPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "YPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "Width",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "Height",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "zOrderIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseImageRawDataCmd": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "MapSessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "MapTotalSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "CompressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "MapFragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "MapFragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "ErrorCode",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "ImageRawDataUpdate": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "MapSessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "MapTotalSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "CompressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "MapFragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "MapFragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "MapRawData",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TextContainerProperty": [
+   {
+    "tag": 1,
+    "name": "XPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "YPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "Width",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "Height",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "BorderWidth",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "BorderColor",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "BorderRadius",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "PaddingLength",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "IsEventCapture",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 13,
+    "name": "zOrderIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseTextUpgradeCmd": [
+   {
+    "tag": 1,
+    "name": "ResCmdMsg",
+    "method": "e",
+    "type": "enum:EvenHub_ErrorCode_List"
+   }
+  ],
+  "TextContainerUpgrade": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ContentOffset",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "ContentLength",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ListContainerProperty": [
+   {
+    "tag": 1,
+    "name": "XPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "YPosition",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "Width",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "Height",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "BorderWidth",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "BorderColor",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "BorderRadius",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "PaddingLength",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "ItemContainer",
+    "method": "aOM",
+    "type": "msg:List_ItemContainerProperty"
+   },
+   {
+    "tag": 12,
+    "name": "IsEventCapture",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 13,
+    "name": "zOrderIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "List_ItemContainerProperty": [
+   {
+    "tag": 1,
+    "name": "ItemCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "ItemWidth",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "IsItemSelectBorderEn",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "SendDeviceEvent": [
+   {
+    "tag": 1,
+    "name": "ListEvent",
+    "method": "aOM",
+    "type": "msg:List_ItemEvent"
+   },
+   {
+    "tag": 2,
+    "name": "TextEvent",
+    "method": "aOM",
+    "type": "msg:Text_ItemEvent"
+   },
+   {
+    "tag": 3,
+    "name": "SysEvent",
+    "method": "aOM",
+    "type": "msg:Sys_ItemEvent"
+   }
+  ],
+  "Sys_ItemEvent": [
+   {
+    "tag": 1,
+    "name": "EventType",
+    "method": "e",
+    "type": "enum:OsEventTypeList"
+   },
+   {
+    "tag": 2,
+    "name": "EventSource",
+    "method": "e",
+    "type": "enum:EventSourceType"
+   },
+   {
+    "tag": 3,
+    "name": "IMUData",
+    "method": "aOM",
+    "type": "msg:IMU_Report_Data"
+   },
+   {
+    "tag": 4,
+    "name": "systemExitReasonCode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "IMU_Report_Data": [
+   {
+    "tag": 1,
+    "name": "x",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "y",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "z",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "Text_ItemEvent": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "EventType",
+    "method": "e",
+    "type": "enum:OsEventTypeList"
+   }
+  ],
+  "List_ItemEvent": [
+   {
+    "tag": 1,
+    "name": "ContainerID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "CurrentSelectItemIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "EventType",
+    "method": "e",
+    "type": "enum:OsEventTypeList"
+   }
+  ]
+ },
+ "conversate": {
+  "ConversateCommResp": [
+   {
+    "tag": 1,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:ConversateErrorCode"
+   }
+  ],
+  "ConversateTagTrackingData": [
+   {
+    "tag": 1,
+    "name": "tagId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "openType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "closeType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "durationTimeMs",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversateStatusNotify": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:ConversateCtrlCmd"
+   },
+   {
+    "tag": 2,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:ConversateErrorCode"
+   }
+  ],
+  "ConversateTranscribeData": [
+   {
+    "tag": 1,
+    "name": "transcribeText",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "transcribeEndFlag",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversateTagData": [
+   {
+    "tag": 1,
+    "name": "tagType",
+    "method": "e",
+    "type": "enum:ConversateTagType"
+   },
+   {
+    "tag": 2,
+    "name": "tagText",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "tagTextExtend",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "tagId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversateControl": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:ConversateCtrlCmd"
+   },
+   {
+    "tag": 2,
+    "name": "settings",
+    "method": "aOM",
+    "type": "msg:ConversateSettings"
+   },
+   {
+    "tag": 3,
+    "name": "noteInfo",
+    "method": "aOM",
+    "type": "msg:ConversatePrepNote"
+   },
+   {
+    "tag": 4,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:ConversateErrorCode"
+   }
+  ],
+  "ConversatePrepNotePacket": [
+   {
+    "tag": 1,
+    "name": "packetIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversatePrepNote": [
+   {
+    "tag": 1,
+    "name": "title",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "totalPackets",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversatePrepNoteSelect": [
+   {
+    "tag": 1,
+    "name": "isSkip",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "selectId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversatePrepNoteList": [
+   {
+    "tag": 1,
+    "name": "list",
+    "method": "pc",
+    "type": "repeated_msg:ConversatePrepNoteListItem"
+   },
+   {
+    "tag": 2,
+    "name": "selectId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversatePrepNoteListItem": [
+   {
+    "tag": 1,
+    "name": "id",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "title",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversateSettings": [
+   {
+    "tag": 1,
+    "name": "aiCue",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "transcribe",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "autoPopEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "useAudio",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "cueDuration",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ConversateDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:ConversateCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:ConversateControl"
+   },
+   {
+    "tag": 4,
+    "name": "prepNoteListRequest",
+    "method": "aOM",
+    "type": "msg:ConversatePrepNoteListRequest"
+   },
+   {
+    "tag": 5,
+    "name": "prepNoteList",
+    "method": "aOM",
+    "type": "msg:ConversatePrepNoteList"
+   },
+   {
+    "tag": 6,
+    "name": "prepNoteSelect",
+    "method": "aOM",
+    "type": "msg:ConversatePrepNoteSelect"
+   },
+   {
+    "tag": 7,
+    "name": "tagData",
+    "method": "aOM",
+    "type": "msg:ConversateTagData"
+   },
+   {
+    "tag": 8,
+    "name": "transcribeData",
+    "method": "aOM",
+    "type": "msg:ConversateTranscribeData"
+   },
+   {
+    "tag": 9,
+    "name": "statusNotify",
+    "method": "aOM",
+    "type": "msg:ConversateStatusNotify"
+   },
+   {
+    "tag": 10,
+    "name": "commResp",
+    "method": "aOM",
+    "type": "msg:ConversateCommResp"
+   },
+   {
+    "tag": 11,
+    "name": "heartBeat",
+    "method": "aOM",
+    "type": "msg:ConversateHeartBeat"
+   },
+   {
+    "tag": 12,
+    "name": "tagTrackingData",
+    "method": "aOM",
+    "type": "msg:ConversateTagTrackingData"
+   },
+   {
+    "tag": 13,
+    "name": "prepNotePacket",
+    "method": "aOM",
+    "type": "msg:ConversatePrepNotePacket"
+   }
+  ]
+ },
+ "dashboard": {
+  "sPageStateSync": [
+   {
+    "tag": 1,
+    "name": "currentPageType",
+    "method": "e",
+    "type": "enum:PageType"
+   },
+   {
+    "tag": 2,
+    "name": "dashboardMain",
+    "method": "aOM",
+    "type": "msg:DashboardMainPageState"
+   },
+   {
+    "tag": 3,
+    "name": "newsExpanded",
+    "method": "aOM",
+    "type": "msg:NewsExpandedPageState"
+   },
+   {
+    "tag": 4,
+    "name": "stockExpanded",
+    "method": "aOM",
+    "type": "msg:StockExpandedPageState"
+   },
+   {
+    "tag": 5,
+    "name": "calendarExpanded",
+    "method": "aOM",
+    "type": "msg:CalendarExpandedPageState"
+   },
+   {
+    "tag": 6,
+    "name": "quicklistExpanded",
+    "method": "aOM",
+    "type": "msg:QuicklistExpandedPageState"
+   },
+   {
+    "tag": 7,
+    "name": "healthExpanded",
+    "method": "aOM",
+    "type": "msg:HealthExpandedPageState"
+   }
+  ],
+  "HealthExpandedPageState": [
+   {
+    "tag": 1,
+    "name": "currentPageIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "QuicklistExpandedPageState": [
+   {
+    "tag": 1,
+    "name": "displayedUidCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "displayedUidList",
+    "method": "p",
+    "type": "repeated:int"
+   },
+   {
+    "tag": 3,
+    "name": "borderState",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "focusedUidIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "CalendarExpandedPageState": [
+   {
+    "tag": 1,
+    "name": "currentPageIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "StockExpandedPageState": [
+   {
+    "tag": 1,
+    "name": "currentPageIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "NewsExpandedPageState": [
+   {
+    "tag": 1,
+    "name": "currentNewsIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DashboardMainPageState": [
+   {
+    "tag": 1,
+    "name": "activeTileIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "activeWidgetType",
+    "method": "e",
+    "type": "enum:PageWidgetType"
+   }
+  ],
+  "DashboardSendToApp": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "statusComponents",
+    "method": "aOM",
+    "type": "msg:sStatusComponent"
+   },
+   {
+    "tag": 4,
+    "name": "widgetComponents",
+    "method": "aOM",
+    "type": "msg:sWidgetComponent"
+   },
+   {
+    "tag": 5,
+    "name": "pageStateSync",
+    "method": "aOM",
+    "type": "msg:sPageStateSync"
+   }
+  ],
+  "AppRespondToDashboard": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "flag",
+    "method": "e",
+    "type": "enum:AppReceiveFLAG"
+   }
+  ],
+  "DashboardContent": [
+   {
+    "tag": 1,
+    "name": "statusComponents",
+    "method": "aOM",
+    "type": "msg:rStatusComponent"
+   },
+   {
+    "tag": 2,
+    "name": "widgetComponents",
+    "method": "aOM",
+    "type": "msg:rWidgetComponent"
+   }
+  ],
+  "DashboardDisplaySetting": [
+   {
+    "tag": 1,
+    "name": "displayMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "statusDisplayCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "statusDisplayOrder",
+    "method": "pc",
+    "type": "repeated_msg:StatusType"
+   },
+   {
+    "tag": 4,
+    "name": "widgetDisplayCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "widgetDisplayOrder",
+    "method": "pc",
+    "type": "repeated_msg:WidgetType"
+   },
+   {
+    "tag": 6,
+    "name": "halfDayFormat",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "temperatureUnit",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DashboardReceiveFromApp": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "bashboardDisplaySetting",
+    "method": "aOM",
+    "type": "msg:DashboardDisplaySetting"
+   },
+   {
+    "tag": 3,
+    "name": "bashboardConfig",
+    "method": "aOM",
+    "type": "msg:DashboardContent"
+   },
+   {
+    "tag": 4,
+    "name": "appRequest",
+    "method": "aOM",
+    "type": "msg:AppRequest"
+   }
+  ],
+  "DashboardRespondToApp": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "flag",
+    "method": "e",
+    "type": "enum:DashboardReceiveFLAG"
+   }
+  ],
+  "AppRequest": [
+   {
+    "tag": 1,
+    "name": "appRequestNewsInfo",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "sWidgetComponent": [
+   {
+    "tag": 1,
+    "name": "news",
+    "method": "aOM",
+    "type": "msg:sNewsWidget"
+   },
+   {
+    "tag": 2,
+    "name": "stock",
+    "method": "aOM",
+    "type": "msg:sStockWidget"
+   },
+   {
+    "tag": 3,
+    "name": "schedule",
+    "method": "aOM",
+    "type": "msg:sScheduleWidget"
+   }
+  ],
+  "rWidgetComponent": [
+   {
+    "tag": 1,
+    "name": "news",
+    "method": "aOM",
+    "type": "msg:rNewsWidget"
+   },
+   {
+    "tag": 2,
+    "name": "stock",
+    "method": "aOM",
+    "type": "msg:rStockWidget"
+   },
+   {
+    "tag": 3,
+    "name": "schedule",
+    "method": "aOM",
+    "type": "msg:rScheduleWidget"
+   }
+  ],
+  "sScheduleWidget": [
+   {
+    "tag": 1,
+    "name": "syncScheduleId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "syncScheduleLine",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "Schedule": [
+   {
+    "tag": 1,
+    "name": "scheduleId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "endTimestamp",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "rScheduleWidget": [
+   {
+    "tag": 1,
+    "name": "scheduleTotal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "scheduleNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "schedule",
+    "method": "aOM",
+    "type": "msg:Schedule"
+   },
+   {
+    "tag": 4,
+    "name": "scheduleAuthority",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "Stock": [
+   {
+    "tag": 3,
+    "name": "marketCap",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "priceChangePercent",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "currentPrice",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "dayHigh",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "dayLow",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "openPrice",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 10,
+    "name": "volume",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "marketValue",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 12,
+    "name": "peRatio",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 13,
+    "name": "changingTrend",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 14,
+    "name": "pointTotal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 15,
+    "name": "darkPrice",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 16,
+    "name": "brightPrice",
+    "method": "p",
+    "type": "repeated:double"
+   }
+  ],
+  "rStockWidget": [
+   {
+    "tag": 1,
+    "name": "stockTotal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "stockNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "stock",
+    "method": "aOM",
+    "type": "msg:Stock"
+   }
+  ],
+  "sNewsWidget": [
+   {
+    "tag": 1,
+    "name": "applyEvent",
+    "method": "aOM",
+    "type": "msg:sNewsWidgetApplyNews"
+   },
+   {
+    "tag": 2,
+    "name": "syncEvent",
+    "method": "aOM",
+    "type": "msg:sNewsWidgetSync"
+   }
+  ],
+  "sNewsWidgetSync": [
+   {
+    "tag": 1,
+    "name": "syncNewsId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "syncNewsBytesRead",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "sNewsWidgetApplyNews": [
+   {
+    "tag": 1,
+    "name": "requiredCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "requiredStartId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "News": [
+   {
+    "tag": 1,
+    "name": "newsId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "reportTime",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "rNewsWidget": [
+   {
+    "tag": 1,
+    "name": "newsTotal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "newsNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "news",
+    "method": "aOM",
+    "type": "msg:News"
+   },
+   {
+    "tag": 4,
+    "name": "newsForceUpgrade",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "sStatusComponent": [
+   {
+    "tag": 1,
+    "name": "notification",
+    "method": "aOM",
+    "type": "msg:sNotificationStatus"
+   },
+   {
+    "tag": 2,
+    "name": "power",
+    "method": "aOM",
+    "type": "msg:sPowerStatus"
+   }
+  ],
+  "rStatusComponent": [
+   {
+    "tag": 1,
+    "name": "weather",
+    "method": "aOM",
+    "type": "msg:rWeatherStatus"
+   }
+  ],
+  "sPowerStatus": [
+   {
+    "tag": 1,
+    "name": "powerLeft",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "powerRight",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "sNotificationStatus": [
+   {
+    "tag": 1,
+    "name": "unreadCount",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "rWeatherStatus": [
+   {
+    "tag": 1,
+    "name": "temperature",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "unit",
+    "method": "e",
+    "type": "enum:TemperatureUnit"
+   },
+   {
+    "tag": 3,
+    "name": "type",
+    "method": "e",
+    "type": "enum:WeatherType"
+   },
+   {
+    "tag": 4,
+    "name": "updateTime",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "rainfallProbabilityIcon",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "sunsetSelect",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DashboardDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eDashboardCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "dashboardRespond",
+    "method": "aOM",
+    "type": "msg:DashboardRespondToApp"
+   },
+   {
+    "tag": 4,
+    "name": "dashboardReceive",
+    "method": "aOM",
+    "type": "msg:DashboardReceiveFromApp"
+   },
+   {
+    "tag": 5,
+    "name": "appRespond",
+    "method": "aOM",
+    "type": "msg:AppRespondToDashboard"
+   },
+   {
+    "tag": 6,
+    "name": "appReceive",
+    "method": "aOM",
+    "type": "msg:DashboardSendToApp"
+   },
+   {
+    "tag": 7,
+    "name": "ReqNewsCmd",
+    "method": "aOM",
+    "type": "msg:RequestNewsFifoCountCmd"
+   },
+   {
+    "tag": 8,
+    "name": "ResNewsMsg",
+    "method": "aOM",
+    "type": "msg:ResponseNewsFifoMsg"
+   },
+   {
+    "tag": 9,
+    "name": "ReqNewsInfo",
+    "method": "aOM",
+    "type": "msg:AppRequestDeviceNewsInfo"
+   },
+   {
+    "tag": 10,
+    "name": "ResNewsInfo",
+    "method": "aOM",
+    "type": "msg:DeviceResponseNewsInfo"
+   },
+   {
+    "tag": 11,
+    "name": "SendNewsData",
+    "method": "aOM",
+    "type": "msg:AppSendNewsData"
+   },
+   {
+    "tag": 12,
+    "name": "ResNewsData",
+    "method": "aOM",
+    "type": "msg:DeviceResponseNewData"
+   },
+   {
+    "tag": 13,
+    "name": "ReqNewsUpgrade",
+    "method": "aOM",
+    "type": "msg:DeviceRequestNewsUpgrade"
+   },
+   {
+    "tag": 14,
+    "name": "NotifyNewsEvent",
+    "method": "aOM",
+    "type": "msg:DeviceNotifyNewsEvent"
+   },
+   {
+    "tag": 15,
+    "name": "ResClearAllData",
+    "method": "aOM",
+    "type": "msg:AppResetClearAllDataMsg"
+   },
+   {
+    "tag": 16,
+    "name": "RespClearAllData",
+    "method": "aOM",
+    "type": "msg:DeviceResponseClearAllDataMsg"
+   }
+  ],
+  "DeviceResponseClearAllDataMsg": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AppResetClearAllDataMsg": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceNotifyNewsEvent": [
+   {
+    "tag": 1,
+    "name": "eventID",
+    "method": "e",
+    "type": "enum:NewsNotifyEvent"
+   },
+   {
+    "tag": 2,
+    "name": "value",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceRequestNewsUpgrade": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceResponseNewData": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "sessionTotalCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "sessionNewsIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "newsId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "newsStatus",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AppSendNewsData": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "sessionStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "sessionTotalCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "sessionNewsIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "newsId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "reportTime",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceResponseNewsInfo": [
+   {
+    "tag": 1,
+    "name": "totalNewsCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "newsId",
+    "method": "p",
+    "type": "repeated:int"
+   }
+  ],
+  "AppRequestDeviceNewsInfo": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "ResponseNewsFifoMsg": [
+   {
+    "tag": 1,
+    "name": "count",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "RequestNewsFifoCountCmd": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "dashboard_ext": {
+  "DashboardExtPackage": [
+   {
+    "tag": 1,
+    "name": "cmdId",
+    "method": "e",
+    "type": "enum:dashboard_ext_cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ReqPbInfoMsg",
+    "method": "aOM",
+    "type": "msg:AppRequestPbFileInfo"
+   },
+   {
+    "tag": 4,
+    "name": "ResPbInfoMsg",
+    "method": "aOM",
+    "type": "msg:OsResponsePbFileInfo"
+   },
+   {
+    "tag": 5,
+    "name": "ReqPbUpgrade",
+    "method": "aOM",
+    "type": "msg:AppRequestUpgradePbFile"
+   },
+   {
+    "tag": 6,
+    "name": "ResPbupgrade",
+    "method": "aOM",
+    "type": "msg:OsResponseUpgradePbFile"
+   },
+   {
+    "tag": 7,
+    "name": "NotifyPbTransStart",
+    "method": "aOM",
+    "type": "msg:OsNotifyPbFileTransmitStart"
+   },
+   {
+    "tag": 8,
+    "name": "SendPbFile",
+    "method": "aOM",
+    "type": "msg:AppSendPbFileData"
+   },
+   {
+    "tag": 9,
+    "name": "ResPbFile",
+    "method": "aOM",
+    "type": "msg:OsResponsePbFileData"
+   },
+   {
+    "tag": 10,
+    "name": "NotifyPbUpdate",
+    "method": "aOM",
+    "type": "msg:OsNotifyPbFileUpdate"
+   }
+  ],
+  "OsNotifyPbFileUpdate": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "OsResponsePbFileData": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "totalSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "compressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "fragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "fragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "OsStatus",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AppSendPbFileData": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "totalSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "compressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "fragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "fragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "rawData",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "OsNotifyPbFileTransmitStart": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "OsResponseUpgradePbFile": [
+   {
+    "tag": 1,
+    "name": "status",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AppRequestUpgradePbFile": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "OsResponsePbFileInfo": [
+   {
+    "tag": 1,
+    "name": "isPbFileExist",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "AppRequestPbFileInfo": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DashboardExtLayoutConfigureFile": [
+   {
+    "tag": 3,
+    "name": "pos",
+    "method": "e",
+    "type": "enum:watchface_pos"
+   },
+   {
+    "tag": 4,
+    "name": "widgetCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "widgetSeq",
+    "method": "pc",
+    "type": "repeated_msg:widget_component_seq"
+   },
+   {
+    "tag": 7,
+    "name": "watchfaceLayout",
+    "method": "aOM",
+    "type": "msg:watchfaceLayoutConfigure"
+   }
+  ],
+  "watchfaceLayoutConfigure": [
+   {
+    "tag": 1,
+    "name": "layout1Msg",
+    "method": "aOM",
+    "type": "msg:WatchfaceLayout1Cfg"
+   },
+   {
+    "tag": 2,
+    "name": "layout2Msg",
+    "method": "aOM",
+    "type": "msg:WatchfaceLayout2Cfg"
+   },
+   {
+    "tag": 3,
+    "name": "layout3Msg",
+    "method": "aOM",
+    "type": "msg:WatchfaceLayout3Cfg"
+   },
+   {
+    "tag": 4,
+    "name": "layout4Msg",
+    "method": "aOM",
+    "type": "msg:WatchfaceLayout4Cfg"
+   }
+  ],
+  "WatchfaceLayout4Cfg": [
+   {
+    "tag": 1,
+    "name": "alignIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "worldClockCnt",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "timezoneOffset",
+    "method": "p",
+    "type": "repeated:double"
+   }
+  ],
+  "WatchfaceLayout3Cfg": [
+   {
+    "tag": 1,
+    "name": "alignIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "dateEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "temperatureEn",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "WatchfaceLayout2Cfg": [
+   {
+    "tag": 1,
+    "name": "alignIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "clockType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "dateEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "list",
+    "method": "pc",
+    "type": "repeated_msg:watchfaceComponentList"
+   }
+  ],
+  "WatchfaceLayout1Cfg": [
+   {
+    "tag": 1,
+    "name": "clockType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "leftSelect",
+    "method": "e",
+    "type": "enum:watchfaceComponentList"
+   },
+   {
+    "tag": 3,
+    "name": "rightSelect",
+    "method": "e",
+    "type": "enum:watchfaceComponentList"
+   }
+  ]
+ },
+ "dev_config_protocol": {
+  "DevCfgCmdException": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eDevCfgCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "DevCfgDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eDevCfgCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "authMgr",
+    "method": "aOM",
+    "type": "msg:AuthMgr"
+   },
+   {
+    "tag": 4,
+    "name": "roleChange",
+    "method": "aOM",
+    "type": "msg:PipeRoleChange"
+   },
+   {
+    "tag": 5,
+    "name": "ringInfo",
+    "method": "aOM",
+    "type": "msg:RingInfo"
+   },
+   {
+    "tag": 6,
+    "name": "connParam",
+    "method": "aOM",
+    "type": "msg:BleConnectParam"
+   },
+   {
+    "tag": 7,
+    "name": "disconnectInfo",
+    "method": "aOM",
+    "type": "msg:DisconnectInfo"
+   },
+   {
+    "tag": 8,
+    "name": "unpairInfo",
+    "method": "aOM",
+    "type": "msg:UnpairInfo"
+   },
+   {
+    "tag": 9,
+    "name": "commandException",
+    "method": "aOM",
+    "type": "msg:DevCfgCmdException"
+   },
+   {
+    "tag": 10,
+    "name": "setDeviceInfo",
+    "method": "aOM",
+    "type": "msg:DeviceInfo"
+   },
+   {
+    "tag": 11,
+    "name": "getDeviceInfo",
+    "method": "aOM",
+    "type": "msg:DeviceInfo"
+   },
+   {
+    "tag": 12,
+    "name": "restoreFactory",
+    "method": "aOM",
+    "type": "msg:RestoreFactory"
+   },
+   {
+    "tag": 13,
+    "name": "baseHeartBeat",
+    "method": "aOM",
+    "type": "msg:BaseConnHeartBeat"
+   },
+   {
+    "tag": 14,
+    "name": "quickRestart",
+    "method": "aOM",
+    "type": "msg:QuickRestart"
+   },
+   {
+    "tag": 128,
+    "name": "timeSync",
+    "method": "aOM",
+    "type": "msg:TimeSync"
+   },
+   {
+    "tag": 129,
+    "name": "AudControl",
+    "method": "aOM",
+    "type": "msg:AudControl"
+   }
+  ]
+ },
+ "dev_infomation": {
+  "BleMac": [
+   {
+    "tag": 1,
+    "name": "mac",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "HeadAngle": [
+   {
+    "tag": 1,
+    "name": "angle",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "offset",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "SnInfo": [
+   {
+    "tag": 1,
+    "name": "snId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "Mode": [
+   {
+    "tag": 1,
+    "name": "mode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "ALSInfo": [
+   {
+    "tag": 1,
+    "name": "brightness",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "autoOC",
+    "method": "e",
+    "type": "enum:eSwitchState"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "DeviceInfoValue": [
+   {
+    "tag": 1,
+    "name": "cfgInfoItem",
+    "method": "e",
+    "type": "enum:eDeviceConfigInfoItem"
+   },
+   {
+    "tag": 2,
+    "name": "alsState",
+    "method": "aOM",
+    "type": "msg:ALSInfo"
+   },
+   {
+    "tag": 3,
+    "name": "antiShakeEnable",
+    "method": "e",
+    "type": "enum:eSwitchState"
+   },
+   {
+    "tag": 4,
+    "name": "displayMode",
+    "method": "aOM",
+    "type": "msg:Mode"
+   },
+   {
+    "tag": 5,
+    "name": "wakeMode",
+    "method": "aOM",
+    "type": "msg:Mode"
+   },
+   {
+    "tag": 6,
+    "name": "wakeupAngle",
+    "method": "aOM",
+    "type": "msg:HeadAngle"
+   },
+   {
+    "tag": 7,
+    "name": "glassesSN",
+    "method": "aOM",
+    "type": "msg:SnInfo"
+   },
+   {
+    "tag": 8,
+    "name": "deviceSN",
+    "method": "aOM",
+    "type": "msg:SnInfo"
+   },
+   {
+    "tag": 9,
+    "name": "bleMac",
+    "method": "aOM",
+    "type": "msg:BleMac"
+   }
+  ],
+  "DeviceInfo": [
+   {
+    "tag": 1,
+    "name": "infoValue",
+    "method": "pc",
+    "type": "repeated_msg:DeviceInfoValue"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ]
+ },
+ "dev_pair_manager": {
+  "UnpairInfo": [
+   {
+    "tag": 1,
+    "name": "dev",
+    "method": "e",
+    "type": "enum:eDevice"
+   },
+   {
+    "tag": 2,
+    "name": "ringMac",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "DisconnectInfo": [
+   {
+    "tag": 1,
+    "name": "dev",
+    "method": "e",
+    "type": "enum:eDevice"
+   },
+   {
+    "tag": 2,
+    "name": "ringMac",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "PipeRoleChange": [
+   {
+    "tag": 1,
+    "name": "asCmdRole",
+    "method": "e",
+    "type": "enum:eGlassesLR"
+   },
+   {
+    "tag": 2,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "BleConnectParam": [
+   {
+    "tag": 1,
+    "name": "MTU",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "connInterval",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "setSpeed",
+    "method": "e",
+    "type": "enum:eConnParamState"
+   },
+   {
+    "tag": 5,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "RingInfo": [
+   {
+    "tag": 2,
+    "name": "ringMac",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ringName",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "connRet",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "AuthMgr": [
+   {
+    "tag": 2,
+    "name": "phoneType",
+    "method": "e",
+    "type": "enum:eDevice"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ]
+ },
+ "dev_settings": {
+  "AudControl": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:eAudCmd"
+   },
+   {
+    "tag": 2,
+    "name": "status",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TimeSync": [
+   {
+    "tag": 1,
+    "name": "timestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "timezone",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "BaseConnHeartBeat": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "QuickRestart": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "RestoreFactory": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ]
+ },
+ "even_ai": {
+  "EvenAIConfig": [
+   {
+    "tag": 1,
+    "name": "voiceSwitch",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "streamSpeed",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 4,
+    "name": "duplexMode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "EvenAICommRsp": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIHeartbeat": [
+   {
+    "tag": 1,
+    "name": "hbCnt",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIEvent": [
+   {
+    "tag": 1,
+    "name": "event",
+    "method": "e",
+    "type": "enum:eEvenAIEvent"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIPromptInfo": [
+   {
+    "tag": 1,
+    "name": "promptType",
+    "method": "e",
+    "type": "enum:eEvenAIPrompt"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAISkillInfo": [
+   {
+    "tag": 1,
+    "name": "streamEnable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "skillId",
+    "method": "e",
+    "type": "enum:eEvenAISkill"
+   },
+   {
+    "tag": 3,
+    "name": "skillParam",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 6,
+    "name": "fTextEnd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "EvenAIReplyInfo": [
+   {
+    "tag": 1,
+    "name": "cmdCnt",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "streamEnable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "textMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 6,
+    "name": "fTextEnd",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "EvenAIAnalyseInfo": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIAskInfo": [
+   {
+    "tag": 1,
+    "name": "cmdCnt",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "streamEnable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "textMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIVADInfo": [
+   {
+    "tag": 1,
+    "name": "vadStatus",
+    "method": "e",
+    "type": "enum:eEvenAIVADStatus"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIControl": [
+   {
+    "tag": 1,
+    "name": "status",
+    "method": "e",
+    "type": "enum:eEvenAIStatus"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "EvenAIDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eEvenAICommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:EvenAIControl"
+   },
+   {
+    "tag": 4,
+    "name": "vadInfo",
+    "method": "aOM",
+    "type": "msg:EvenAIVADInfo"
+   },
+   {
+    "tag": 5,
+    "name": "askInfo",
+    "method": "aOM",
+    "type": "msg:EvenAIAskInfo"
+   },
+   {
+    "tag": 6,
+    "name": "analyseInfo",
+    "method": "aOM",
+    "type": "msg:EvenAIAnalyseInfo"
+   },
+   {
+    "tag": 7,
+    "name": "replyInfo",
+    "method": "aOM",
+    "type": "msg:EvenAIReplyInfo"
+   },
+   {
+    "tag": 8,
+    "name": "skillInfo",
+    "method": "aOM",
+    "type": "msg:EvenAISkillInfo"
+   },
+   {
+    "tag": 9,
+    "name": "promptInfo",
+    "method": "aOM",
+    "type": "msg:EvenAIPromptInfo"
+   },
+   {
+    "tag": 10,
+    "name": "event",
+    "method": "aOM",
+    "type": "msg:EvenAIEvent"
+   },
+   {
+    "tag": 11,
+    "name": "heartbeat",
+    "method": "aOM",
+    "type": "msg:EvenAIHeartbeat"
+   },
+   {
+    "tag": 12,
+    "name": "resp",
+    "method": "aOM",
+    "type": "msg:EvenAICommRsp"
+   },
+   {
+    "tag": 13,
+    "name": "config",
+    "method": "aOM",
+    "type": "msg:EvenAIConfig"
+   }
+  ]
+ },
+ "g2_setting": {
+  "APP_Control_Device": [
+   {
+    "tag": 1,
+    "name": "turnOnDevice",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "App_Respond_To_Device": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "receiveFlag",
+    "method": "e",
+    "type": "enum:App_Respond_Flag"
+   }
+  ],
+  "Device_Respond_To_App": [
+   {
+    "tag": 1,
+    "name": "packageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "receiveFlag",
+    "method": "e",
+    "type": "enum:Device_Respond_Flag"
+   }
+  ],
+  "APP_Send_Dominant_Hand": [
+   {
+    "tag": 1,
+    "name": "dominantHand",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "ringMac",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "APP_Send_Gesture_Control_List": [
+   {
+    "tag": 1,
+    "name": "gestureControlList",
+    "method": "pc",
+    "type": "repeated_msg:APP_Send_Gesture_Control"
+   }
+  ],
+  "APP_Send_Gesture_Control": [
+   {
+    "tag": 1,
+    "name": "screenOn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "operationType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "apptype",
+    "method": "e",
+    "type": "enum:ApplicationType"
+   }
+  ],
+  "APP_Send_Universe_Setting": [
+   {
+    "tag": 1,
+    "name": "unitFormat",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "distanceUnit",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "timeFormat",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "dateFormat",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "temperatureUnit",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceSendInfoToAPP": [
+   {
+    "tag": 1,
+    "name": "currentRecalibrationStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "silentModeSwitch",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceiveRequestFromAPP": [
+   {
+    "tag": 1,
+    "name": "settingInfoType",
+    "method": "e",
+    "type": "enum:APPRequestSettingType"
+   },
+   {
+    "tag": 2,
+    "name": "autoBrightnessLevel",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "yCoordinateLevelRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "xCoordinateLevelRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "headUpSwitchRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "headUpAngleRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "headUpAngleCalibrationRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 10,
+    "name": "wearDetectionSwitchRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "deviceRunningStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 12,
+    "name": "battery",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 13,
+    "name": "chargingStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 14,
+    "name": "silentModeSwitchRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 15,
+    "name": "leftCalibrationRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 16,
+    "name": "rightCalibrationRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 17,
+    "name": "headUpRecalibrationSuccess",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 18,
+    "name": "autoBrightnessSwitchRestored",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 19,
+    "name": "unreadMessageCount",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceiveInfoFromAPP": [
+   {
+    "tag": 1,
+    "name": "deviceReceiveBrightness",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_Brightness"
+   },
+   {
+    "tag": 2,
+    "name": "deviceReceiveYCoordinate",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_Y_Coordinate"
+   },
+   {
+    "tag": 3,
+    "name": "deviceReceiveXCoordinate",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_X_Coordinate"
+   },
+   {
+    "tag": 4,
+    "name": "deviceReceiveHeadUpSetting",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_Head_UP_Setting"
+   },
+   {
+    "tag": 5,
+    "name": "deviceReceiveWearDetection",
+    "method": "aOM",
+    "type": "msg:Wear_Detection_Setting"
+   },
+   {
+    "tag": 6,
+    "name": "deviceReceiveSilentMode",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_Silent_Mode_Setting"
+   },
+   {
+    "tag": 7,
+    "name": "deviceReceiveAppPage",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_APP_PAGE"
+   },
+   {
+    "tag": 8,
+    "name": "deviceReceiveAdvancedSetting",
+    "method": "aOM",
+    "type": "msg:DeviceReceive_Advanced_Setting"
+   },
+   {
+    "tag": 9,
+    "name": "appSendUniverseSetting",
+    "method": "aOM",
+    "type": "msg:APP_Send_Universe_Setting"
+   },
+   {
+    "tag": 10,
+    "name": "appSendGestureControlList",
+    "method": "aOM",
+    "type": "msg:APP_Send_Gesture_Control_List"
+   },
+   {
+    "tag": 11,
+    "name": "appSendDominantHand",
+    "method": "aOM",
+    "type": "msg:APP_Send_Dominant_Hand"
+   },
+   {
+    "tag": 12,
+    "name": "appControlDevice",
+    "method": "aOM",
+    "type": "msg:APP_Control_Device"
+   }
+  ],
+  "DeviceReceive_Advanced_Setting": [
+   {
+    "tag": 1,
+    "name": "killAllFeature",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_APP_PAGE": [
+   {
+    "tag": 1,
+    "name": "appPage",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_Silent_Mode_Setting": [
+   {
+    "tag": 1,
+    "name": "silentModeSwitch",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "Wear_Detection_Setting": [
+   {
+    "tag": 1,
+    "name": "wearDetectionSwitch",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_Head_UP_Setting": [
+   {
+    "tag": 1,
+    "name": "headUpSwitch",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "headUpAngle",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "headUpCalibrationSwitch",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "headUpCalibration",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_X_Coordinate": [
+   {
+    "tag": 1,
+    "name": "xCoordinateLevel",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_Y_Coordinate": [
+   {
+    "tag": 1,
+    "name": "yCoordinateLevel",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "DeviceReceive_Brightness": [
+   {
+    "tag": 1,
+    "name": "autoAdjust",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "brightnessLevel",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "leftCalibration",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "rightCalibration",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "G2SettingPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:g2_settingCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "deviceReceiveInfoFromApp",
+    "method": "aOM",
+    "type": "msg:DeviceReceiveInfoFromAPP"
+   },
+   {
+    "tag": 4,
+    "name": "deviceReceiveRequestFromApp",
+    "method": "aOM",
+    "type": "msg:DeviceReceiveRequestFromAPP"
+   },
+   {
+    "tag": 5,
+    "name": "deviceSendInfoToApp",
+    "method": "aOM",
+    "type": "msg:DeviceSendInfoToAPP"
+   },
+   {
+    "tag": 6,
+    "name": "deviceRespondToApp",
+    "method": "aOM",
+    "type": "msg:Device_Respond_To_App"
+   },
+   {
+    "tag": 7,
+    "name": "appRespondToDevice",
+    "method": "aOM",
+    "type": "msg:App_Respond_To_Device"
+   }
+  ]
+ },
+ "glasses_case": {
+  "GlassesCaseInfo": [
+   {
+    "tag": 1,
+    "name": "soc",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "chargeStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "lidStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "inCaseStatus",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "GlassesCaseDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eGlassesCaseCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "caseInfo",
+    "method": "aOM",
+    "type": "msg:GlassesCaseInfo"
+   }
+  ]
+ },
+ "health": {
+  "HealthMultHighlight": [
+   {
+    "tag": 1,
+    "name": "Highlight",
+    "method": "pc",
+    "type": "repeated_msg:HealthSingleHighlight"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "HealthSingleHighlight": [
+   {
+    "tag": 1,
+    "name": "dataType",
+    "method": "e",
+    "type": "enum:eHealthDataType"
+   },
+   {
+    "tag": 2,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "HealthMultData": [
+   {
+    "tag": 1,
+    "name": "dataType",
+    "method": "e",
+    "type": "enum:eHealthDataType"
+   },
+   {
+    "tag": 2,
+    "name": "dataSet",
+    "method": "pc",
+    "type": "repeated_msg:HealthSingleData"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "HealthSingleData": [
+   {
+    "tag": 1,
+    "name": "dataType",
+    "method": "e",
+    "type": "enum:eHealthDataType"
+   },
+   {
+    "tag": 2,
+    "name": "goal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "value",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "avgValue",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "duration",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 7,
+    "name": "trend",
+    "method": "e",
+    "type": "enum:eHealthDataTrend"
+   }
+  ],
+  "HealthDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eHealthCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "singleData",
+    "method": "aOM",
+    "type": "msg:HealthSingleData"
+   },
+   {
+    "tag": 4,
+    "name": "multData",
+    "method": "aOM",
+    "type": "msg:HealthMultData"
+   },
+   {
+    "tag": 5,
+    "name": "singleHighlight",
+    "method": "aOM",
+    "type": "msg:HealthSingleHighlight"
+   },
+   {
+    "tag": 6,
+    "name": "multHighlight",
+    "method": "aOM",
+    "type": "msg:HealthMultHighlight"
+   }
+  ]
+ },
+ "logger": {
+  "logger_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:logger_Cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "bleTransEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "levelMsg",
+    "method": "aOM",
+    "type": "msg:ble_trans_level_msg"
+   },
+   {
+    "tag": 6,
+    "name": "requestMsg",
+    "method": "aOM",
+    "type": "msg:request_filelist_msg"
+   },
+   {
+    "tag": 7,
+    "name": "delMsg",
+    "method": "aOM",
+    "type": "msg:delete_file_msg"
+   }
+  ],
+  "ble_trans_level_msg": [
+   {
+    "tag": 1,
+    "name": "bleTransLevel",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "menu": {
+  "meun_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "Cmd",
+    "method": "e",
+    "type": "enum:Menu_Cmd_List"
+   },
+   {
+    "tag": 2,
+    "name": "MagicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "sendData",
+    "method": "aOM",
+    "type": "msg:MenuInfoSend"
+   },
+   {
+    "tag": 4,
+    "name": "resData",
+    "method": "aOM",
+    "type": "msg:ResponseMenuInfo"
+   }
+  ],
+  "ResponseMenuInfo": [
+   {
+    "tag": 1,
+    "name": "respValue",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "MenuInfoSend": [
+   {
+    "tag": 1,
+    "name": "itemTotalNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "item",
+    "method": "pc",
+    "type": "repeated_msg:Menu_Item_Ctx"
+   }
+  ],
+  "Menu_Item_Ctx": [
+   {
+    "tag": 1,
+    "name": "itemType",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "iconNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "itemAppId",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "module_configure": {
+  "module_configure_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:module_configure_Cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "SysGeneralSetting",
+    "method": "aOM",
+    "type": "msg:send_system_general_setting"
+   },
+   {
+    "tag": 4,
+    "name": "DashboardGeneralSetting",
+    "method": "aOM",
+    "type": "msg:dashboard_general_setting"
+   }
+  ],
+  "dashboard_general_setting": [
+   {
+    "tag": 1,
+    "name": "autoCloseValue",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "send_system_general_setting": [
+   {
+    "tag": 1,
+    "name": "languageIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "navigation": {
+  "navigation_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:Navigation_Cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "extMsg",
+    "method": "aOM",
+    "type": "msg:extend_info_msg"
+   },
+   {
+    "tag": 4,
+    "name": "list",
+    "method": "aOM",
+    "type": "msg:LocationList_msg"
+   },
+   {
+    "tag": 5,
+    "name": "info",
+    "method": "aOM",
+    "type": "msg:basic_info_msg"
+   },
+   {
+    "tag": 6,
+    "name": "miniMapData",
+    "method": "aOM",
+    "type": "msg:mini_map_msg"
+   },
+   {
+    "tag": 7,
+    "name": "maxMapData",
+    "method": "aOM",
+    "type": "msg:max_map_msg"
+   },
+   {
+    "tag": 8,
+    "name": "selectIndex",
+    "method": "aOM",
+    "type": "msg:os_select_location_msg"
+   },
+   {
+    "tag": 9,
+    "name": "viewMsg",
+    "method": "aOM",
+    "type": "msg:view_info_msg"
+   },
+   {
+    "tag": 10,
+    "name": "compassMsg",
+    "method": "aOM",
+    "type": "msg:compass_info_msg"
+   }
+  ],
+  "compass_info_msg": [
+   {
+    "tag": 1,
+    "name": "compassIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "view_info_msg": [
+   {
+    "tag": 1,
+    "name": "viewIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "extend_info_msg": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 3,
+    "name": "errorIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "max_map_msg": [
+   {
+    "tag": 1,
+    "name": "mapSessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "mapTotalSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "compressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "mapFragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "mapFragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "mapRawData",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "mini_map_msg": [
+   {
+    "tag": 1,
+    "name": "mapSize",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "compressMode",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "mapRawData",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 5,
+    "name": "rotationAngle",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "miniMapBorderEn",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "mapSessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "mapFragmentIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "mapFragmentPacketSize",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "basic_info_msg": [
+   {
+    "tag": 1,
+    "name": "directionSignIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "navigateWorkMethod",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "os_select_location_msg": [
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 3,
+    "name": "locationIndex",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "navigateMethod",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "LocationList_msg": [
+   {
+    "tag": 1,
+    "name": "listNum",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "locationIconIndex",
+    "method": "p",
+    "type": "repeated:int"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ]
+ },
+ "notification": {
+  "NotificationWhitelistChk": [
+   {
+    "tag": 1,
+    "name": "whitelistCrc",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "checkStatus",
+    "method": "e",
+    "type": "enum:eWhitelistCheckStatus"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "NotificationWhitelistCtrl": [
+   {
+    "tag": 1,
+    "name": "whitelistDisable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "NotificationCommRsp": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eNotificationCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "NotificationIOS": [
+   {
+    "tag": 1,
+    "name": "appID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "displayName",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "NotificationControl": [
+   {
+    "tag": 1,
+    "name": "notifEnable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "autoDispEnable",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "dispTime",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 5,
+    "name": "avoidDisturbEnable",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "NotificationDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eNotificationCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:NotificationControl"
+   },
+   {
+    "tag": 4,
+    "name": "IOS",
+    "method": "aOM",
+    "type": "msg:NotificationIOS"
+   },
+   {
+    "tag": 5,
+    "name": "resp",
+    "method": "aOM",
+    "type": "msg:NotificationCommRsp"
+   },
+   {
+    "tag": 6,
+    "name": "whitelistCtrl",
+    "method": "aOM",
+    "type": "msg:NotificationWhitelistCtrl"
+   },
+   {
+    "tag": 7,
+    "name": "whitelistChk",
+    "method": "aOM",
+    "type": "msg:NotificationWhitelistChk"
+   }
+  ]
+ },
+ "onboarding": {
+  "OnboardingEvent": [
+   {
+    "tag": 1,
+    "name": "event",
+    "method": "e",
+    "type": "enum:eOnboardingEvent"
+   },
+   {
+    "tag": 2,
+    "name": "eventParam",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "OnboardingHeartbeat": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "OnboardingConfig": [
+   {
+    "tag": 1,
+    "name": "processId",
+    "method": "e",
+    "type": "enum:eOnboardingProcessId"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "OnboardingDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eOnboardingCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "config",
+    "method": "aOM",
+    "type": "msg:OnboardingConfig"
+   },
+   {
+    "tag": 4,
+    "name": "heartbeat",
+    "method": "aOM",
+    "type": "msg:OnboardingHeartbeat"
+   },
+   {
+    "tag": 5,
+    "name": "event",
+    "method": "aOM",
+    "type": "msg:OnboardingEvent"
+   }
+  ]
+ },
+ "quicklist": {
+  "QuicklistEvent": [
+   {
+    "tag": 1,
+    "name": "event",
+    "method": "e",
+    "type": "enum:eQuicklistEvent"
+   },
+   {
+    "tag": 2,
+    "name": "uid",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "QuicklistMultItems": [
+   {
+    "tag": 1,
+    "name": "dataType",
+    "method": "e",
+    "type": "enum:eQuicklistDataType"
+   },
+   {
+    "tag": 2,
+    "name": "totalCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "items",
+    "method": "pc",
+    "type": "repeated_msg:QuicklistItem"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "QuicklistItem": [
+   {
+    "tag": 1,
+    "name": "uid",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "index",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "isCompleted",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "title",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 7,
+    "name": "tsType",
+    "method": "e",
+    "type": "enum:eQuicklistTsType"
+   }
+  ],
+  "QuicklistDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eQuicklistCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "item",
+    "method": "aOM",
+    "type": "msg:QuicklistItem"
+   },
+   {
+    "tag": 4,
+    "name": "multItems",
+    "method": "aOM",
+    "type": "msg:QuicklistMultItems"
+   },
+   {
+    "tag": 5,
+    "name": "event",
+    "method": "aOM",
+    "type": "msg:QuicklistEvent"
+   }
+  ]
+ },
+ "ring": {
+  "RingRawData": [
+   {
+    "tag": 1,
+    "name": "battery",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "chargeStates",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "hr",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "hrTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "spo2",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "spo2Timestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "hrv",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "hrvTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "temp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 10,
+    "name": "tempTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "actKcal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 12,
+    "name": "actKcalTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 13,
+    "name": "allKcal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 14,
+    "name": "allKcalTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 15,
+    "name": "steps",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 16,
+    "name": "stepsTimestamp",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 17,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "RingEvent": [
+   {
+    "tag": 1,
+    "name": "ringMac",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "eventId",
+    "method": "e",
+    "type": "enum:eRingEvent"
+   },
+   {
+    "tag": 3,
+    "name": "eventParam",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "RingDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eRingCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "event",
+    "method": "aOM",
+    "type": "msg:RingEvent"
+   },
+   {
+    "tag": 4,
+    "name": "rawData",
+    "method": "aOM",
+    "type": "msg:RingRawData"
+   }
+  ]
+ },
+ "sync_info": {
+  "sync_info_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "cmdList",
+    "method": "e",
+    "type": "enum:Sync_Info_Cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "dataMsg",
+    "method": "aOM",
+    "type": "msg:sync_info_data_msg"
+   }
+  ],
+  "sync_info_data_msg": [
+   {
+    "tag": 1,
+    "name": "backgroundAppID",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "foregroundAppID",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "teleprompt": {
+  "TelepromptHeartBeat": [
+   {
+    "tag": 1,
+    "name": "appPageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "appLineId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "osPageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "osLineId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptScrollSync": [
+   {
+    "tag": 1,
+    "name": "pageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "lineId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "mode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptCommResp": [
+   {
+    "tag": 1,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TelepromptErrorCode"
+   }
+  ],
+  "TelepromptPageDataRequest": [
+   {
+    "tag": 1,
+    "name": "pageId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptFileSelect": [
+   {
+    "tag": 1,
+    "name": "fileId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptStatusNotify": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TelepromptCtrlCmd"
+   },
+   {
+    "tag": 2,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TelepromptErrorCode"
+   }
+  ],
+  "TelepromptAISync": [
+   {
+    "tag": 1,
+    "name": "pageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "lineId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "charId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptPageData": [
+   {
+    "tag": 1,
+    "name": "pageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "pageLineCount",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "pageText",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptFileList": [
+   {
+    "tag": 1,
+    "name": "files",
+    "method": "pc",
+    "type": "repeated_msg:TelepromptFileInfo"
+   }
+  ],
+  "TelepromptControl": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TelepromptCtrlCmd"
+   },
+   {
+    "tag": 2,
+    "name": "startSettings",
+    "method": "aOM",
+    "type": "msg:TelepromptSetting"
+   }
+  ],
+  "TelepromptSetting": [
+   {
+    "tag": 1,
+    "name": "mode",
+    "method": "e",
+    "type": "enum:TelepromptMode"
+   },
+   {
+    "tag": 2,
+    "name": "startPageId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "startLineId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "totalPages",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "totalLines",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 6,
+    "name": "displayWidth",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 7,
+    "name": "scrollIntervalMs",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 8,
+    "name": "countdownSeconds",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 9,
+    "name": "useAudio",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 10,
+    "name": "displayLines",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 11,
+    "name": "scrollMode",
+    "method": "e",
+    "type": "enum:TelepromptScrollMode"
+   }
+  ],
+  "TelepromptFileInfo": [
+   {
+    "tag": 1,
+    "name": "fileId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "filename",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TelepromptDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:TelepromptCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:TelepromptControl"
+   },
+   {
+    "tag": 4,
+    "name": "fileList",
+    "method": "aOM",
+    "type": "msg:TelepromptFileList"
+   },
+   {
+    "tag": 5,
+    "name": "pageData",
+    "method": "aOM",
+    "type": "msg:TelepromptPageData"
+   },
+   {
+    "tag": 6,
+    "name": "aiSync",
+    "method": "aOM",
+    "type": "msg:TelepromptAISync"
+   },
+   {
+    "tag": 7,
+    "name": "statusNotify",
+    "method": "aOM",
+    "type": "msg:TelepromptStatusNotify"
+   },
+   {
+    "tag": 8,
+    "name": "fileListReq",
+    "method": "aOM",
+    "type": "msg:TelepromptFileListRequest"
+   },
+   {
+    "tag": 9,
+    "name": "fileSelect",
+    "method": "aOM",
+    "type": "msg:TelepromptFileSelect"
+   },
+   {
+    "tag": 10,
+    "name": "pageDataReq",
+    "method": "aOM",
+    "type": "msg:TelepromptPageDataRequest"
+   },
+   {
+    "tag": 11,
+    "name": "scrollSync",
+    "method": "aOM",
+    "type": "msg:TelepromptScrollSync"
+   },
+   {
+    "tag": 12,
+    "name": "commResp",
+    "method": "aOM",
+    "type": "msg:TelepromptCommResp"
+   },
+   {
+    "tag": 13,
+    "name": "heartBeat",
+    "method": "aOM",
+    "type": "msg:TelepromptHeartBeat"
+   }
+  ]
+ },
+ "terminal": {
+  "TerminalCommResp": [
+   {
+    "tag": 1,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TerminalErrorCode"
+   }
+  ],
+  "TerminalOverlayFocus": [
+   {
+    "tag": 1,
+    "name": "overlay",
+    "method": "e",
+    "type": "enum:TerminalOverlayKind"
+   },
+   {
+    "tag": 2,
+    "name": "focusedIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalListFocus": [
+   {
+    "tag": 1,
+    "name": "focusedIndex",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalDisplayState": [
+   {
+    "tag": 1,
+    "name": "state",
+    "method": "e",
+    "type": "enum:TerminalDisplayStateNotify"
+   },
+   {
+    "tag": 2,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "overlay",
+    "method": "e",
+    "type": "enum:TerminalOverlayKind"
+   }
+  ],
+  "TerminalNewSessionRequest": [
+   {
+    "tag": 1,
+    "name": "hostId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalSessionSwitchRequest": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "hostId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalAgentInterrupt": [
+   {
+    "tag": 1,
+    "name": "dummyField",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalQueryReply": [
+   {
+    "tag": 1,
+    "name": "queryId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "optionId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalVoiceInput": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TerminalVoiceCmd"
+   }
+  ],
+  "TerminalStatusReply": [
+   {
+    "tag": 1,
+    "name": "currentMode",
+    "method": "e",
+    "type": "enum:TerminalMode"
+   },
+   {
+    "tag": 2,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TerminalErrorCode"
+   }
+  ],
+  "TerminalSessionChange": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalNewSessionResult": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "e",
+    "type": "enum:TerminalNewSessionResultCode"
+   }
+  ],
+  "TerminalSessionSwitchResult": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "e",
+    "type": "enum:TerminalSessionSwitchResultCode"
+   }
+  ],
+  "TerminalSessionListItem": [
+   {
+    "tag": 1,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "title",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "sessionStatus",
+    "method": "e",
+    "type": "enum:TerminalSessionStatus"
+   }
+  ],
+  "TerminalSessionList": [
+   {
+    "tag": 1,
+    "name": "hostId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "currentSessionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "sessions",
+    "method": "pc",
+    "type": "repeated_msg:TerminalSessionListItem"
+   }
+  ],
+  "TerminalErrorMsg": [
+   {
+    "tag": 1,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TerminalErrorCode"
+   }
+  ],
+  "TerminalQueryOption": [
+   {
+    "tag": 1,
+    "name": "optionId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "optionText",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalQuery": [
+   {
+    "tag": 1,
+    "name": "queryId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "question",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "options",
+    "method": "pc",
+    "type": "repeated_msg:TerminalQueryOption"
+   },
+   {
+    "tag": 4,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalAgentContent": [
+   {
+    "tag": 1,
+    "name": "style",
+    "method": "e",
+    "type": "enum:TerminalContentStyle"
+   },
+   {
+    "tag": 2,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "contentOp",
+    "method": "e",
+    "type": "enum:TerminalAgentContentOp"
+   },
+   {
+    "tag": 4,
+    "name": "contentId",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "event",
+    "method": "e",
+    "type": "enum:TerminalAgentContentEvent"
+   },
+   {
+    "tag": 6,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalSessionStatusMsg": [
+   {
+    "tag": 1,
+    "name": "status",
+    "method": "e",
+    "type": "enum:TerminalSessionStatus"
+   },
+   {
+    "tag": 2,
+    "name": "sessionId",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalAsrResult": [
+   {
+    "tag": 1,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "sentenceFinal",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "allFinal",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TerminalHostStatusMsg": [
+   {
+    "tag": 1,
+    "name": "hostStatus",
+    "method": "e",
+    "type": "enum:TerminalHostStatus"
+   },
+   {
+    "tag": 2,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TerminalErrorCode"
+   }
+  ],
+  "TerminalModeSync": [
+   {
+    "tag": 1,
+    "name": "targetMode",
+    "method": "e",
+    "type": "enum:TerminalMode"
+   },
+   {
+    "tag": 2,
+    "name": "errCode",
+    "method": "e",
+    "type": "enum:TerminalErrorCode"
+   }
+  ],
+  "TerminalDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:TerminalCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "modeSync",
+    "method": "aOM",
+    "type": "msg:TerminalModeSync"
+   },
+   {
+    "tag": 4,
+    "name": "hostStatus",
+    "method": "aOM",
+    "type": "msg:TerminalHostStatusMsg"
+   },
+   {
+    "tag": 5,
+    "name": "asrResult",
+    "method": "aOM",
+    "type": "msg:TerminalAsrResult"
+   },
+   {
+    "tag": 6,
+    "name": "sessionStatus",
+    "method": "aOM",
+    "type": "msg:TerminalSessionStatusMsg"
+   },
+   {
+    "tag": 7,
+    "name": "agentContent",
+    "method": "aOM",
+    "type": "msg:TerminalAgentContent"
+   },
+   {
+    "tag": 8,
+    "name": "query",
+    "method": "aOM",
+    "type": "msg:TerminalQuery"
+   },
+   {
+    "tag": 9,
+    "name": "statusReply",
+    "method": "aOM",
+    "type": "msg:TerminalStatusReply"
+   },
+   {
+    "tag": 10,
+    "name": "voiceInput",
+    "method": "aOM",
+    "type": "msg:TerminalVoiceInput"
+   },
+   {
+    "tag": 11,
+    "name": "queryReply",
+    "method": "aOM",
+    "type": "msg:TerminalQueryReply"
+   },
+   {
+    "tag": 12,
+    "name": "agentInterrupt",
+    "method": "aOM",
+    "type": "msg:TerminalAgentInterrupt"
+   },
+   {
+    "tag": 13,
+    "name": "commResp",
+    "method": "aOM",
+    "type": "msg:TerminalCommResp"
+   },
+   {
+    "tag": 14,
+    "name": "heartBeat",
+    "method": "aOM",
+    "type": "msg:TerminalHeartBeat"
+   },
+   {
+    "tag": 15,
+    "name": "errorMsg",
+    "method": "aOM",
+    "type": "msg:TerminalErrorMsg"
+   },
+   {
+    "tag": 16,
+    "name": "sessionList",
+    "method": "aOM",
+    "type": "msg:TerminalSessionList"
+   },
+   {
+    "tag": 17,
+    "name": "sessionSwitchResult",
+    "method": "aOM",
+    "type": "msg:TerminalSessionSwitchResult"
+   },
+   {
+    "tag": 18,
+    "name": "sessionSwitchRequest",
+    "method": "aOM",
+    "type": "msg:TerminalSessionSwitchRequest"
+   },
+   {
+    "tag": 19,
+    "name": "newSessionRequest",
+    "method": "aOM",
+    "type": "msg:TerminalNewSessionRequest"
+   },
+   {
+    "tag": 20,
+    "name": "displayStateNotify",
+    "method": "aOM",
+    "type": "msg:TerminalDisplayState"
+   },
+   {
+    "tag": 21,
+    "name": "sessionChange",
+    "method": "aOM",
+    "type": "msg:TerminalSessionChange"
+   },
+   {
+    "tag": 22,
+    "name": "newSessionCancel",
+    "method": "aOM",
+    "type": "msg:TerminalNewSessionCancel"
+   },
+   {
+    "tag": 23,
+    "name": "newSessionResult",
+    "method": "aOM",
+    "type": "msg:TerminalNewSessionResult"
+   },
+   {
+    "tag": 24,
+    "name": "listFocus",
+    "method": "aOM",
+    "type": "msg:TerminalListFocus"
+   },
+   {
+    "tag": 25,
+    "name": "overlayFocus",
+    "method": "aOM",
+    "type": "msg:TerminalOverlayFocus"
+   }
+  ]
+ },
+ "tracepoint": {
+  "tracepoint_main_msg_ctx": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:tracepoint_Cmd_list"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "requestMsg",
+    "method": "aOM",
+    "type": "msg:tracepoint_filelist_msg"
+   },
+   {
+    "tag": 4,
+    "name": "delMsg",
+    "method": "aOM",
+    "type": "msg:tracepoint_delete_file_msg"
+   },
+   {
+    "tag": 5,
+    "name": "rspMsg",
+    "method": "aOM",
+    "type": "msg:tracepoint_common_rsp_msg"
+   }
+  ],
+  "tracepoint_common_rsp_msg": [
+   {
+    "tag": 1,
+    "name": "result",
+    "method": "a",
+    "type": "a"
+   }
+  ]
+ },
+ "transcribe": {
+  "TranscribeHeartBeat": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranscribeResp": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranscribeNotify": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TranscribeCmd"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranscribeResult": [
+   {
+    "tag": 1,
+    "name": "text",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 3,
+    "name": "endFlag",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "speaker",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TranscribeControl": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TranscribeCmd"
+   },
+   {
+    "tag": 2,
+    "name": "noteIdx",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranscribeDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eTranscribeCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:TranscribeControl"
+   },
+   {
+    "tag": 4,
+    "name": "result",
+    "method": "aOM",
+    "type": "msg:TranscribeResult"
+   },
+   {
+    "tag": 5,
+    "name": "notify",
+    "method": "aOM",
+    "type": "msg:TranscribeNotify"
+   },
+   {
+    "tag": 6,
+    "name": "resp",
+    "method": "aOM",
+    "type": "msg:TranscribeResp"
+   },
+   {
+    "tag": 7,
+    "name": "heartbeat",
+    "method": "aOM",
+    "type": "msg:TranscribeHeartBeat"
+   }
+  ]
+ },
+ "translate": {
+  "TranslateResult": [
+   {
+    "tag": 1,
+    "name": "srcText",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 2,
+    "name": "dstText",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   },
+   {
+    "tag": 4,
+    "name": "endFlag",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 5,
+    "name": "speaker",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TranslateControl": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TranslateCmd"
+   },
+   {
+    "tag": 2,
+    "name": "languagePair",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "useAudio",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 4,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranslateResp": [
+   {
+    "tag": 1,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranslateModeSwitch": [
+   {
+    "tag": 1,
+    "name": "mode",
+    "method": "a",
+    "type": "a"
+   }
+  ],
+  "TranslateNotify": [
+   {
+    "tag": 1,
+    "name": "cmd",
+    "method": "e",
+    "type": "enum:TranslateCmd"
+   },
+   {
+    "tag": 2,
+    "name": "errorCode",
+    "method": "e",
+    "type": "enum:eErrorCode"
+   }
+  ],
+  "TranslateDataPackage": [
+   {
+    "tag": 1,
+    "name": "commandId",
+    "method": "e",
+    "type": "enum:eTranslateCommandId"
+   },
+   {
+    "tag": 2,
+    "name": "magicRandom",
+    "method": "a",
+    "type": "a"
+   },
+   {
+    "tag": 3,
+    "name": "ctrl",
+    "method": "aOM",
+    "type": "msg:TranslateControl"
+   },
+   {
+    "tag": 4,
+    "name": "result",
+    "method": "aOM",
+    "type": "msg:TranslateResult"
+   },
+   {
+    "tag": 5,
+    "name": "notify",
+    "method": "aOM",
+    "type": "msg:TranslateNotify"
+   },
+   {
+    "tag": 6,
+    "name": "modeSwitch",
+    "method": "aOM",
+    "type": "msg:TranslateModeSwitch"
+   },
+   {
+    "tag": 7,
+    "name": "resp",
+    "method": "aOM",
+    "type": "msg:TranslateResp"
+   },
+   {
+    "tag": 8,
+    "name": "heartbeat",
+    "method": "aOM",
+    "type": "msg:TranslateHeartBeat"
+   }
+  ]
+ }
+}

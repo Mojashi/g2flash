@@ -76,6 +76,19 @@ SNAPSHOT_BL_SITES      = {   # both decode to `bl 0x45a8ec` (verified)
 SETTINGS_BL_SITE       = (0x4b43c4, "bf f7 e2 fa")  # bl FUN_0047398c (aa21 send) -> wrapper
 GESTURE_LONGPRESS_SITE = (0x4425ae, "28 f0 49 f8")  # bl FUN_0046a644 -> evenhub_longpress
 GESTURE_RELEASE_SITE   = (0x4428de, "1d f0 cf f9")  # bl FUN_0045fc80 -> ring_release
+# --- terminal-mode printf-debug instrumentation (see dbg_terminal.c) ---
+# Both fsm sites are `bl terminal_ui_fsm_handler (FUN_005e8b00)`; the enqueue site
+# is the `bl <rtos queue_send> (FUN_0046435a)` INSIDE fire_ui_event (FUN_005e535e).
+# Bytes verified against the stock image by disassembly (g2dis.py).
+DBG_FSM_DISPATCH_SITE  = (0x5e5536, "03 f0 e3 fa")  # UI-task dispatch  -> dbg_fsm
+DBG_FSM_ENTER_SITE     = (0x5e5500, "03 f0 fe fa")  # DISPLAY_ENTER(1,0)-> dbg_fsm
+DBG_ENQUEUE_SITE       = (0x5e53d0, "7e f6 c3 ff")  # fire_ui_event post-> dbg_enqueue
+# --- on-demand screenshot trigger (see screenshot.c) ---
+# The single `bl FUN_00441c68` (universal inbound-frame service dispatcher) at
+# 0x0045aaa4 -- EVERY sid-routed app frame passes through it, in any UI. Redirected to
+# cap_rx_hook, which fires a screenshot on the reserved serviceID 0x7d then tail-calls
+# the real dispatcher so all normal (and unknown-sid) traffic is byte-for-byte unchanged.
+CAP_RX_SITE            = (0x45aaa4, "e7 f7 e0 f8")  # bl FUN_00441c68 -> cap_rx_hook
 
 def enc_bl(pc, target):
     """Encode a Thumb-2 BL (T1) from instruction address `pc` to `target`."""
@@ -157,6 +170,9 @@ def layout(img):
     settings_addr  = base + _fn(p2, "settings_send_wrapper")["offset"]
     longpress_addr = base + _fn(p2, "evenhub_longpress")["offset"]
     release_addr   = base + _fn(p2, "ring_release")["offset"]
+    dbg_fsm_addr      = base + _fn(p2, "dbg_fsm")["offset"]       # terminal FSM instrumentation
+    dbg_enqueue_addr  = base + _fn(p2, "dbg_enqueue")["offset"]   # fire_ui_event instrumentation
+    cap_rx_addr       = base + _fn(p2, "cap_rx_hook")["offset"]   # screenshot RX trigger
 
     # --- assemble the appended payload bytes (old_ps .. end) ---
     pad = blob_off - old_ps                     # alignment gap before the blob
@@ -209,6 +225,18 @@ def layout(img):
          enc_bl(GESTURE_LONGPRESS_SITE[0], longpress_addr), "bl evenhub_longpress (replaces force-quit dialog)"),
         (g2f(GESTURE_RELEASE_SITE[0]), GESTURE_RELEASE_SITE[1],
          enc_bl(GESTURE_RELEASE_SITE[0], release_addr), "bl ring_release (forward ring release-long-press)"),
+        # terminal-mode printf-debug: instrument the FSM dispatcher (both call sites)
+        # and the fire_ui_event enqueue, emitting debug frames on sid 0x7e.
+        (g2f(DBG_FSM_DISPATCH_SITE[0]), DBG_FSM_DISPATCH_SITE[1],
+         enc_bl(DBG_FSM_DISPATCH_SITE[0], dbg_fsm_addr), "bl dbg_fsm (fsm dispatch instrumentation)"),
+        (g2f(DBG_FSM_ENTER_SITE[0]), DBG_FSM_ENTER_SITE[1],
+         enc_bl(DBG_FSM_ENTER_SITE[0], dbg_fsm_addr), "bl dbg_fsm (DISPLAY_ENTER instrumentation)"),
+        (g2f(DBG_ENQUEUE_SITE[0]), DBG_ENQUEUE_SITE[1],
+         enc_bl(DBG_ENQUEUE_SITE[0], dbg_enqueue_addr), "bl dbg_enqueue (fire_ui_event post instrumentation)"),
+        # on-demand screenshot: redirect the universal inbound-frame dispatcher call
+        # to cap_rx_hook (fires a capture on serviceID 0x7d, else forwards unchanged).
+        (g2f(CAP_RX_SITE[0]), CAP_RX_SITE[1],
+         enc_bl(CAP_RX_SITE[0], cap_rx_addr), "bl cap_rx_hook (screenshot capture trigger)"),
     ]
     return bytes(append), in_place, (idx, comp_off, old_ps)
 
