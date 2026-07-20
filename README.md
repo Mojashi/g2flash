@@ -1,16 +1,46 @@
 # g2flash
 
-`g2flash.py` flashes firmware onto Even Realities G2 smart glasses by
-reimplementing the official app's BLE flash protocol. It is the tool used to
-push custom firmware (a patched `*_cfw.bin` image) onto the device.
+Tools for flashing, reverse-engineering, and building custom firmware (CFW) for
+the **Even Realities G2** smart glasses.
+
+> This repository is a fork of
+> [**jimrandomh/g2flash**](https://github.com/jimrandomh/g2flash). It keeps the
+> original flasher and image-CFW patches and adds a firmware reverse-engineering
+> toolchain, a hot-loadable "mode-runtime" CFW loader, ~90 BLE driver scripts,
+> and an extensive set of RE notes. Licensed GPLv3, same as upstream.
 
 > **WARNING — this voids your warranty and can brick the glasses.**
-> Flashing custom firmware over the OTA path carries a real risk of bricking
-> the device. The tool makes you type `my warranty is void` at an interactive
-> prompt before it will write anything (use `--my-warranty-is-void` to skip the
-> prompt for automation). Only proceed if you understand and accept the risk.
+> Flashing custom firmware over the OTA path carries a real risk of bricking the
+> device. `g2flash.py` makes you type `my warranty is void` at an interactive
+> prompt before it will write anything (use `--my-warranty-is-void` to skip it
+> for automation). Only proceed if you understand and accept the risk.
 
-## Quick start
+## What's here
+
+| Area | Where | What |
+|------|-------|------|
+| **Flasher** | `g2flash.py`, `build_cfw.sh` | Reimplements the official app's BLE flash protocol to push a `*_cfw.bin` image onto the glasses |
+| **Image CFW** | `patches/` (`patch_compress.py`, `settings_ext.c`, …) | 576×288 image containers, zlib-compressed + XOR-delta frames, per-lens stereo, capability advertisement |
+| **Loader CFW** | `patches/` (`runtime*.c`, `patch_loader.py`, `mode_*.c`) | Flash **once**, then hot-load arbitrary code "modes" over BLE into RAM — see the notes |
+| **RE toolchain** | `ghidra/` (`rebuild_db.sh`, `apply_*.py`, `match_lvgl*.py`) | Rebuilds a named + typed Ghidra database of the firmware from scratch |
+| **Protobuf recovery** | `pb_extract.py`, `pb_blutter_extract.py`, `pb_join.py`, `docs/pb_*` | Firmware nanopb schema (244 messages) + names joined from the Even app |
+| **BLE demos** | `demos/*.ts` | ~90 Bun/TypeScript scripts: screenshots, IMU/gyro, stereo, cross-lens sync, terminal, `g2ctl` settings CLI |
+| **RE notes** | [`docs/notes/`](docs/notes/) | Architecture, wire formats, addresses, and the "what works / what fails" findings |
+
+### Start with the notes
+
+The reverse-engineering findings are written up in **[`docs/notes/`](docs/notes/)** —
+begin there if you want to understand the firmware rather than just flash it:
+
+- [01 — Hardware & dev facts](docs/notes/01-hardware-and-dev-facts.md)
+- [02 — RE toolchain (Ghidra DB)](docs/notes/02-re-toolchain.md)
+- [03 — Display architecture](docs/notes/03-display-architecture.md)
+- [04 — Two lenses & cross-lens sync](docs/notes/04-two-lens-and-sync.md)
+- [05 — CFW loader & hot-loaded modes](docs/notes/05-cfw-loader-and-modes.md)
+- [06 — Terminal protocol & protobuf](docs/notes/06-terminal-and-protobuf.md)
+- [07 — Full-panel stereo tiling](docs/notes/07-stereo-tiling.md)
+
+## Quick start (flasher)
 
 ```bash
 cd g2flash
@@ -18,75 +48,89 @@ cd g2flash
 ./venv/bin/python g2flash.py -c g2://local -f g2_2.2.4.34_cfw.bin
 ```
 
-`build_cfw.sh` does the whole build: it creates `./venv` with the flasher's
-dependencies, downloads the stock **G2 2.2.4.34** firmware from Even's CDN,
-applies the patches in `patches/`, and verifies that both the download and the
-patched result match pinned SHA-256 hashes (so a clean run proves you got
-exactly the reviewed image). Run `./build_cfw.sh --help` for options
-(`--skip-venv`, `--force-download`). Then flash as shown above — see
-[Usage](#usage) for connection strings and safety flags.
+`build_cfw.sh` does the whole build: creates `./venv`, downloads the stock
+**G2 2.2.4.34** firmware from Even's CDN, applies the patches in `patches/`, and
+verifies that both the download and the patched result match pinned SHA-256
+hashes (so a clean run proves you got exactly the reviewed image). Run
+`./build_cfw.sh --help` for options (`--skip-venv`, `--force-download`,
+`--update-patches`). See [Flasher usage](#flasher-usage) for connection strings
+and safety flags.
 
-## What's the custom firmware?
+Firmware images (`g2_2.2.4.34*.bin`) are **not** checked in — they are Even's
+firmware, so you build them locally with `build_cfw.sh`. Likewise the Ghidra
+project database (`ghidra/ghidra_proj/`, ~125 MB) and the `bad_apple` demo GIFs
+are excluded; regenerate the DB with `ghidra/rebuild_db.sh`.
 
-The patches in `patches/` add image/display features on top of stock 2.2.4.34:
+## Repository layout
+
+```
+g2flash.py            the flasher
+build_cfw.sh          one-shot venv setup + download + patch + verify
+
+patches/              CFW sources & build tools
+  cfw_patches.json      committed image-CFW patch set (offset/old/new bytes)
+  apply_patches.py      replays cfw_patches.json onto the stock image (pure stdlib)
+  gen_patches.py        compiles injected code with clang, regenerates the JSON
+  patch_compress.py     the image-CFW patcher (576 lift + compression + stereo)
+  patch_loader.py       assembles the loader-CFW container
+  runtime*.c            the loader / mode-runtime (RX hook, dispatch, ABI)
+  mode_*.c              hot-loadable feature payloads (screenshot, ownanim, ...)
+  fw_2.2.4.34_syms.h    firmware addresses by name (generated by ghidra/export_syms.py)
+  fw_2.2.4.34_structs.h firmware struct layouts + RAM globals
+
+ghidra/               reverse-engineering toolchain
+  rebuild_db.sh         rebuild the named+typed Ghidra DB from the firmware
+  apply_*.py            fold RE findings (names, sigs, structs, comments) into the DB
+  match_lvgl*.py        LVGL v9.3 reference matching (string / callgraph / BSim / dynamic)
+
+demos/                ~90 Bun/TypeScript BLE driver scripts
+docs/                 formal write-ups (FW arch, terminal protocol, pb schema, peer map)
+docs/notes/           distilled RE field notes (start here)
+
+pb_extract.py         scan firmware rodata for nanopb descriptors -> schema
+pb_blutter_extract.py recover message names from the Even app (Blutter)
+pb_join.py            fingerprint-join firmware descriptors to app message names
+```
+
+## Image CFW features
+
+The patches in `patches/` add, on top of stock 2.2.4.34:
 
 - **576×288 image containers** (stock caps at 288×144).
 - **zlib-compressed image payloads** and **8bpp XOR-delta** frame updates, for
   much faster image/video streaming.
-- **Per-lens stereo image pairs**.
+- **Per-lens stereo image pairs.**
 - A **capability-advertisement field** on the settings response, so a connected
   app can detect this firmware and which features it supports.
 
-## What's in this directory
+The **loader CFW** goes further: flash it once, and every subsequent feature is a
+hot-loaded code payload delivered over BLE (no re-flash). See
+[05 — CFW loader & hot-loaded modes](docs/notes/05-cfw-loader-and-modes.md).
 
-- `g2flash.py` — the flasher.
-- `build_cfw.sh` — one-shot venv setup + download + patch + verify (see above).
-- `patches/` — the patch sources and tools:
-  - `cfw_patches.json` — the **committed patch set**: a list of
-    offset/expected-old/new byte patches (plus base + output SHA-256s) that turns
-    the stock image into the CFW image. This is the source of truth for the build.
-  - `apply_patches.py` — replays `cfw_patches.json` onto the stock image. **No
-    compiler** — pure Python stdlib, so it runs anywhere (a phone, a fresh box).
-    This is what `build_cfw.sh` uses to produce the image.
-  - `gen_patches.py` — compiles the injected code with **clang** and (re)generates
-    `cfw_patches.json`. Run it after editing the patch sources:
-    `python3 patches/gen_patches.py g2_2.2.4.34.bin patches/cfw_patches.json`
-    (or `./build_cfw.sh --update-patches`), then commit the JSON.
-  - `patch_compress.py` — the all-in-one patcher (576 lift + image compression
-    + stereo + capability field); `gen_patches.py` calls it to build the ops.
-  - `patch_img_container_576.py` — standalone tool for just the 576×288 lift.
-  - `build.py`, `*.c` — the C→position-independent-Thumb pipeline and sources
-    for the injected firmware code (compiled by `gen_patches.py`; the resulting
-    machine code lands in `cfw_patches.json`).
-- `requirements.txt` — the flasher's Python dependencies.
+## Reverse-engineering workflow
 
-Firmware images (`g2_2.2.4.34*.bin`) are **not** checked in — they are Even's
-firmware, so you build them locally with `build_cfw.sh`.
+Findings are applied **back into the Ghidra database** (as names, typed
+signatures, struct types, and plate comments) via `ghidra/apply_*.py` scripts
+wired into `ghidra/rebuild_db.sh` — not left only in markdown. The DB is the
+compounding asset every future decompile reads against. See
+[02 — RE toolchain](docs/notes/02-re-toolchain.md) for the full pipeline.
+
+```bash
+cd ghidra
+./rebuild_db.sh        # autofunc -> apply_knowledge -> apply_types -> apply_sigs
+                       # -> apply_pb* -> apply_peer -> apply_imu* -> match_lvgl* -> export_syms
+```
 
 ## Requirements
 
-- Python 3.x (developed against the Homebrew `python@3.14` build).
-- One of two transports to reach the glasses:
-  - **local** — this machine's own Bluetooth radio, via the `bleak` package.
-  - **droidbridge** — a bonded Android phone running
-    [DroidBridge](../droidbridge) that forwards GATT over HTTP/WebSocket; uses
-    the `websocket-client` package.
+- Python 3.x (developed against the Homebrew `python@3.14` build) for the
+  flasher; `bleak` (`g2://local`) or `websocket-client` (`g2://droidbridge`),
+  both imported lazily.
+- [Bun](https://bun.sh) for the `demos/` scripts, which use
+  [g2-kit-unofficial](https://github.com/jimrandomh/g2-kit-unofficial).
+- [Ghidra](https://ghidra-sre.org/) + `arm-none-eabi-gcc` for the RE toolchain.
 
-Third-party Python dependencies:
-
-| Package            | Needed for                          | Imported as |
-|--------------------|-------------------------------------|-------------|
-| `bleak`            | `g2://local` transport              | `bleak`     |
-| `websocket-client` | `g2://droidbridge` transport        | `websocket` |
-
-Both are imported lazily, so you only need to install the one for the transport
-you actually use. Firmware parsing, validation, and `--recompute-checksums` run
-on the standard library alone.
-
-## Setting up the venv
-
-`build_cfw.sh` creates and populates `./venv` for you as part of a normal run.
-To set it up by hand instead:
+### Setting up the venv by hand
 
 ```bash
 cd g2flash
@@ -95,21 +139,17 @@ python3 -m venv venv
 ./venv/bin/python -m pip install -r requirements.txt
 ```
 
-With the venv activated (`source venv/bin/activate`) you can invoke the tool as
-`python g2flash.py ...`; otherwise use `./venv/bin/python g2flash.py ...`. Run
-`deactivate` to leave the environment.
-
 ### macOS note
 
 On macOS, `bleak` talks to CoreBluetooth, which never exposes BLE MAC
 addresses — scanned addresses are random per-host UUIDs. `g2flash` works around
 this by scanning and matching the last three MAC bytes embedded in the arm's
 advertised name (`Even G2_32_L_693CCB`). For a local flash the arm must be
-powered on and **not** connected to the phone (quit the Even app / turn off the
-phone's Bluetooth) so it advertises for a direct connection. The first time you
-run it, macOS will prompt to grant your terminal Bluetooth permission.
+powered on and **not** connected to the phone (quit the Even app) so it
+advertises for a direct connection. The first run prompts for Bluetooth
+permission.
 
-## Usage
+## Flasher usage
 
 ```
 python g2flash.py -c <connection-string> -f <firmware.bin> [options]
@@ -135,12 +175,11 @@ Common options:
   halts before the named stage; use it to test connectivity without writing.
 - `--my-warranty-is-void` — skip the interactive warranty confirmation.
 - `--component-retries N` / `--block-nak-retries N` — transfer retry tuning.
+- `--recompute-checksums IMAGE` — rewrite an image's stored checksums
+  (component CRC32C + mainApp preamble CRC32) in place and exit without
+  connecting. Run it after any length-preserving binary patch, or the glasses
+  reject the component on END with status 7 (CHECK_FAIL).
 - `--debug` — print received BLE frames.
-
-`--recompute-checksums IMAGE` rewrites an image's stored checksums in place
-(component CRC32C + mainApp preamble CRC32) to match its current payloads and
-exits without connecting. Run it after any length-preserving binary patch —
-otherwise the glasses reject the component on END with status 7 (CHECK_FAIL).
 
 ### Examples
 
@@ -159,13 +198,18 @@ python g2flash.py \
   -f g2_2.2.4.34_cfw.bin
 ```
 
-## How it works (brief)
+## How the flasher works (brief)
 
-The flasher speaks the same `aa21`-framed envelope protocol as the official
-app, validated byte-for-byte against a real flash capture. The firmware image
-is an EVENOTA container of five components; each is streamed over the firmware
-data service (`...e1001`) as a FILE_CHECK subheader followed by 4 KB blocks,
-then an END check the glasses verify against a per-component CRC32C. A heartbeat
-on the EvenHub control service (`...e5450`) keeps the session alive during the
-transfer. Arms are flashed one at a time. See the module docstring and comments
-in `g2flash.py` for the wire-level details and the retry/recovery rationale.
+It speaks the same `aa21`-framed envelope protocol as the official app, validated
+byte-for-byte against a real flash capture. The firmware image is an EVENOTA
+container of five components; each is streamed over the firmware data service
+(`...e1001`) as a FILE_CHECK subheader followed by 4 KB blocks, then an END check
+the glasses verify against a per-component CRC32C. A heartbeat on the EvenHub
+control service (`...e5450`) keeps the session alive. Arms are flashed one at a
+time. See the module docstring in `g2flash.py` for the wire-level details.
+
+## Credits & license
+
+Original flasher and image CFW: [jimrandomh/g2flash](https://github.com/jimrandomh/g2flash).
+Direct-BLE library: [jimrandomh/g2-kit-unofficial](https://github.com/jimrandomh/g2-kit-unofficial).
+Licensed under the **GNU General Public License v3.0** — see [`LICENSE`](LICENSE).

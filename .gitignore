@@ -28,3 +28,6 @@ demos/*.gif
 
 # Stray runtime logs.
 *.log
+
+# Full-firmware decompiler dump (generated, large).
+/ghidra/decompiled_all.c
